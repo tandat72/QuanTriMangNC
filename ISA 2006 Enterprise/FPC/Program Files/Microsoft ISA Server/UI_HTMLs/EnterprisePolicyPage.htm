@@ -1,0 +1,55 @@
+<html xmlns:controls>
+	<head>
+		<LINK REL="stylesheet" type="text/css" href="_common/isa.css">
+			<script id="jsCommon" src="common.js"></script>
+			<script id="jsCommands" src="commands.js"></script>
+			<script>
+            var g_sPageContext = location.hash.slice(1);
+            
+            function body_onload() {
+                var ListviewsCollection = document.getElementsByName("IsaListView");
+                ListviewsCollection[0].id = g_sPageContext;
+                ListviewsCollection[0].TestKey = "ISA_LIST_CONTROL" + g_sPageContext;
+                NotifySnapin("IDR_PAGE_LOADED", g_sPageContext);
+            }
+            
+            function CmdActivate(Code)
+            {
+                NotifySnapin(Code, g_sPageContext);
+            }
+			
+            //  Updates the UI according to specified ISA edition type
+            function UpdateViewForEditionType(EditionType)
+            {
+                //  Nothing to do
+            }
+			</script>
+	</head>
+	<body id="idBody" class="TabPageBody" height="100%" width="100%" onload="body_onload();">
+		<table height="100%" width="100%" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td height="20%" width="100%">
+<P><ID id="L_DefPol1">The <b>Default Policy</b> cannot be modified. This means that no enterprise rules can be added to the Default Policy enterprise policy.
+In addition, the pre-defined "Deny All" rule cannot be changed.</ID></P>
+<P><ID id="L_DefPol2">You can create <b>array rules</b> in the array-level firewall policy.</ID><ID id="L_DefPol3"> Help about <a href="javascript:CmdActivate('IDR_HELP_ABOUT_ARRAY_RULES')">array rules...</a></ID><BR>
+<ID id="L_DefPol4">You can create your own <b>enterprise polices</b>.</ID><ID id="L_DefPol5"> Help about <a href="javascript:CmdActivate('IDR_HELP_ABOUT_ENTERPRISE_POLICIES')">enterprise policies...</a></ID></P>
+				</td>
+			</tr>
+			<tr>
+				<td height="7" nowrap></td>
+			</tr>
+			<tr>
+				<td class="contSep" nowrap></td>
+			</tr>
+			<tr>
+				<td height="3" nowrap></td>
+			</tr>
+			<tr>
+				<td height="100%" width="100%">
+                         		<object NAME="IsaListView" height="100%" width="100%" classid="CLSID:7B800019-6212-41DC-B208-520B501FBFB2" VIEWASTEXT>
+					</OBJECT>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,408 @@
+<html xmlns:controls>
+    <head>
+        <SCRIPT language=Javascript src="SideSlide.js"></SCRIPT>
+        <?import namespace="controls" implementation="TabsHandler/TabsHandler.htc" ?>
+        <LINK REL="stylesheet" type="text/css" href="_common/isa.css">
+        <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5"> <!-- issue: what is this? --!>
+        <!-- Includes -->
+        <object id="MMCCtrl" height="0" width="0" classid="CLSID:545AE700-50BF-11D1-9FE9-00600832DB4A" VIEWASTEXT>
+        </object>
+        <script id="jsCommon" src="common.js"></script>
+        <script id="jsCommands" src="commands.js"></script>
+        <script>
+            var g_sPageContext = location.hash.slice(1);
+            var g_SnapinClsid;
+            var g_MMCMajor = 1;
+            var g_MMCMinor = 2;
+            var g_ApplyDiscardText;
+            var g_SQMOptInText;
+
+            if (WithinSnapin()) {
+                var g_oListpadInfo = MMCCtrl.GetListPadInfo(g_sPageContext);
+                g_SnapinClsid = g_oListpadInfo.Clsid;
+            }
+
+            function body_onload() {
+                aBackToGettingStarted.TestKey = "ATASK_" + g_oNotifications["IDR_BACK_TO_GETTINGSTARTED"] + "_" + g_sPageContext;
+                tdTaskbarButton.TestKey = "A_TASKBAR_LEVER";
+
+                Slider_OnLoad();
+                if (WithinSnapin())                 {
+                    hTitle.innerText = MMCCtrl.GetTitle(g_sPageContext);
+                } else {
+                    hTitle.innerText = "Heading for the page"
+                    htcForm.AddPage("Network Templates","..\\NetworkTemplates.htm","IDF1",0);
+                    htcForm.Select="IDF1";
+                    htcTabs.AddPage("Generic","..\\GenericPage.htm","ID1",0);
+                    htcTabs.AddPage("Alerts","..\\AlertsTab.htm","id3",2);
+                    htcTabs.AddPage("configuration","..\\configuration.htm","id4",3);
+                    htcTabs.AddPage("dashboard","..\\DashboardTab.htm","id5",4);
+                    htcTabs.AddPage("sessions","..\\SessionsTab.htm","id6",5);
+                    htcTabs.AddPage("GettingStarted","..\\GettingStarted.htm","id7",6);
+                    htcTabs.AddPage("vpn","..\\VPN.htm","id8",7);
+                    htcTabs.AddPage("Log Viewer","..\\LogViewerTab.htm","id9",8);
+                    htcTabs.AddPage("welcome","..\\welcome.htm","id10",9);
+                    htcTabs.AddPage("Configuration","..\\GenericTaskBar.htm","id11",10);
+                    htcTabs.AddPage("Configuration Status","..\\DistributionTab.htm","id12",11);
+                    htcTabs.Select="ID1";
+                    htcToolsTabs.AddPage("taskbar","..\\GenericTaskBar.htm","IDT1",0);
+                    htcToolsTabs.AddPage("toolbox","..\\ToolBox.htm","IDT2",1);
+                    htcToolsTabs.AddPage("help","..\\HelpTab.htm","IDT3",1);
+                    htcToolsTabs.Select="IDT1";
+                }
+                g_ApplyDiscardText = htcStatus.innerHTML;
+                g_SQMOptInText = htcSQM.innerHTML;
+
+        hUnavailableServersWarning.style.display = 'none';
+                NotifySnapin("IDR_PAGE_LOADED", g_sPageContext);
+            }
+
+            function body_onunload()
+            {
+                if (g_MMCMajor >= 2)
+                {
+                    NotifySnapin("IDR_PAGE_UNLOADED", g_sPageContext);
+                }
+            }
+
+            function CmdActivate(Code)
+            {
+                NotifySnapin(Code, g_sPageContext);
+            }
+
+            //  Updates the UI according to specified ISA edition type
+            function UpdateViewForEditionType(EditionType)
+            {
+                if(EditionType == g_TypeStandardEdition)
+                {
+                    //  Hide ADAM name and unavailable servers
+                    hEESpecificInfo.style.display = "none";
+                    hTitle.style.textAlign = "right";
+                }
+            }
+            
+            function SetStorageServerName(StorageServerName)
+            {
+                    hStorageServerName.innerText = StorageServerName
+            }
+
+            function SetUnavailableServersWarning(UnavailableSeversString)
+            {
+                    hUnavailableServersWarningList.innerText = UnavailableSeversString
+            }
+
+            function ShowUnavailableServersWarning()
+            {
+                hUnavailableServersWarning.style.display = 'block'      
+            }
+
+
+            function HideUnavailableServersWarning()
+            {
+                hUnavailableServersWarning.style.display = 'none'       
+            }
+
+            function EnableGettingStartedBack()
+            {
+                tdToolFooter.runtimeStyle.display = 'block';
+            }
+
+            function SetSliderVisible(fVisible, fAnimation)
+            {
+                oMenu[0].menu(fVisible, fAnimation);
+            }
+
+            function IsSliderVisible()
+            {
+                if (oMenu[0].css.pixelRight == 0)
+                    return true;
+                return false;
+            }
+
+            function InputButtonApply_onclick() {
+                NotifySnapin("IDR_APPLY_CHANGES", g_sPageContext);
+            }
+            function InputButtonDiscard_onclick() {
+                NotifySnapin("IDR_DISCARD_CHANGES", g_sPageContext);
+            }
+
+            function HideApplyDiscardBar()
+            {
+                if (document.all.trApplyDiscardBar.style.display == 'none')
+                {
+                    return;
+                }
+                oMenu[0].pixelRight -= document.all.trApplyDiscardBar.clientWidth;
+                divTasks.pixelRight -= document.all.trApplyDiscardBar.clientWidth;
+                document.all.trApplyDiscardBar.style.display = 'none';
+                Slider_OnLoad();
+                htcStatus.innerHTML = "";
+            }
+
+            function ShowApplyDiscardBar()
+            {
+                if (document.all.trApplyDiscardBar.style.display == 'block')
+                {
+                    return;
+                }
+
+                htcStatus.innerHTML = g_ApplyDiscardText;
+                document.all.trApplyDiscardBar.style.display = 'block';
+                oMenu[0].pixelRight += document.all.trApplyDiscardBar.clientWidth;
+                divTasks.pixelRight += document.all.trApplyDiscardBar.clientWidth;
+                Slider_OnLoad();
+                HideSQMBar();
+            }
+
+            function EnableApplyDiscardBar()
+            {
+                document.all.tbApplyButtons.className = "applyButtonsOn";
+                ShowApplyDiscardBar();
+            }
+
+            function DisableApplyDiscardBar()
+            {
+                document.all.tbApplyButtons.className = "applyButtonsOff";
+                HideApplyDiscardBar();
+            }
+
+            function onFormTabLoaded()
+            {
+                trForm.runtimeStyle.display='block';
+                htcTabs.contentHeight=23;
+                htcTabs.imgPrefix='TabsHandler/tab3-';
+                htcTabs.boostUp = -5;
+                htcTabs.boostDown = -5;
+                htcTabs.renderTabs();
+            }
+
+            function SetMMCVersion(MMCMajor,MMCMinor)
+            {
+                g_MMCMajor = MMCMajor;
+                g_MMCMinor = MMCMinor;
+            }
+
+            function HideSQMBar()
+            {
+                if (document.all.trSQM.style.display == 'none')
+                {
+                    return;
+                }
+                oMenu[0].pixelRight -= document.all.trSQM.clientWidth;
+                divTasks.pixelRight -= document.all.trSQM.clientWidth;
+                document.all.trSQM.style.display = 'none';
+                Slider_OnLoad();
+                htcSQM.innerHTML = "";
+            }
+
+            function ShowSQMBar()
+            {
+                if (document.all.trSQM.style.display == 'block')
+                {
+                    return;
+                }
+
+                htcSQM.innerHTML = g_SQMOptInText;
+                document.all.trSQM.style.display = 'block';
+                oMenu[0].pixelRight += document.all.trSQM.clientWidth;
+                divTasks.pixelRight += document.all.trSQM.clientWidth;
+                Slider_OnLoad();
+            }
+
+        </script>
+    </head>
+    <body id="bodyMain" topmargin="0" leftmargin="0" rightmargin="0" style="overflow: visible;"
+          onload="body_onload();" onunload="body_onunload();">
+        <!--
+            The following DIV is very important to disable the ability to move the screen rigth to
+            the off screen toolbox
+        -->
+        <DIV id=mainContentDiv style="VISIBILITY: hidden; OVERFLOW: visible; WIDTH: 100%; HEIGHT:100%">
+
+        <table id="tblMain" cellpadding="0" cellspacing="0" width="100%" height="100%" border="0">
+        <tr>
+            <td>
+            <!-- outer table -->
+
+            <table cellpadding="0" cellspacing="0" width="100%" height="100%" border="0">
+                <tr id="trTitle" width="100%">
+                    <td width="100%">
+                        <table cellpadding="0" cellspacing="0" width="100%" height="100%" border="0">
+                            <tr>
+                                <td nowrap class="brandHeader"></td>
+                                <td id="hEESpecificInfo">
+                                    <table cellpadding="0" cellspacing="0" width="100%" height="100%" border="0">
+                                        <tr>
+                                            <td id="hStorageServerName" class="sLocation"></td>
+                                        </tr>
+                                        <tr id="hUnavailableServersWarning">
+                                            <td>
+                                                <table cellpadding="0" cellspacing="0" width="100%" height="100%" border="0">
+                                                    <td nowrap width="16" align="right" class="sUnavailableServersWarning"><IMG width="16px" height="16px" src="warn.gif">
+                                                    </td>
+                                                    <td class="sUnavailableServersWarning">
+                                                        <A href="CmdActivate('IDR_LINK_SERVERS')" class="sUnavailableServersWarningHREF" onmousemove="ClearStatus()" ONCLICK="CmdActivate('IDR_LINK_SERVERS')" id="hUnavailableServersWarningList"></A>
+                                                    </td>                                       
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td id="hTitle" class="sLocation">Node name</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+	        <!-- SQM Opt-in link -->
+                <tr id="trSQM" style="display:none" width="100%">
+                    <td width="100%" border="1" class="SQM-bar-WithBorder">
+                        <table id="tbSqmOptIn" class="SQM-bar" border="0" width="100%" cellpadding="0" cellspacing="0">
+                            <tr width="100%" border="0">
+                                <td height="5" nowrap colspan="8" width="100%"></td>
+                            </tr>
+                            <tr width="100%" width="100%" border="0">
+                                <td><IMG id="htcSQMIcon" alt="" src="BasicPane\info.gif"></td>
+                                <td width="100%" class="SQM-bar" border="0">
+                                    <a href="#none" onmousemove="ClearStatus()" onclick="javascript:NotifySnapin('IDR_SQM_OPTIN', g_sPageContext);" id="aSQM">
+					<ID id="L_Generic_LearnAboutSQM">
+                                            <span id="htcSQM" class="SQM-bar">
+                                                Click here to learn about the Customer Experience Improvement Program.
+					    </span>
+					</ID>
+				    </a>
+                                </td>
+                            </tr>
+                            <tr width="100%" border="1" class="SQM-bar-WithBorder">
+                                <td height="5" nowrap colspan="8" border="1" class="SQM-bar-WithBorder"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr id="trApplyDiscardBar" style="display:none" width="100%">
+                    <td width="100%">
+                        <table id="tbApplyButtons" class="applyButtonsOff" border="0" width="100%" cellpadding="0" cellspacing="0">
+                            <tr width="100%">
+                                <td height="5" nowrap colspan="8" width="100%"></td>
+                            </tr>
+                            <tr width="100%" width="100%">
+                                <td><IMG id="htcStatusIcon" alt="" src="warn.gif"></td>
+                                <td>&nbsp;</td>
+                                <td><input id="InputButtonApply" type="button" value="Apply" onclick="return InputButtonApply_onclick()" NAME="InputButtonApply"></td>
+                                <td>&nbsp;&nbsp;</td>
+                                <td><input id="InputButtonDiscard" type="button" value="Discard" onclick="return InputButtonDiscard_onclick()" NAME="InputButtonDiscard"></td>
+                                <td>&nbsp;&nbsp;</td>
+                                <td width="100%">
+                                    <span id="htcStatus"><ID id="L_Generic_SaveChangesText">To save changes and update the configuration, click Apply.</ID></span>
+                                </td>
+                                <td>&nbsp;&nbsp;</td>
+                            </tr>
+                            <tr width="100%">
+                                <td height="5" nowrap colspan="8"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr id="trContent" width="100%" height="100%">
+                    <td height="100%" width="100%">
+
+                        <!-- Shell Table -->
+
+                        <table id="tblContent" cellpadding="0" cellspacing="0" height="100%" width="100%">
+                            <tr height="100%" width="100%" >
+                               <td id="tdWorkArea" width="100%" height="100%" >
+
+                                    <!-- Internal Table 1 -->
+
+                                    <table id="tblWorkArea" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="100%" height="100%" >
+                                        <!-- Form !-->
+                                        <tr id="trForm" style="display:none" height="50%" width="100%">
+                                            <td width="100%">
+                                                <controls:TabsHandler TestKey="htcForm" id="htcForm"
+                                                                      onTabLoaded="onFormTabLoaded();"
+                                                                      onTabChanged="NotifySnapin('IDR_PAGE_SELECTED', htcForm.Select);"
+                                                                      imgPrefix="TabsHandler/tab-"
+                                                                      boostUp="-6"
+                                                                      boostDown="-6"
+                                                                      ContentHeight="30"
+                                                                      width="100%" height="100%"/>
+
+                                            </td>
+                                        </tr>
+                                        <tr height="100%" width="100%">
+                                            <td height="100%" width="100%">
+                                                <controls:TabsHandler TestKey="htcTabs" id="htcTabs"
+                                                                      onTabChanged="NotifySnapin('IDR_PAGE_SELECTED',htcTabs.Select);"
+                                                                      imgPrefix="TabsHandler/tab-"
+                                                                      boostUp="-6"
+                                                                      boostDown="-6"
+                                                                      ContentHeight="30"
+                                                                      width="100%" height="100%"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                <div id="divTasks" style="display:none; Z-INDEX: 1; RIGHT: 0px; WIDTH: 200px; POSITION: absolute; TOP: 0px; HEIGHT: 480px">
+                                    <table id="tblToolArea" style="border-collapse: collapse" border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
+                                    <tr height="100%" width="100%">
+                                        <td width="2" height="100%" nowrap background="_image/Taskbar/tb-tableLeftLines.jpg"></td>
+                                        <td class="Taskpane-bar">
+                                            <ID id="L_Generic_OpenCloseTaskPane">
+                                            <a id="tdTaskbarButton"
+                                               title="Open / Close Task Pane"
+                                               onclick="javascript:NotifySnapin('IDR_TOGGLE_TASKBAR', g_sPageContext)"
+                                               onmouseover="hilightLever(true);"
+                                               onmouseout="hilightLever(false);"
+                                               >
+                                               <IMG class="Taskpane-knob" id="imgTaskbarButton"" src="_image/taskBar/tab-off-lt.png"
+                                                    onmouseover="imgTaskbarButton.style.cursor='hand';"
+
+                                               />
+                                            </a>
+                                            </ID>
+                                        </td>
+                                        <td valign="top" align="left">
+                                            <table id="tblTasksControl" cellpadding="0" cellspacing="0" width="100%" height="100%">
+                                                <tr height="100%">
+
+                                                    <td id="tdTasks" style="VISIBILITY: hidden; display:block ; width=200px " nowrap align="right" valign="top">
+                                                        <controls:tabshandler TestKey="htcToolsTabs" id="htcToolsTabs"
+                                                                              imgPrefix="TabsHandler/tab2-"
+                                                                              onTabLoaded="divTasks.runtimeStyle.display='block'"
+                                                                              boostUp="-12"
+                                                                              boostDown="-12"
+                                                                              contentHeight="34"
+                                                                              onTabChanged="NotifySnapin('IDR_PAGE_SELECTED', htcToolsTabs.Select);"/>
+                                                    </td>
+                                                </tr>
+                                                <tr id="trToolFooter" width="100%">
+                                                    <td id="tdToolFooter" style="display:none">
+                                                        <a href="#none" onmousemove="ClearStatus()" onclick="NotifySnapin('IDR_BACK_TO_GETTINGSTARTED', g_sPageContext)" id="aBackToGettingStarted"><ID id="L_Generic_BackToGettingStarted">
+                                                            Back to Getting Started
+                                                        </ID></a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    </table>
+
+                                </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- End Shell Table -->
+
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+
+            <!-- end outer table -->
+            </td>
+        </tr>
+        </table>
+    </DIV>
+    </body>
+</html>

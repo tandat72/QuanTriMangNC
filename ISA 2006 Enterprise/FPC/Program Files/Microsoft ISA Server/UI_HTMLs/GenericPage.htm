@@ -1,0 +1,32 @@
+<html xmlns:controls>
+    <head>
+        <LINK REL="stylesheet" type="text/css" href="_common/isa.css">
+            <script id="jsCommon" src="common.js"></script>
+            <script id="jsCommands" src="commands.js"></script>
+            <script>
+            var g_sPageContext = location.hash.slice(1);
+            
+            function body_onload() {
+                var ListviewsCollection = document.getElementsByName("IsaListView");
+                ListviewsCollection[0].id = g_sPageContext;
+                ListviewsCollection[0].TestKey = "ISA_LIST_CONTROL" + g_sPageContext;
+                NotifySnapin("IDR_PAGE_LOADED", g_sPageContext);
+            }
+            
+            function CmdActivate(Code)
+            {
+                NotifySnapin(Code, g_sPageContext);
+            }
+            
+            //  Updates the UI according to specified ISA edition type
+            function UpdateViewForEditionType(EditionType)
+            {
+                //  Nothing to do
+            }
+            </script>
+    </head>
+    <body id="idBody" class="TabPageBody" height="100%" width="100%" onload="body_onload();">
+        <object NAME="IsaListView" height="100%" width="100%" classid="CLSID:7B800019-6212-41DC-B208-520B501FBFB2" VIEWASTEXT>
+        </object>
+    </body>
+</html>

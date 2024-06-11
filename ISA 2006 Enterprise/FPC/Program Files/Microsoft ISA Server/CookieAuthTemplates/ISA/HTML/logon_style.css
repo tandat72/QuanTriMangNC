@@ -1,0 +1,261 @@
+/*Copyright (c) 2003-2006 Microsoft Corporation.  All rights reserved.*/
+
+/* main layout styles */
+
+/* Everything should be Tahoma */
+*
+{
+	font-family:Tahoma;
+}
+body
+{
+	background-color:#ffffff;
+	text-align:center;
+}
+img
+{
+	border:0;
+}
+.nonMSIE
+{
+	padding: 3px 3px; 
+	margin: 2px 2px;
+}
+table#tblMain
+{
+	margin-top:48px;
+	padding:0px 0px 0px 0px;
+}
+table.mid
+{
+	border-collapse:collapse;
+	padding:0px;
+	width:380px;
+	font-size:70%; 
+	color:#ffffff; 
+	text-align:left; 
+}
+table.tblConn
+{
+    direction: ltr;
+}
+td.tdConnImg
+{
+    width: 22;
+}
+td.tdCopy
+{
+    font-size: 80%;
+}
+td.tdConn
+{
+    padding-top: 15;
+}
+td#mdLft
+{
+	background: url("/CookieAuth.dll?GetPic?formdir=@@FORMDIR&image=lgnleft.gif") repeat-y;
+	width:15px;
+}
+td#mdRt
+{
+	background: url("/CookieAuth.dll?GetPic?formdir=@@FORMDIR&image=lgnright.gif") repeat-y;
+	width:15px;
+}
+td#mdMid
+{
+	padding:0px 45px;
+	background: #7f90b1; 
+	vertical-align: top;
+}
+td .txtpad
+{
+	padding: 3px 6px 3px 0px;
+	text-align:right;
+}
+/* shared content styles */
+body.rtl td#mdMid
+{
+	text-align:right;
+	direction:rtl;
+}
+select, table
+{
+	font-size:100%;
+	color:#ffffff;
+}
+select, .txt
+{
+	color:#000000;
+	background-color:#fceeaf;
+	border:1px solid #F6F8FF;
+	margin: 3px 6px 3px 6px;
+}
+.txt
+{
+	padding:3px;
+	height:2.2em;
+	font-size:95%;
+}
+input.btn
+{
+	color: #3f52b8;
+	background-color: #f6f8ff;
+	border:0px;
+	padding:2px 6px;
+	margin:0px 6px;
+	font-size:95%;
+	text-align:center;
+}
+.btnOnFcs
+{
+	color: #3f52b8;
+	background-color: #f6f8ff;
+	border:0px;
+	padding:2px 6px;
+	margin:0px 6px;
+	font-size:95%;
+	text-align:center;
+}
+.btnOnMseOvr
+{
+	color: #3f52b8;
+	background-color: #ffefb2;
+	border:0px;
+	padding:2px 6px;
+	margin:0px 6px;
+	font-size:95%;
+	text-align:center;
+}
+.btnOnMseDwn
+{
+	color: #000000;
+	background-color: #ffefb2;
+	border:0px solid #ffccd0;
+	padding:2px 6px;
+	margin:0px 6px;
+	font-size:95%;
+	text-align:center;
+}
+.nowrap
+{
+	white-space:nowrap;
+}
+hr
+{
+	height:1px;
+	color:#A9AAC4;
+}
+.l
+{
+	text-align:left;
+}
+.rtl .l
+{
+	text-align:right;
+}
+.r
+{
+	text-align:right;
+}
+.rtl .r
+{
+	text-align:left;
+}
+/* logon page specific styles */
+a
+{
+	color:#FFE052;
+	text-decoration:none;
+}
+.wrng
+{
+	color:#F8D328;
+}
+.disBsc
+{
+	color:#C8D3E3;
+}
+.expl
+{
+	color:#C8D3E3;
+}
+.w100, .txt
+{
+	width:100%;
+}
+.txt
+{
+	margin:0px 6px;
+}
+.rdo
+{
+	margin:0px 12px 0px 32px;
+}
+body.rtl .rdo
+{
+	margin:0px 32px 0px 12px;
+}
+tr.expl td, tr.wrng td
+{
+	padding:2px 0px 4px 0px;
+}
+tr#trSec td
+{
+	padding:3px 0px 8px 0px;
+}
+/* language page specific styles */
+td#tdLng
+{
+	padding:12px 0px 12px 0px;
+}
+td#tdTz
+{
+	padding:8px 0px 8px 0px;
+}
+select#selTz
+{
+	padding:0px;
+	margin:0px;
+}
+td#tdOptMsg
+{
+	padding:10px 0px 10px 0px;
+}
+td#tdOptChk
+{
+	padding:0px 0px 15px 65px;
+}
+td#tdOptAcc
+{
+	vertical-align:middle;
+	padding:0px 0px 0px 3px;
+}
+select#selLng
+{
+	margin:0px 16px;
+}
+input#btnOk
+{
+	width:50px;
+}
+/* logoff page specific styles */
+td#tdMsg
+{
+	margin:9px 0px 64px;
+}
+input#btnCls
+{
+	margin:3px 6px;
+}
+.dir
+{
+	direction: ltr;
+}
+.align
+{
+	text-align:left;
+}
+.padding
+{
+	padding-left:42px;
+}

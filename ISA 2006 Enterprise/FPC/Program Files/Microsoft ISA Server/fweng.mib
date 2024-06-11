@@ -1,0 +1,549 @@
+FwEng-MIB DEFINITIONS ::= BEGIN
+
+        IMPORTS
+                enterprises,
+                OBJECT-TYPE,
+                Counter
+                        FROM RFC1155-SMI
+                Counter64
+                        FROM SNMPv2-SMI
+                internetServer
+                        FROM InternetServer-MIB;
+
+--      microsoft       OBJECT IDENTIFIER ::= { enterprises 311 }
+--      software        OBJECT IDENTIFIER ::= { microsoft 1 }
+--      internetServer  OBJECT IDENTIFIER ::= { software 7 }
+        WspServer       OBJECT IDENTIFIER ::= { internetServer 12 }
+        FwEngStatistics OBJECT IDENTIFIER ::= { WspServer 3 }
+
+-- Firewall Engine Statistics
+	ActiveConnections OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of active connections currently passing data."
+		::= { FwEngStatistics 1 }
+
+	NewConnections OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of connections created per second."
+		::= { FwEngStatistics 2 }
+
+	TcpEstablishedConnections OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The current number of established TCP connections. A TCP connection is counted as established after the 3-way SYN handshake was completed successfully."
+		::= { FwEngStatistics 3 }
+
+	Bytes OBJECT-TYPE
+		SYNTAX	Counter64
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of bytes passed through the firewall packet engine driver."
+		::= { FwEngStatistics 4 }
+
+	BytesSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of bytes passed through the firewall packet engine driver per second."
+		::= { FwEngStatistics 5 }
+
+	Packets OBJECT-TYPE
+		SYNTAX	Counter64
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of packets inspected by the firewall packet engine driver."
+		::= { FwEngStatistics 6 }
+
+	PacketsSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of packets inspected by the firewall packet engine driver per second."
+		::= { FwEngStatistics 7 }
+
+	AllowedPackets OBJECT-TYPE
+		SYNTAX	Counter64
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of packets allowed to pass through the firewall packet engine driver."
+		::= { FwEngStatistics 8 }
+
+	AllowedPacketsSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of packets allowed per second."
+		::= { FwEngStatistics 9 }
+
+	DroppedPackets OBJECT-TYPE
+		SYNTAX	Counter64
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of dropped packets."
+		::= { FwEngStatistics 10 }
+
+	DroppedPacketsSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of packets dropped per second."
+		::= { FwEngStatistics 11 }
+
+	BackloggedPackets OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of packets waiting for the firewall packet engine to create a data pump."
+		::= { FwEngStatistics 12 }
+
+	RegularConnections OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of regular connections."
+		::= { FwEngStatistics 13 }
+
+	RegularConnectionsSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of regular connections per second."
+		::= { FwEngStatistics 14 }
+
+	TcpNonEstablishedConnections OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of TCP non established connections."
+		::= { FwEngStatistics 15 }
+
+	TcpNonEstablishedConnectionsSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of TCP non established connections per second."
+		::= { FwEngStatistics 16 }
+
+	TcpEstablishedConnectionsSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of TCP established connections per second."
+		::= { FwEngStatistics 17 }
+
+	TcpFinWait1Connections OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of TCP FIN_WAIT_1 connections."
+		::= { FwEngStatistics 18 }
+
+	TcpFinWait1ConnectionsSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of TCP FIN_WAIT_1 connections per second."
+		::= { FwEngStatistics 19 }
+
+	NoTimeoutConnections OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of no timeout connections."
+		::= { FwEngStatistics 20 }
+
+	NoTimeoutConnectionsSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of no timeout connections per second."
+		::= { FwEngStatistics 21 }
+
+	ShutdownConnections OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of shutdown connections."
+		::= { FwEngStatistics 22 }
+
+	ShutdownConnectionsSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of shutdown connections per second."
+		::= { FwEngStatistics 23 }
+
+	ClosedConnections OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of closed connections."
+		::= { FwEngStatistics 24 }
+
+	ClosedConnectionsSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of closed connections per second."
+		::= { FwEngStatistics 25 }
+
+	NotifyPendingConnections OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of notify pending connections."
+		::= { FwEngStatistics 26 }
+
+	NotifyPendingConnectionsSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of notify pending connections per second."
+		::= { FwEngStatistics 27 }
+
+	CreationPendingConnections OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of creation pending connections."
+		::= { FwEngStatistics 28 }
+
+	CreationPendingConnectionsSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of creation pending connections per second."
+		::= { FwEngStatistics 29 }
+
+	RawConnection OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of RAW connection."
+		::= { FwEngStatistics 30 }
+
+	RawConnectionSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of RAW connection per second."
+		::= { FwEngStatistics 31 }
+
+	SpoofedPackets OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of spoofed packets dropped."
+		::= { FwEngStatistics 32 }
+
+	SpoofedPacketsSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of spoofed packets dropped per second."
+		::= { FwEngStatistics 33 }
+
+	SynProtections OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of connections dropped because of syn protection attacks."
+		::= { FwEngStatistics 34 }
+
+	SynProtectionsSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of connections dropped because of syn protection attacks per second."
+		::= { FwEngStatistics 35 }
+
+	FundstoneClosedConnections OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of connections dropped because of fundstone attacks."
+		::= { FwEngStatistics 36 }
+
+	FundstoneClosedConnectionsSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of connections dropped because of fundstone attacks per seconds."
+		::= { FwEngStatistics 37 }
+
+	TimeoutTcpEstablishedConnections OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of established TCP connections that receive timout."
+		::= { FwEngStatistics 38 }
+
+	TimeoutTcpEstablishedConnectionsSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of established TCP connections that receive timout per seconds."
+		::= { FwEngStatistics 39 }
+
+	TimeoutTcpHalfOpenedConnections OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of half-opened TCP connections that receive timout."
+		::= { FwEngStatistics 40 }
+
+	TimeoutTcpHalfOpenedConnectionsSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of half-opened TCP connections that receive timout per second."
+		::= { FwEngStatistics 41 }
+
+	TimeoutTcpHalfClosedConnections OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of half-closed TCP connections that receive timout."
+		::= { FwEngStatistics 42 }
+
+	TimeoutTcpHalfClosedConnectionsSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of half-closed TCP connections that receive timout per second."
+		::= { FwEngStatistics 43 }
+
+	TcpReservePortList OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of TCP reserve port list."
+		::= { FwEngStatistics 44 }
+
+	TcpReservePortListSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of TCP reserve port list per second."
+		::= { FwEngStatistics 45 }
+
+	UdpReservePortList OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of UDP reserve port list."
+		::= { FwEngStatistics 46 }
+
+	UdpReservePortListSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of UDP reserve port list per second."
+		::= { FwEngStatistics 47 }
+
+	Creations OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of creations."
+		::= { FwEngStatistics 48 }
+
+	CreationsSecond OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of creations per second."
+		::= { FwEngStatistics 49 }
+
+	KernelEstablishFailAndDrop OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of dropped packets due to kernel establishments failures."
+		::= { FwEngStatistics 50 }
+
+	LogBufferAvailableIRPs OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of log buffer available IRPs."
+		::= { FwEngStatistics 51 }
+
+	LogBufferFreeQueueLength OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of log buffer free queue length."
+		::= { FwEngStatistics 52 }
+
+	LogBufferPendingQueueLength OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of log buffer pending queue length."
+		::= { FwEngStatistics 53 }
+
+	LogEntriesInCurrentFilledLogEntry OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of log entries in current filled log entry."
+		::= { FwEngStatistics 54 }
+
+	LogBufferFailedDueToFullQueue OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of log buffer failed due to full queue."
+		::= { FwEngStatistics 55 }
+
+	LogBufferNewPumpFailedDueToFullQueue OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of log buffer of new data-pumps failed due to full queue."
+		::= { FwEngStatistics 56 }
+
+	ReInjectAvailableIRPs OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of reinject available IRPs."
+		::= { FwEngStatistics 57 }
+
+	ReInjectFreeQueueLength OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of reiunject free queue length."
+		::= { FwEngStatistics 58 }
+
+	ReInjectPendingHoldPacketsRequests OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of reinject pending hold packets requests."
+		::= { FwEngStatistics 59 }
+
+	ReInjectFailedDueToFullQueue OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of reinject failed due to full queue."
+		::= { FwEngStatistics 60 }
+
+	NotifyBufferAvailableIRPs OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of notify buffer available IRPs."
+		::= { FwEngStatistics 61 }
+
+	NotifyBufferFreeQueueLength OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of notify buffer free queue length."
+		::= { FwEngStatistics 62 }
+
+	NotifyBufferPendingQueueLength OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of notify buffer pending queue length."
+		::= { FwEngStatistics 63 }
+
+	NotifyBufferFailedDueToFullQueue OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of notify buffer failed due to full queue."
+		::= { FwEngStatistics 64 }
+
+	DroppedBadChecksumPackets OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of dropped TCP packets due to bad checksum value."
+		::= { FwEngStatistics 65 }
+
+	DroppedSeqAckMismatchPackets OBJECT-TYPE
+		SYNTAX	Integer
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of dropped TCP packets due to a SEQ or ACK mismatch."
+		::= { FwEngStatistics 66 }
+
+
+END

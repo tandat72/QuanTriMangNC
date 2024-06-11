@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>@@L_OWAWindowTitle_Text</title>
+    <meta http-equiv="Content-Type" content="text/html; CHARSET=utf-8">
+    <meta content="NOINDEX, NOFOLLOW" name="Robots">
+    <link href="/CookieAuth.dll?GetPic?formdir=@@FORMDIR&image=logon_style.css" type="text/css" rel="stylesheet">
+
+    <script src="/CookieAuth.dll?GetPic?formdir=@@FORMDIR&image=flogon.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+	<!--
+	var a_fGzpEnbl = 1;
+    var g_fFcs = 1;
+    
+    function window_onload()
+    {
+        var uid = document.getElementById('newpin');
+        if (g_fFcs)
+        {
+            uid.select();
+            uid.focus();
+        }
+        
+        var expl4 = document.getElementById('expl4');
+	    expl4.style.display = "";
+	    
+        var lnkHidedSection = document.getElementById('lnkHdExp4');
+	    lnkHidedSection.style.display = "none";
+    	
+	    var lnkShowSection = document.getElementById('lnkShwExp4');
+	    lnkShowSection.style.display = "";
+	    
+	    clkPin();
+    }
+    
+    -->
+    </script>
+
+</head>
+<body class="ltr" onload="return window_onload();">
+    <form action="@@URL?Logon" method="post" id="logonForm" autocomplete="off">
+        <input id="flags" type="hidden" name="flags" value="0">
+        <input id="forcedownlevel" type="hidden" name="forcedownlevel" value="0">
+        <input id="userid" type="hidden" name="userid" value="@@USER">
+        <input id="curl" type="hidden" name="curl" value="@@DESTINATION">
+        <input id="sessionid" type="hidden" name="sessionid" value="@@SESSIONID">
+        <input id="formdir" type="hidden" name="formdir" value="@@FORMDIR">
+        <!-- Main table -->
+		<table align="center" id="tblMain" cellpadding=0 cellspacing=0>
+			<tr>
+				<td colspan=3><img src="/CookieAuth.dll?GetPic?formdir=@@FORMDIR&image=lgntop.gif" alt=""></td>
+			</tr>
+			<tr>
+				<td id="mdLft">&nbsp;</td>
+                    <td id="mdMid">
+                        <!-- Mid table -->
+                        <table id="tblMid" class="mid">
+                            <tbody>
+                                <tr>
+                                    <td class="expl" id="expltxt">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <hr />
+                                        <!-- HR-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                <td class="align">
+                                    <!-- Table 1-->
+                                    <table cellpadding="0" cellspacing="0">
+                                        <col>
+		                                <col class="w100">
+		                                <tr id="trSec">
+				                            <td class="nowrap">
+					                            @@L_NewPin2_Text2_Text&nbsp;
+				                            </td>
+				                            <td id="expl4" style="display:none">
+				                                ( <a href="javascript:clkExp4(lnkShwExp4)" id="lnkShwExp4">@@L_ShowDetail_Text</a><a href="javascript:clkExp4(lnkHdExp4)" id="lnkHdExp4">@@L_HideDetail_Text</a> )
+				                            </td>
+			                            </tr>
+			                        </table>  
+			                        <!-- End Table 1-->
+                                </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <!--Table 2-->
+                                        <table cellpadding="0" cellspacing="0">
+                                            <col>
+                                            <col class="w100">
+                                            <tr class="height">
+                                                <td>
+                                                    <input id="rdoCPinSys" type="radio" name="pintype" value="1" class="rdo" onclick="clkPin()" checked="checked" /></td>
+                                                <td>
+                                                    <label for="rdoCPinSys">
+                                                        @@L_NewPin2_SysPin_Text</label></td>
+                                            </tr>
+			                                <tr id="trPinSysExp" class="expl" style="display:none">
+			                                    <td></td>
+				                                <td>@@L_NewPin2_Text3_Text</td>
+			                                </tr>
+                                            <tr class="height">
+                                                <td>
+                                                    <input id="rdoCPinUser" type="radio" name="pintype" value="2" class="rdo" onclick="clkPin()" /></td>
+                                                <td>
+                                                    <label for="rdoCPinUser">
+                                                        @@L_NewPin2_UserPin_Text</label></td>
+                                            </tr>
+			                                <tr id="trPinUserExp" class="expl" style="display:none">
+			                                    <td></td>
+				                                <td>@@L_NewPin2_Text4_Text</td>
+			                                </tr>
+                                        </table>
+                                        <!-- End Table 2-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <!-- Table 3-->
+                                        <table cellspacing="0" cellpadding="0">
+                                            <colgroup>
+                                                <col class="nowrap">
+                                                <col class="w100">
+                                                <col>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="nowrap"><label for="newpin">
+                                                        @@L_NewPin_Text</label></td>
+                                                    <td class="txtpad">
+                                                        <input class="txt" id="newpin" name="newpin" type="password" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="nowrap"><label for="nextprn">
+                                                        @@L_NewPin_Verify_Text</label></td>
+                                                    <td class="txtpad">
+                                                        <input class="txt" id="nextprn" type="password" name="nextprn" /></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- End Table 3-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <!-- Table 4-->
+                                        <table cellspacing="0" cellpadding="0" class="padding">
+                                            <colgroup>
+                                                <col class="w100">
+                                                <col class="nowrap">
+                                                <col>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="txtpad">
+                                                        <input class="btn" onmousedown="this.className='btnOnMseDwn'" id="submitPIN" onmouseover="this.className='btnOnMseOvr'"
+                                                            onclick="" onmouseout="this.className='btn'" type="submit" value="@@L_LoginButton_Text" style="margin:0px 0px 0px 0px;"
+                                                            name="submitPIN" />
+                                                    </td>
+                                                    <td class="txtpad">
+                                                        <input class="btn" onmousedown="this.className='btnOnMseDwn'" id="cancelPIN" onmouseover="this.className='btnOnMseOvr'"
+                                                            onclick="" onmouseout="this.className='btn'" type="submit" value="@@L_CancelButton_Text"
+                                                            name="SubmitCancel" />
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- End Table 4-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <hr />
+                                        <!-- HR-->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- End Mid Table-->
+						<table class="mid tblConn">
+							<tr>
+								<td rowspan=3 style="vertical-align:top" class="tdConnImg"><img src="/CookieAuth.dll?GetPic?formdir=@@FORMDIR&image=lgnexlogo.gif" alt=""></td>
+								<td class="tdConn" style="padding-top:6px;">@@L_OWAConnectedToExchange</td>
+							</tr>
+							<tr>
+								<td class="tdConn" style="padding-top:0px;">@@L_SecuredByISA</td>
+							</tr>
+							<tr>
+								<td class="tdCopy">@@L_Copyright</td>
+							</tr>
+						</table>
+                    </td>
+		<td id="mdRt">&nbsp;</td>
+	</tr>
+	<tr>
+		<td colspan=3><img src="/CookieAuth.dll?GetPic?formdir=@@FORMDIR&image=lgnbottom.gif" alt=""></td>
+	</tr>
+    </tbody>
+    </table>
+    <!-- End Main Table-->
+</form>
+</body>
+</html>

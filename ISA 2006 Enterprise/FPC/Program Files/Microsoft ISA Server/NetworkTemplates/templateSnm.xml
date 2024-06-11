@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fpc4:Root xmlns:fpc4="http://schemas.microsoft.com/isa/config-4" xmlns:dt="urn:schemas-microsoft-com:datatypes" StorageName="FPC" StorageType="0">
+	<fpc4:Build dt:dt="string">4.0.1649.50</fpc4:Build>
+	<fpc4:Comment dt:dt="string"/>
+	<fpc4:Edition dt:dt="int">81</fpc4:Edition>
+	<fpc4:ExportItemClassCLSID dt:dt="string">{E603489F-FA78-41CA-ADFE-EDC572C944DE}</fpc4:ExportItemClassCLSID>
+	<fpc4:IsaXmlVersion dt:dt="string">3.0</fpc4:IsaXmlVersion>
+	<fpc4:OptionalData dt:dt="int">12</fpc4:OptionalData>
+	<fpc4:Arrays StorageName="Arrays" StorageType="0">
+		<fpc4:Array StorageName="{11225416-4E74-4400-AA2A-696636C78149}" StorageType="1">
+			<fpc4:Components dt:dt="int">62</fpc4:Components>
+            <fpc4:DNSName dt:dt="string">NoDNSName</fpc4:DNSName>
+			<fpc4:Name dt:dt="string">NoName</fpc4:Name>
+			<fpc4:NetConfig StorageName="NetConfig" StorageType="1">
+				<fpc4:Networks StorageName="Networks" StorageType="1">
+					<fpc4:Network StorageName="{4E32B556-0FAF-4A27-9111-085F679EDC9B}" StorageType="1">
+						<fpc4:Description dt:dt="string" FromResource="msfpcui.dll">13352</fpc4:Description>
+						<fpc4:EnableFirewallClients dt:dt="boolean">1</fpc4:EnableFirewallClients>
+						<fpc4:EnableWebProxyClients dt:dt="boolean">1</fpc4:EnableWebProxyClients>
+						<fpc4:Name dt:dt="string" FromResource="msfpcui.dll">13351</fpc4:Name>
+						<fpc4:NetworkType dt:dt="int">4</fpc4:NetworkType>
+					</fpc4:Network>
+					<fpc4:Network StorageName="{F129EACF-778B-44FE-B339-5B752D7220A3}" StorageType="1">
+						<fpc4:Description dt:dt="string" FromResource="msfpcui.dll">13350</fpc4:Description>
+						<fpc4:Name dt:dt="string" FromResource="msfpcui.dll">13349</fpc4:Name>
+						<fpc4:NetworkType dt:dt="int">3</fpc4:NetworkType>
+					</fpc4:Network>
+       			</fpc4:Networks>
+				<fpc4:NetworkRules StorageName="NetworkRules" StorageType="1">
+					<fpc4:NetworkRule StorageName="{FB9F2F22-A52A-4d7b-88BD-5BB8B944E46D}" StorageType="1">
+						<fpc4:Enabled dt:dt="boolean">1</fpc4:Enabled>
+						<fpc4:Name dt:dt="string" FromResource="msfpcui.dll">13377</fpc4:Name>
+						<fpc4:Order dt:dt="bin.hex">01 00 00 00 00 00 00 00</fpc4:Order>
+						<fpc4:RoutingType dt:dt="int">0</fpc4:RoutingType>
+						<fpc4:SelectionIPs StorageName="SourceSelectionIPs" StorageType="1">
+							<fpc4:Refs StorageName="Networks" StorageType="1">
+								<fpc4:Ref StorageName="{26C9D0E3-109E-47df-81B6-532A6E73B71F}" StorageType="1">
+									<fpc4:Name dt:dt="string">{394b94a2-36d5-4811-9db8-f0754aef4f79}</fpc4:Name>
+									<fpc4:RefClass dt:dt="string">msFPCNetwork</fpc4:RefClass>
+								</fpc4:Ref>
+								<fpc4:Ref StorageName="{A30AD5B7-3099-425c-A52B-56D588FEB50B}" StorageType="1">
+									<fpc4:Name dt:dt="string">{08e7b0e1-287a-4fbd-a33d-b13012e4bc4a}</fpc4:Name>
+									<fpc4:RefClass dt:dt="string">msFPCNetwork</fpc4:RefClass>
+								</fpc4:Ref>
+							</fpc4:Refs>
+						</fpc4:SelectionIPs>
+						<fpc4:SelectionIPs StorageName="DestinationSelectionIPs" StorageType="1">
+							<fpc4:Refs StorageName="Networks" StorageType="1">
+								<fpc4:Ref StorageName="{2D387513-DB84-48b8-B1CB-83668D7A879D}" StorageType="1">
+									<fpc4:Name dt:dt="string">{4E32B556-0FAF-4A27-9111-085F679EDC9B}</fpc4:Name>
+									<fpc4:RefClass dt:dt="string">msFPCNetwork</fpc4:RefClass>
+								</fpc4:Ref>
+							</fpc4:Refs>
+						</fpc4:SelectionIPs>
+					</fpc4:NetworkRule>
+					<fpc4:NetworkRule StorageName="{E40BC4C6-A4A2-4B4A-8359-EA567BF83283}" StorageType="1">
+						<fpc4:Enabled dt:dt="boolean">1</fpc4:Enabled>
+						<fpc4:Name dt:dt="string" FromResource="msfpcui.dll">13348</fpc4:Name>
+						<fpc4:Order dt:dt="bin.hex">02 00 00 00 00 00 00 00</fpc4:Order>
+						<fpc4:RoutingType dt:dt="int">1</fpc4:RoutingType>
+						<fpc4:SelectionIPs StorageName="SourceSelectionIPs" StorageType="1">
+							<fpc4:Refs StorageName="Networks" StorageType="1">
+								<fpc4:Ref StorageName="{C6F2C51B-3663-4229-AB2A-F146E87F2837}" StorageType="1">
+									<fpc4:Name dt:dt="string">{4E32B556-0FAF-4A27-9111-085F679EDC9B}</fpc4:Name>
+									<fpc4:RefClass dt:dt="string">msFPCNetwork</fpc4:RefClass>
+								</fpc4:Ref>
+								<fpc4:Ref StorageName="{097D8CAD-8FE9-4188-9FA6-3BDC19D5D217}" StorageType="1">
+									<fpc4:Name dt:dt="string">{394b94a2-36d5-4811-9db8-f0754aef4f79}</fpc4:Name>
+									<fpc4:RefClass dt:dt="string">msFPCNetwork</fpc4:RefClass>
+								</fpc4:Ref>
+								<fpc4:Ref StorageName="{0DF10D3F-11CA-4d6e-89AD-781F44D47983}" StorageType="1">
+									<fpc4:Name dt:dt="string">{08e7b0e1-287a-4fbd-a33d-b13012e4bc4a}</fpc4:Name>
+									<fpc4:RefClass dt:dt="string">msFPCNetwork</fpc4:RefClass>
+								</fpc4:Ref>
+							</fpc4:Refs>
+						</fpc4:SelectionIPs>
+						<fpc4:SelectionIPs StorageName="DestinationSelectionIPs" StorageType="1">
+							<fpc4:Refs StorageName="Networks" StorageType="1">
+								<fpc4:Ref StorageName="{E3DCD23F-7ED4-4377-8C68-3EE942C76097}" StorageType="1">
+									<fpc4:Name dt:dt="string">{F129EACF-778B-44FE-B339-5B752D7220A3}</fpc4:Name>
+									<fpc4:RefClass dt:dt="string">msFPCNetwork</fpc4:RefClass>
+								</fpc4:Ref>
+							</fpc4:Refs>
+						</fpc4:SelectionIPs>
+					</fpc4:NetworkRule>
+				</fpc4:NetworkRules>
+			</fpc4:NetConfig>
+			<fpc4:Policies StorageName="Policies" StorageType="1">
+				<fpc4:ArrayPolicy StorageName="{7EDA00D3-09D2-486a-9A08-05D20A389998}" StorageType="1">
+					<fpc4:Description dt:dt="string" FromResource="msfpcui.dll">13522</fpc4:Description>
+					<fpc4:Name dt:dt="string" FromResource="msfpcui.dll">13523</fpc4:Name>
+				</fpc4:ArrayPolicy>
+			</fpc4:Policies>
+		</fpc4:Array>
+	</fpc4:Arrays>
+</fpc4:Root>

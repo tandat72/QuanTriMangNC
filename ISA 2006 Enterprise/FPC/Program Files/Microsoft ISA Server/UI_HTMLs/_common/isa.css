@@ -1,0 +1,722 @@
+
+body    {
+        margin: 0px ;
+        font-family : tahoma;
+        font-size : 8pt;
+}
+
+td {
+        margin: 0px ;
+        font-family : tahoma;
+        font-size : 8pt;
+}
+
+/* All anchors on the entire page */
+A {
+        color: #336699 ;
+        text-decoration: none ;
+}
+
+A:link {
+        color: #336699 ;
+        text-decoration: none ;
+}
+
+A:active {
+        color: #336699 ;
+        text-decoration: none ;
+}
+
+A:visited {
+        color: #336699 ;
+        text-decoration: none ;
+}
+
+A:hover {
+        color: #000033 ;
+        text-decoration: underline ;
+}
+
+img     {
+        border : 0;
+}
+
+/* Brand/Header */
+
+.brandHeader    {
+        width : 187px;
+        height : 60px;
+        vertical-align: middle;
+        padding: 0px;
+        background-image: url(../_image/common/upperLeft.png);
+}
+
+.headerBack     {
+        background-image: url(../_image/common/row1.png);
+        vertical-align : top;
+        width : 100%;
+}
+
+td.sLocation    {
+        text-align : left;
+        font-family : tahoma;
+        font-size : 8pt;
+        font-weight : Bold;
+        padding-right : 13px;
+        color : white;
+        background-image: url(../_image/common/headerBack.png);
+}
+
+td.sUnavailableServersWarning
+{
+        text-align : left;
+        font-family : tahoma;
+        font-size : 8pt;
+        font-weight : Bold;
+        padding-right : 13px;
+        color : red;
+        background-image: url(../_image/common/headerBack.png);
+}
+
+A.sUnavailableServersWarningHREF:active:hover:link:visited    {
+        text-align : left;
+        font-family : tahoma;
+        font-size : 8pt;
+        font-weight : Bold;
+        padding-right : 13px;
+        color : red;
+        background-image: url(../_image/common/headerBack.png);
+}
+
+A.sUnavailableServersWarningHREF    {
+        text-align : left;
+        font-family : tahoma;
+        font-size : 8pt;
+        font-weight : Bold;
+        padding-right : 13px;
+        color : red;
+        background-image: url(../_image/common/headerBack.png);
+}
+
+h1.hTitle       {
+        text-align : right;
+        vertical-align : middle;
+        font-family : tahoma;
+        font-size : 8pt;
+        font-weight : Bold;
+        padding-right : 13px;
+        padding-top : 17px;
+        color : white;
+}
+
+
+/* Selected Tabs */
+
+.tabSelectedText        {
+        font-family : tahoma;
+        font-size : 8pt;
+        font-weight : Bold;
+        padding-top : 13px;
+        background-image: url(../_image/tabs/tabSelected-Back.png);
+        vertical-align : top;
+}
+
+.tabDeSelectedText      {
+        font-family : tahoma;
+        font-size : 8pt;
+        font-weight : Bold;
+        padding-top : 13px;
+        background-image: url(../_image/tabs/tabDeSelected-Back.png);
+        vertical-align : top;
+}
+
+
+.tabBack        {
+        height : 30;
+        background-image: url(../_image/tabs/tabBack.png);
+        vertical-align : top;
+}
+
+a.tabHREF:active:hover:link:visited
+{
+        vertical-align : middle;
+        padding-left : 0px;
+        padding-top : 2px;
+        font-weight : normal;
+        text-decoration: none;
+}
+
+
+
+
+/* Selected Tabs : TaskBar */
+
+.tb-tabSelectedText     {
+        font-family : tahoma;
+        font-size : 8pt;
+        font-weight : Bold;
+        padding-top : 18px;
+        background-image: url(../_image/taskBar/tb-tabSelectedBack.png);
+        vertical-align : middle;
+        text-align : center;
+}
+
+.tb-tabDeSelectedText   {
+        font-family : tahoma;
+        font-size : 8pt;
+        font-weight : Bold;
+        padding-top : 18px;
+        background-image: url(../_image/taskBar/tb-tabDeSelectedBack.png);
+        vertical-align : middle;
+        text-align : center;
+}
+
+
+
+
+
+
+/* Selected Tabs : Inline/white background */
+
+.wTabBack       {
+        height : 23;
+        background-image: url(../_image/wTab/wBack.png);
+        vertical-align : top;
+}
+
+.wTabSelectedText       {
+        font-family : tahoma;
+        font-size : 8pt;
+        font-weight : Bold;
+        padding-top : 5px;
+        background-image: url(../_image/wTab/wTabSelectedBack.png);
+        vertical-align : top;
+}
+
+.wTabDeSelectedText     {
+        font-family : tahoma;
+        font-size : 8pt;
+        font-weight : Bold;
+        padding-top : 5px;
+        background-image: url(../_image/wTab/wTabDeSelectedBack.png);
+        vertical-align : top;
+}
+
+
+
+
+
+
+
+/* TaskBar Elements */
+
+.TasksTable {
+    background-color = #F9F8F3;
+    color: black;
+}
+
+table.taskbar   {
+        border-color : #2E4C75;
+        border-width : 1px ;
+        border-style : solid;
+}
+
+.Taskpane-knob        {
+        vertical-align : middle;
+        text-align : center;
+        height : 51;
+        width : 9;
+        cursor : hand;
+        background-image : url(../_image/taskBar/tab-bkg.PNG);
+        background-repeat : repeat-y;
+}
+
+.Taskpane-bar       {
+        vertical-align : middle;
+        height : 100%;
+        width : 9;
+        vertical-align : middle;
+        background-image : url(../_image/taskBar/tab-bkg.PNG);
+        background-repeat : repeat-y;
+}
+
+.SQM-bar       {
+        vertical-align : middle;
+        font-family : tahoma;
+        font-size : 8pt;
+        font-weight : Bold;
+        text-decoration : underline;
+        background-color = #FFFFD2;
+}
+
+.SQM-bar-WithBorder  {
+        vertical-align : middle;
+        font-family : tahoma;
+        font-size : 8pt;
+        font-weight : Bold;
+        text-decoration : underline;
+        background-color = #FFFFD2;
+        border-bottom-color : #2E4C75;
+        border-bottom-width : 1px ;
+        border-bottom-style : solid;
+}
+
+.href-MainButtonOnText      {
+        font-family : tahoma;
+        font-size : 8pt;
+        font-weight : Bold;
+        vertical-align : middle;
+}
+
+.tb-sectionButtonOn     {
+        font-family : tahoma;
+        font-size : 8pt;
+        font-weight : Bold;
+        text-decoration : underline;
+        padding-left : 10px;
+        vertical-align : middle;
+        text-align : left;
+        height : 21;
+        width : 190;
+        border-bottom-color : #2E4C75;
+        border-bottom-width : 1px ;
+        border-bottom-style : solid;
+        background-image : url(../_image/taskBar/tb-SectionButton-on.png);
+}
+
+.tb-sectionButtonOff    {
+        font-family : tahoma;
+        font-size : 8pt;
+        font-weight : Bold;
+        color : #2E4C75;
+        padding-left : 10px;
+        vertical-align : middle;
+        text-align : left;
+        height : 21;
+        width : 190;
+        border-bottom-color : #2E4C75;
+        border-bottom-width : 1px ;
+        border-bottom-style : solid;
+        background-image : url(../_image/taskBar/tb-SectionButton-off.png);
+}
+
+
+.tb-sectionButtonActiveOn       {
+        font-family : tahoma;
+        font-size : 8pt;
+        font-weight : Bold;
+        text-decoration : underline;
+        padding-left : 10px;
+        vertical-align : middle;
+        text-align : left;
+        height : 21;
+        width : 190;
+        border-bottom-color : #2E4C75;
+        border-bottom-width : 1px ;
+        border-bottom-style : solid;
+        background-image : url(../_image/taskBar/tb-SectionButtonActive-on.png);
+}
+
+.tb-sectionButtonActiveOff      {
+        font-family : tahoma;
+        font-size : 8pt;
+        font-weight : Bold;
+        color : #2E4C75;
+        padding-left : 10px;
+        vertical-align : middle;
+        text-align : left;
+        height : 21;
+        width : 190;
+        border-bottom-color : #2E4C75;
+        border-bottom-width : 1px ;
+        border-bottom-style : solid;
+        background-image : url(../_image/taskBar/tb-SectionButtonActive-off.png);
+}
+
+
+.tb-sectionButtonBottomOn       {
+        font-family : tahoma;
+        font-size : 8pt;
+        font-weight : Bold;
+        padding-left : 10px;
+        vertical-align : middle;
+        text-align : left;
+        height : 21;
+        width : 190;
+        border-bottom-color : #2E4C75;
+        border-bottom-width : 0px ;
+        border-bottom-style : none;
+        background-image : url(../_image/taskBar/tb-SectionButton-on.png);
+}
+
+.tb-sectionButtonBottomOff      {
+        font-family : tahoma;
+        font-size : 8pt;
+        font-weight : Bold;
+        color : #2E4C75;
+        padding-left : 10px;
+        vertical-align : middle;
+        text-align : left;
+        height : 21;
+        width : 190;
+        border-bottom-color : #2E4C75;
+        border-bottom-width : 0px ;
+        border-bottom-style : none;
+        background-image : url(../_image/taskBar/tb-SectionButton-off.png);
+}
+
+
+/* Content Elements - Taskbar */
+
+
+
+.cont   {
+        padding-left : 4px;
+        padding-top: 5px;
+        vertical-align : top;
+        text-align : left;
+        height : 100%
+        border-bottom-color : #2E4C75;
+        border-bottom-width : 1px ;
+        border-bottom-style : solid;
+
+}
+
+.contEnd        {
+        padding-left : 4px;
+        padding-top: 5px;
+        vertical-align : top;
+        text-align : left;
+        height : 100%
+        border-bottom-color : #2E4C75;
+        border-bottom-width : 0px ;
+        border-bottom-style : none;
+
+}
+
+ul.taskList     {
+        font-family : tahoma;
+        font-size : 8pt;
+        list-style-image:url(../_image/general/greenArrow.png);
+        margin-top : 5px;
+        margin-left : 22px;
+}
+
+
+li.taskList {
+        vertical-align : middle;
+        padding-left : 8px;
+        padding-top : 2px;
+
+}
+
+tr.taskList     {
+        font-family : tahoma;
+        font-size : 10pt;
+        margin-top : 5px;
+        margin-left : 22px;
+        text-decoration : none;
+}
+
+a.taskHREF:active:hover:link:visited     {
+        vertical-align : middle;
+        padding-left : 0px;
+        padding-top : 0px;
+        font-weight : normal;
+}
+
+span.taskListHeader     {
+        font-family : tahoma;
+        font-size : 11pt;
+        font-weight : bolder;
+}
+
+caption.taskListHeader  {
+        font-family : tahoma;
+        font-size : 11pt;
+        font-weight : bold;
+	color : black;
+}
+
+/* Content Elements - General */
+
+td.alertsBox    {
+        border-color : #2E4C75;
+        border-width : 1px ;
+        border-style : solid;
+        background-color : #F9F8F3;
+	color : black;
+}
+
+td.alertsBoxHeader      {
+        border-color : #2E4C75;
+        border-width : 1px ;
+        border-style : solid;
+        padding-left : 5px;
+        background-image : url(../_image/general/boxBar.png);
+	color : black;
+}
+
+span.TaskActionWord
+{
+    color : Navy;
+        font-weight : bold;
+}
+
+span.TaskSelect
+{
+    color : black;
+}
+
+select.TaskSelect
+{
+        font-family : tahoma;
+        font-size : 8pt;
+}
+
+td.dFilter      {
+        font-family : tahoma;
+        font-size : 8pt;
+        vertical-align : top;
+        text-align : left;
+        padding-left : 5px;
+}
+
+.contSep {
+        height : 7px;
+        width : 100%;
+        background-image : url(../_image/general/contSep.png);
+
+}
+
+.padLeft        {
+        padding-Left : 5px;
+}
+
+
+.applyButtonsOn {
+        padding-Left : 5px;
+        background-color : #F9F8F3;
+}
+
+.applyButtonsOff {
+        padding-Left : 5px;
+        background-color : #F9F8F3;
+}
+
+/* Page Titles */
+
+.pageTitleText  {
+        font-family : tahoma;
+        font-size : 8pt;
+        font-weight : Bold;
+        color : white;
+        padding-top : 5px;
+        vertical-align : middle;
+        padding-right : 12px;
+        padding-bottom : 6px;
+}
+
+.BodyCopy       {
+        font-family : tahoma;
+        font-size : 8pt;
+        vertical-align : top;
+        text-align : left;
+        padding-right : 12px;
+}
+
+
+
+
+.header1        {
+        font-family : tahoma;
+        font-size : 12pt;
+        font-weight : bold;
+        vertical-align : top;
+        text-align : left;
+}
+
+.header2        {
+        font-family : tahoma;
+        font-size : 10pt;
+        font-weight : bold;
+        vertical-align : top;
+        text-align : left;
+}
+
+
+/* Dashboard Frames */
+
+table.dashframe {
+        border : 1px;
+        border-style : solid;
+        border-color: #415B8A;
+}
+.dashFrame      {
+        height : 22px;
+        font-family : tahoma;
+        font-size : 8pt;
+        font-weight : bold;
+        color : #2E4C75;
+        vertical-align : middle;
+        text-align : left;
+}
+
+/* Getting Started Elements */
+
+.GSIcon {
+        vertical-align : top;
+        text-align : right;
+        padding-right : 15px;
+        width : 83px;
+        border : 1;
+}
+
+.GSNoIcon       {
+        vertical-align : top;
+        text-align : center;
+        width : 45px;
+        border : 1;
+}
+
+
+.GSStepText     {
+        font-family : tahoma;
+        font-size : 9pt;
+        font-weight : bold;
+        vertical-align : top;
+        text-align : left;
+        padding-right : 12px;
+        margin-bottom : -12px;
+}
+
+.GSUL   {
+        font-family : tahoma;
+        font-size : 9pt;
+        margin-top : -10px;
+        margin-bottom : 0px;
+}
+
+.GSTDText       {
+        vertical-align : top;
+        text-align : left;
+        width : 100%;
+        border-top: #cccccc 1px solid ;
+        padding-top : 5px;
+        padding-right : 12px;
+}
+
+.GSRow2 {
+        width : 100%;
+        height : 6px;
+        background-image: url(../_image/row2.png);
+}
+
+.GSRow3 {
+        height : 23;
+        background-image: url(../_image/row3.png);
+        vertical-align : top;
+}
+
+.GSSpacer       {
+        width : 100%;
+        height : 20;
+}
+
+/* Config Elements */
+
+.conIcon        {
+        vertical-align : top;
+        text-align : right;
+        padding-right : 15px;
+        padding-top : 5px;
+        width : 83px;
+        border : 1;
+}
+
+/* General Page Elements */
+
+.GPIcon {
+        vertical-align : top;
+        text-align : left;
+        padding-top : 0px;
+        width :  30px;
+        border : 1;
+}
+
+
+/* Welcome Page */
+
+span.ArrayTitle {
+        font-family : tahoma;
+        font-size : 9pt;
+        font-weight : bold;
+        vertical-align : top;
+        text-align : left;
+
+}
+
+a.arraysList    {
+        width : 250;
+        font-family : tahoma;
+        font-size : 8pt;
+        vertical-align : top;
+        text-align : left;
+        width : 100%;
+        border-top: #cccccc 1px solid ;
+
+
+
+}
+
+.emptyViewHeader {
+        font-family : tahoma;
+        font-weight : bold;
+        font-size : 12pt;
+        vertical-align : top;
+        text-align : left;
+	margin-top : 22;
+        padding : 5
+}
+
+.emptyViewDescription {
+        font-family : tahoma;
+        font-size : 8pt;
+        vertical-align : top;
+        text-align : left;
+        padding : 5
+}
+
+.TabPageBody
+{
+        overflow:visible;
+        border-width : 2pt 2pt 2pt 2pt ;
+        border-color : white;
+        border-style : solid;
+}
+
+.TemplateMouseOver
+{
+                background: highlight;
+                color : highlighttext;
+}
+
+.TemplateNormal
+{
+                background : #F9F8F3;
+                cursor : hand;
+}
+
+#TemplateUnSelected
+{
+        border : 5 solid;
+        border-color : #F9F8F3;
+}
+
+#TemplateSelected
+{
+        border : 5 solid;
+        border-color : #336699;
+}
+
+

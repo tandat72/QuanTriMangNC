@@ -1,0 +1,154 @@
+<html xmlns:controls>
+    <head>
+        <link REL="stylesheet" type="text/css" href="_common/isa.css">
+            <script id="jsCommon" src="common.js"></script>
+            <script id="jsCommands" src="commands.js"></script>
+            <script>
+            var g_sPageContext = location.hash.slice(1);
+            
+            function body_onload()
+            {
+                aStep1a.TestKey = "ATASK_" + g_oNotifications["IDR_VPN_ADDRESS_ASSIGNMENT"] + "_" + g_sPageContext;
+                aStep1b.TestKey = "ATASK_" + g_oNotifications["IDR_PROPERTY"] + "_" + g_sPageContext;
+                aStep2a.TestKey = "ATASK_" + g_oNotifications["IDR_VPN_USERS"] + "_" + g_sPageContext;
+                aStep2b.TestKey = "ATASK_" + g_oNotifications["IDR_VPN_RADIUS_USAGE"] + "_" + g_sPageContext;
+                aStep3_1.TestKey = "ATASK_" + g_oNotifications["IDR_VPN_PROTOCOLS"] + "_" + g_sPageContext;
+                aStep3_2.TestKey = "ATASK_" + g_oNotifications["IDR_VPN_ACCESS_POINTS"] + "_" + g_sPageContext;
+                aStep4.TestKey = "ATASK_" + g_oNotifications["IDR_LINK_FW_PROTECTION"] + "_" + g_sPageContext;
+                aStep5.TestKey = "ATASK_" + g_oNotifications["IDR_LINK_NETWORKS"] + "_" + g_sPageContext;
+                
+                NotifySnapin("IDR_PAGE_LOADED", g_sPageContext);
+            }
+            
+            function CmdActivate(Code)
+            {
+                NotifySnapin(Code, g_sPageContext);
+            }
+            
+            //  Updates the UI according to specified ISA edition type
+            function UpdateViewForEditionType(EditionType)
+            {
+                //  Nothing to do
+            }
+			
+			</script>
+    </head>
+    <body id="idBody" height="100%" width="100%" onload="body_onload();" dir="ltr">
+        <table cellpadding="0" cellspacing="0" width="100%" ID="Table1">
+            <tr>
+                <td>
+                    <table cellpadding="0" cellspacing="0" width="100%" ID="Table2">
+                        <tr>
+                            <td width="100%" height="22"></td>
+                        </tr>
+                    </table>
+                    <table cellpadding="0" cellspacing="0" ID="Table3">
+                        <tr>
+                            <td nowrap width="0"></td>
+                            <td nowrap width="83"><img src="_image/general/hexImage.png"></td>
+                            <td class="BodyCopy" valign="top" align="left" width="100%"><span class="header1"><ID id="L_VPN_Title1">Configure VPN Client Access</ID>
+                                </span>&nbsp;
+                                <br/>
+                                <ID id="L_VPN_Text1">This page helps you define and configure how clients access the corporate network using a virtual private network (VPN) connection. </ID>
+                            </td>
+                        </tr>
+                    </table>
+                    <table cellpadding="0" cellspacing="0" width="100%" ID="Table4">
+                        <tr>
+                            <td width="100%" height="20">
+                            </td>
+                        </tr>
+                    </table>
+                    <table cellpadding="0" cellspacing="0" ID="Table5">
+                        <tr>
+                            <td nowrap width="0"></td>
+                            <td class="GSIcon" nowrap><img src="_image/general/icon1.gif"></td>
+                            <td class="GSTDText"><p class="GSStepText"><ID id="L_VPN_Step1Title"><a href="#none" onmousemove="ClearStatus()" onclick="CmdActivate('IDR_VPN_ADDRESS_ASSIGNMENT')" id="aStep1a">Configure Address Assignment Method</a> and <a href="#none" onmousemove="ClearStatus()" onclick="CmdActivate('IDR_PROPERTY')" id="aStep1b">Enable VPN Client Access</ID></a></p>
+                                <p class="bodyCopy"><ID id="L_VPN_Step1Body">Allow remote clients to connect to the network using a VPN connection.</ID></p>
+                            </td>
+                        </tr>
+                    </table>
+                    <table cellpadding="0" cellspacing="0" width="100%" ID="Table6">
+                        <TBODY>
+                            <tr>
+                                <td class="GSSpacer"></td>
+                </td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" ID="Table7">
+            <tr>
+                <td nowrap width="0"></td>
+                <td class="GSIcon" nowrap><img src="_image/general/icon2.gif"></td>
+                <td class="GSTDText"><p class="GSStepText"><ID id="L_VPN_Step2Title"><a href="#none" onmousemove="ClearStatus()" onclick="CmdActivate('IDR_VPN_USERS')" id="aStep2a">Specify Windows Users</a> or select a <a href="#none" onmousemove="ClearStatus()" onclick="CmdActivate('IDR_VPN_RADIUS_USAGE')" id="aStep2b">RADIUS Server</ID></a></p>
+                    <p class="bodyCopy"><ID id="L_VPN_Step2Body">Specify the Windows users (domain groups) allowed VPN access or, if using RADIUS authentication, select the RADIUS authentication server. </ID></p>
+                </td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" width="100%" ID="Table8">
+            <tr>
+                <td class="GSSpacer"></td>
+                </TD>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" ID="Table9">
+            <tr>
+                <td nowrap width="0"></td>
+                <td class="GSIcon" nowrap><img src="_image/general/icon3.gif"></td>
+                <td class="GSTDText">
+				<p class="GSStepText">
+				<ID id="L_VPN_Step3Title_1"> 
+					<a href="#none" onmousemove="ClearStatus()" onclick="CmdActivate('IDR_VPN_PROTOCOLS')" id="aStep3_1">
+						Verify VPN Properties
+					</a>
+					and
+					<a href="#none" onmousemove="ClearStatus()" onclick="CmdActivate('IDR_VPN_ACCESS_POINTS')" id="aStep3_2">
+						Remote Access Configuration
+					</a>
+				</ID>
+				</p>
+                    <p class="bodyCopy"><ID id="L_VPN_Step3Body">Verify that VPN properties, such as protocols and access points, are defined according to your network requirements.</ID>
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" width="100%" ID="Table10">
+            <tr>
+                <td class="GSSpacer"></td>
+                </TD>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" ID="Table11">
+            <tr>
+                <td nowrap width="0"></td>
+                <td class="GSIcon" nowrap><img src="_image/general/icon4.gif"></td>
+                <td class="GSTDText"><p class="GSStepText"><a href="#none" onmousemove="ClearStatus()" onclick="CmdActivate('IDR_LINK_FW_PROTECTION')" id="aStep4">
+                                <ID id="L_VPN_Step4Title">View Firewall Policy for the VPN Clients Network</ID></a></p>
+                    <p class="bodyCopy"><ID id="L_VPN_Step4Body">Verify that Firewall Policy rules for the <STRONG>VPN Clients Network</STRONG> are defined in accordance with your network and corporate security requirements. </ID></p>
+                </td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" width="100%" ID="Table12">
+            <tr>
+                <td class="GSSpacer"></td>
+                </TD>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" ID="Table13">
+            <tr>
+                <td nowrap width="0"></td>
+                <td class="GSIcon" nowrap><img src="_image/general/icon5.gif "></td>
+                <td class="GSTDText"><p class="GSStepText"><a href="#none" onmousemove="ClearStatus()" onclick="CmdActivate('IDR_LINK_NETWORKS')" id="aStep5">
+                                <ID id="L_VPN_Step5Title">View Network&nbsp;Rules</ID></a></p>
+                    <p class="bodyCopy"><ID id="L_VPN_Step5Body">Verify that the rules specifying network relationships between the <b>VPN Clients Network</b> and other networks, such as Internal, are defined according to your network requirements.</ID></p>
+                </td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" width="100%" ID="Table14">
+            <tr>
+                <td class="GSSpacer"></td>
+                </TD>
+            </tr>
+        </table>
+        </TD></TR></TBODY></TABLE>
+    </body>
+</html>

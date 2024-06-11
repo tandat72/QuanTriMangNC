@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD Compact HTML 1.0 Draft //EN">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>@@L_WindowTitle_Text</title>
+</head>
+<body>
+<br />
+<center>
+<img src="/CookieAuth.dll?GetPic?formdir=@@FORMDIR&image=mslogo.gif" alt="" />
+</center>
+<form action="@@URL?Logon" method="post">
+<input type="hidden" name="curl" value="@@DESTINATION" />
+<input type="hidden" name="flags" value="0" />
+<input type="hidden" name="forcedownlevel" value="0" />
+<input type="hidden" name="userid" value="@@USER" />
+<input type="hidden" name="sessionid" value="@@SESSIONID" />
+<input type="hidden" name="formdir" value="@@FORMDIR" />
+<p>@@INSERT_USER_TEXT</p>
+<p>@@L_ISA_Credentials_Text</p>
+<p>@@L_Passcode_Help_Text</p>
+<p>@@L_NextTokencode_Text<br />
+<input name="nextprn" type="password" size="14" />
+</p>
+<p>@@L_WebSrvCredentials_Text</p>
+<p>@@L_NamePassword_Help_Text</p>
+<p>@@L_UserName_Text<br />
+<input name="username" type="text" size="14" />
+</p>
+<p>@@L_Password_Text<br />
+<input name="password" type="password" size="14" />
+</p>
+<p>
+<input type="submit" name="SubmitCreds" value="@@L_LoginButton_Text" />
+</p>
+</form>
+</body>
+</html>

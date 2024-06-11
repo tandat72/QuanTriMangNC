@@ -1,0 +1,52 @@
+<html xmlns:controls>
+    <head>
+        <meta NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+        <title></title>
+        <?import namespace="controls" implementation="TaskHandler/TasksHandler.htc" ?>        <!-- Includes -->    
+        <script id="jsCommon" src="common.js"></script>
+        <script id="jsCommands" src="commands.js"></script>
+        <script>
+            var L_GenericTaskbarAdd_text = "<u>A</u>dd...";
+            var L_GenericTaskbarConfig_text = "<u>C</u>onfigure...";
+            var L_GenericTaskbarDel_text = "<u>D</u>elete...";
+            var L_GenericTaskbarSeeAlso_text = "See also";
+            var L_GenericTaskbarClickToConfig1_text = "Click here to configure <u>xxx</u>";
+            var L_GenericTaskbarClickToConfig2_text = "Click here to configure <u>zzz</u>";
+            var L_GenericTaskbarClickToLearn_text = "To learn more about yyy click <u>xxx</u>";
+            
+            
+            var g_sPageContext = location.hash.slice(1);
+
+            function body_onload() {
+                var htcTasksObjArr = document.getElementsByTagName("taskshandler");
+                htcTasksObjArr[0].ImgIconsSrc = "toolbar.bmp";
+                htcTasksObjArr[0].id = g_sPageContext;
+                
+                if (!WithinSnapin())
+                {
+                    htcTasksObjArr[0].ImgIconsSrc = "..\\toolbar.bmp";
+                    var TGL = htcTasksObjArr[0].AddTaskGroup("Tasks",-1);
+                    htcTasksObjArr[0].AddTask(TGL,1,"AddContextGuid", L_GenericTaskbarAdd_text,1,true,-1);
+                    htcTasksObjArr[0].AddTask(TGL,2,"PropertiesContextGuid",L_GenericTaskbarConfig_text,2,true,-1);
+                    htcTasksObjArr[0].AddTask(TGL,3,"DeleteContextGuid", L_GenericTaskbarDel_text,3,true,-1);
+                    TGL = htcTasksObjArr[0].AddTaskGroup(L_GenericTaskbarSeeAlso_text,-1);
+                    htcTasksObjArr[0].AddTask(TGL,4,"Link1ContextGuid", L_GenericTaskbarClickToConfig1_text,-1,true,-1);
+                    htcTasksObjArr[0].AddTask(TGL,5,"Link2ContextGuid", L_GenericTaskbarClickToLearn_text,-1,true,-1);
+                    htcTasksObjArr[0].AddTask(TGL,6,"Link3ContextGuid", L_GenericTaskbarClickToLearn_text,-1,true,-1);
+                }
+                
+                NotifySnapin("IDR_PAGE_LOADED", g_sPageContext);
+            }
+        
+            //  Updates the UI according to specified ISA edition type
+            function UpdateViewForEditionType(EditionType)
+            {
+                //  Nothing to do
+            }
+		</script>
+    </head>
+    <body onload="body_onload()" topmargin="0" leftmargin="0" rightmargin="0" SCROLL=no >
+        <SPAN style="display:none">This text should never apear it is just a workaround for IE bug when loading this page</SPAN>
+        <controls:taskshandler onTaskActivated="NotifySnapin(window.event.iTaskID,window.event.sTaskContext)" style='background:ghostwhite' />
+     </body>
+</html>

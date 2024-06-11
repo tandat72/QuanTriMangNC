@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@@L_WindowTitle_Text</title>
+    <link rel="stylesheet" type="text/css" href="/CookieAuth.dll?GetPic?formdir=@@FORMDIR&image=logon_style.css" />
+</head>
+<body>
+<form action="/CookieAuth.dll?ChangePwd" method="post" id="logonForm">
+<div class="direction">
+<input type="hidden" id="curl" name="curl" value="@@DESTINATION" />
+<input type="hidden" id="formdir" name="formdir" value="@@FORMDIR" />
+<br />
+<img src="/CookieAuth.dll?GetPic?formdir=@@FORMDIR&image=mslogo.gif" alt=""/>
+<p>@@INSERT_MSG_TEXT</p>
+<p>@@INSERT_USER_TEXT</p>
+<p><label for="password">@@L_OldPwd_Text</label><br />
+<input id="password" name="password" type="password" class="textSize" />
+</p>
+<p><label for="newpassword">@@L_NewPwd_Text</label><br />
+<input id="newpassword" name="newpassword" type="password" class="textSize" />
+</p>
+<p><label for="cnewpassword">@@L_Confirm_NewPwd_Text</label><br />
+<input id="cnewpassword" name="cnewpassword" type="password" class="textSize" />
+</p>
+<p>
+<input type="submit" id="SubmitCreds" name="SubmitCreds" value="@@L_ChangePassword_Text" />
+<input type="submit" id="SubmitCancel" name="SubmitCancel" value="@@L_ContinueButton" />
+</p>
+</div>
+</form>
+</body>
+</html>

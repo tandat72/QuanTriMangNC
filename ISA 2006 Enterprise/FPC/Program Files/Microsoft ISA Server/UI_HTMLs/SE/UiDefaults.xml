@@ -1,0 +1,477 @@
+<FpcPersistenceRoot m_fDontAskMeAgain_EmptyIncludedList="0">
+    <FpcNode GUID="{43E06AFC-729B-49AB-8BC2-33A9E35BB12D}" DisplayName="MAIN">
+        <FpcNode GUID="{41223021-4684-4CF4-BD24-4AD71FFC4445}" DisplayName="SERVER">
+            <FpcNode GUID="{1FC3773B-C941-450C-BA39-224904EFD093}" DisplayName="Monitoring">
+                <FpcNode GUID="{6DD1EA15-BDF8-4158-B7D6-A35EA7523B57}" DisplayName="Dashboard" RefreshRate="60">
+                    <Pane TitleID="7181" Title="Alerts" Column="1" Row="0" TabGUID="{2D6EDEAE-F468-4C22-8A41-B006E6682CA4}" Opened="-1">
+                        <Object ActiveX="{7B800019-6212-41DC-B208-520B501FBFB2}" GUID="{69039453-E693-4058-8271-1F126C6E27A1}" />
+                    </Pane>
+                    <Pane TitleID="7211" Title="Services" Column="0" Row="1" TabGUID="{A271438E-34C6-4EB6-AAF7-4F8FD2C74C95}" Opened="-1">
+                        <Object ActiveX="{7B800019-6212-41DC-B208-520B501FBFB2}" GUID="{5C4E04FA-247A-4668-992A-10060D1F5BE7}" />
+                    </Pane>
+                    <Pane TitleID="7692" Title="Connectivity" Column="0" Row="0" TabGUID="{13D5CB1A-BEF2-4360-8646-05E13161978A}" Opened="-1">
+                        <Object ActiveX="{7B800019-6212-41DC-B208-520B501FBFB2}" GUID="{8ECCDC5F-878A-466E-B260-8F3FB7C23D86}" />
+                    </Pane>
+                    <Pane TitleID="7212" Title="Sessions" Column="1" Row="1" TabGUID="{8427D867-2452-4B04-AFA2-B92508448553}" Opened="-1">
+                        <Object ActiveX="{7B800019-6212-41DC-B208-520B501FBFB2}" GUID="{42D4AF87-DC29-478B-9038-7CCE0835FB8B}" />
+                    </Pane>
+                    <Pane TitleID="9005" Title="System Performance" Column="2" Row="0" TabGUID="" heightMust="100" heightNicetohave="0" Status="4" Opened="-1">
+                        <Object ActiveX="{C4D2D8E0-D1DD-11CE-940F-008029004347}" GUID="{418BCB75-D1F7-4165-A7DE-1D857867F5D6}" Row="0" Column="0">
+                            <Param Name="ShowToolbar" Value="0" />
+                            <Param Name="ShowLegend" Value="0" />
+                            <Param Name="ShowValueBar" Value="0" />
+                            <Param Name="BackColorCtl" Value="16777215" />
+                            <Param Name="CounterCount" Value="0" />
+                            <Param Name="ReadOnly" Value="-1" />
+                            <Param Name="TimeBarColor" Value="16711680" />
+                        </Object>
+                        <Object ActiveX="{C4D2D8E0-D1DD-11CE-940F-008029004347}" GUID="{418BCB76-D1F7-4165-A7DE-1D857867F5D6}" Row="0" Column="1">
+                            <Param Name="ShowToolbar" Value="0" />
+                            <Param Name="ShowLegend" Value="0" />
+                            <Param Name="ShowValueBar" Value="0" />
+                            <Param Name="BackColorCtl" Value="16777215" />
+                            <Param Name="CounterCount" Value="0" />
+                            <Param Name="ReadOnly" Value="-1" />
+                            <Param Name="TimeBarColor" Value="16711680" />
+                        </Object>
+                    </Pane>
+                    <Pane TitleID="16650" Title="Reports" Column="0" Row="2" TabGUID="{6B93E94B-48B0-4861-9D12-1B3798AE587D}" Opened="-1">
+                        <Object ActiveX="{7B800019-6212-41DC-B208-520B501FBFB2}" GUID="{2B080CE8-2F95-4A9B-9A61-EA0ED7EC43C8}" />
+                    </Pane>
+                    <FpcNode GUID="{69039453-E693-4058-8271-1F126C6E27A1}" DisplayName="Alerts">
+                        <IsaList SortColumnId="16402" SortDirection="-1">
+                            <Column Id="16399" Width="100" Visible="0" />
+                            <Column Id="16400" Width="80" Visible="0" />
+                            <Column Id="16401" Width="140" Visible="-1" />
+                            <Column Id="16402" Width="120" Visible="-1" />
+                            <Column Id="16398" Width="54" Visible="-1" />
+                            <Row Id="Alerts" Selected="0" Mode="0" />
+                            <FirstVisible Index="0" />
+                        </IsaList>
+                    </FpcNode>
+                    <FpcNode GUID="{42D4AF87-DC29-478B-9038-7CCE0835FB8B}" DisplayName="Sessions">
+                        <IsaList>
+                            <Column Id="16408" Width="112" Visible="-1" />
+                            <Column Id="16415" Width="120" Visible="-1" />
+                        </IsaList>
+                    </FpcNode>
+                    <FpcNode GUID="{5C4E04FA-247A-4668-992A-10060D1F5BE7}" DisplayName="Services">
+                        <IsaList>
+                            <Column Id="16403" Width="105" Visible="-1" />
+                            <Column Id="16418" Width="72" Visible="-1" />
+                        </IsaList>
+                    </FpcNode>
+                    <FpcNode GUID="{2B080CE8-2F95-4A9B-9A61-EA0ED7EC43C8}" DisplayName="Reports">
+                        <IsaList SortColumnId="16705" SortDirection="-1">
+                            <Column Id="16700" Width="84" Visible="-1" />
+                            <Column Id="16703" Width="42" Visible="-1" />
+                            <Column Id="16705" Width="79" Visible="-1" />
+                        </IsaList>
+                    </FpcNode>
+                    <FpcNode GUID="{8ECCDC5F-878A-466E-B260-8F3FB7C23D86}" DisplayName="Connectivity">
+                        <IsaList SortColumnId="16407" SortDirection="-1">
+                            <Column Id="16407" Width="105" Visible="-1" />
+                            <Column Id="16418" Width="84" Visible="-1" />
+                        </IsaList>
+                    </FpcNode>
+                </FpcNode>
+                <FpcNode GUID="{2D6EDEAE-F468-4C22-8A41-B006E6682CA4}" DisplayName="Alerts" RefreshRate="60">
+                    <FpcNode GUID="{B918D0BC-FD24-4456-824F-2F373DFBD919}" DisplayName="Alerts">
+                        <IsaList SortColumnId="16402" SortDirection="-1">
+                            <Column Id="16399" Width="100" Visible="0" />
+                            <Column Id="16397" Width="69" Visible="0" />
+                            <Column Id="16401" Width="130" Visible="-1" />
+                            <Column Id="16402" Width="133" Visible="-1" />
+                            <Column Id="16418" Width="69" Visible="-1" />
+                            <Column Id="16419" Width="114" Visible="-1" />
+                            <FocusedRow Id="{FFFF8EA2-94EC-11D2-AF53-00E02C069419}0" Index="0" />
+                            <Row Id="Alerts" Selected="0" Mode="0" />
+                            <Row Id="{FFFF8EA2-94EC-11D2-AF53-00E02C069419}0" Selected="-1" Mode="1" />
+                            <Row Id="{FFFF8E96-94EC-11D2-AF53-00E02C069419}-1" Selected="0" Mode="1" />
+                            <Row Id="{FFFF8E93-94EC-11D2-AF53-00E02C069419}-1" Selected="0" Mode="1" />
+                            <Row Id="{C53667EF-78AE-4C73-B625-0409959D5321}0" Selected="0" Mode="1" />
+                            <FirstVisible Index="0" />
+                        </IsaList>
+                    </FpcNode>
+                </FpcNode>
+                <FpcNode GUID="{8427D867-2452-4B04-AFA2-B92508448553}" DisplayName="Sessions" RefreshRate="1">
+                    <IsaList SortColumnId="9301" SortDirection="-1">
+                        <Column Id="9340" Width="100" Visible="0" />
+                        <Column Id="9338" Width="77" Visible="-1" />
+                        <Column Id="9337" Width="85" Visible="-1" />
+                        <Column Id="9301" Width="90" Visible="-1" />
+                        <Column Id="9318" Width="100" Visible="-1" />
+                        <Column Id="9302" Width="100" Visible="-1" />
+                        <Column Id="9323" Width="100" Visible="-1" />
+                    </IsaList>
+                    <Filter FilterType="Sessions" />
+                </FpcNode>
+                <FpcNode GUID="{A271438E-34C6-4EB6-AAF7-4F8FD2C74C95}" DisplayName="Services" RefreshRate="60">
+                    <IsaList SortColumnId="16413" SortDirection="-1">
+                        <Column Id="16413" Width="206" Visible="-1" />
+                        <Column Id="16414" Width="105" Visible="-1" />
+                        <Column Id="16416" Width="100" Visible="-1" />
+                        <FocusedRow Id="{9CC9684B-FD25-4F49-913F-9AC555A5B183}3" Index="1" />
+                        <Row Id="{94023FCA-E940-4D9E-91F6-D051C9C5B76A}" Selected="0" Mode="0" />
+                        <Row Id="{9CC9684B-FD25-4F49-913F-9AC555A5B183}3" Selected="-1" Mode="0" />
+                        <FirstVisible Index="0" />
+                    </IsaList>
+                </FpcNode>
+                <FpcNode GUID="{6B93E94B-48B0-4861-9D12-1B3798AE587D}" DisplayName="Reports" RefreshRate="60">
+                    <IsaList SortColumnId="16700" SortDirection="-1">
+                        <Column Id="16705" Width="100" Visible="0" />
+                        <Column Id="16700" Width="100" Visible="-1" />
+                        <Column Id="16704" Width="100" Visible="-1" />
+                        <Column Id="16701" Width="100" Visible="-1" />
+                        <Column Id="16702" Width="100" Visible="-1" />
+                        <Column Id="16703" Width="100" Visible="-1" />
+                        <FirstVisible Index="0" />
+                    </IsaList>
+                </FpcNode>
+                <FpcNode GUID="{FBDEC32D-461A-4575-9784-076F3C68EFD9}" DisplayName="Logging">
+                    <IsaList SortColumnId="9328" SortDirection="-1">
+                        <Column Id="9328" Width="125" Visible="-1"/>
+                        <Column Id="9309" Width="90" Visible="-1"/>
+                        <Column Id="9330" Width="90" Visible="-1"/>
+                        <Column Id="9310" Width="100" Visible="-1"/>
+                        <Column Id="9322" Width="50" Visible="-1"/>
+                        <Column Id="9324" Width="100" Visible="-1"/>
+                        <Column Id="9301" Width="90" Visible="-1"/>
+                        <Column Id="9302" Width="100" Visible="-1"/>
+                        <Column Id="9318" Width="100" Visible="-1"/>
+                        <Column Id="9319" Width="100" Visible="-1"/>
+                        <Column Id="9312" Width="100" Visible="-1"/>
+                        <Column Id="9313" Width="100" Visible="-1"/>
+                        <Column Id="9303" Width="100" Visible="0"/>
+                        <Column Id="9304" Width="100" Visible="0"/>
+                        <Column Id="9305" Width="100" Visible="0"/>
+                        <Column Id="9306" Width="100" Visible="0"/>
+                        <Column Id="9307" Width="100" Visible="0"/>
+                        <Column Id="9308" Width="100" Visible="0"/>
+                        <Column Id="9311" Width="100" Visible="0"/>
+                        <Column Id="9316" Width="100" Visible="0"/>
+                        <Column Id="9317" Width="100" Visible="0"/>
+                        <Column Id="9320" Width="100" Visible="0"/>
+                        <Column Id="9321" Width="100" Visible="0"/>
+                        <Column Id="9323" Width="100" Visible="0"/>
+                        <Column Id="9342" Width="100" Visible="0"/>
+                        <Column Id="9325" Width="100" Visible="0"/>
+                        <Column Id="9326" Width="100" Visible="0"/>
+                        <Column Id="9327" Width="100" Visible="0"/>
+                        <Column Id="9329" Width="100" Visible="0"/>
+                        <Column Id="9331" Width="100" Visible="0"/>
+                        <Column Id="9334" Width="100" Visible="0"/>
+                        <Column Id="9344" Width="100" Visible="0"/>
+                        <Column Id="9335" Width="100" Visible="0"/>
+                        <Column Id="9339" Width="100" Visible="0"/>
+                        <Column Id="9341" Width="100" Visible="0"/>
+                        <Column Id="9336" Width="91" Visible="0"/>
+                        <Column Id="9333" Width="100" Visible="0"/>
+                        <Column Id="9332" Width="100" Visible="0"/>
+                    </IsaList>
+                    <Filter FilterType="LogViewer">
+                        <FilterExpression>
+                            <Criteria Name="Log Record Type" Value="23" />
+                            <Condition Name="Equals" Value="1" />
+                            <Value ValueType="5" Name="Firewall or Web Proxy Filter" Value="3" />
+                        </FilterExpression>
+                        <FilterExpression>
+                            <Criteria Name="Log Time" Value="18" />
+                            <Condition Name="Live" Value="128"/>
+                        </FilterExpression>
+                        <FilterExpression>
+                            <Criteria Name="Action" Value="31" />
+                            <Condition Name="Not Equals" Value="2"/>
+                            <Value ValueType="5" Name="Connection Status" Value="11" />
+                        </FilterExpression>
+                    </Filter>
+                </FpcNode>
+                <FpcNode GUID="{00C2F27A-B6EE-4B5B-9766-451D752EB8E7}" DisplayName="Taskbar" />
+                <ActivePage HtcTabGUID="htcTabs" PageId="{6DD1EA15-BDF8-4158-B7D6-A35EA7523B57}" />
+                <ActivePage HtcTabGUID="htcToolsTabs" PageId="{00C2F27A-B6EE-4B5B-9766-451D752EB8E7}" />
+            </FpcNode>
+            <FpcNode GUID="{CAB89263-C55E-4492-958B-C24723083320}" DisplayName="Firewall protection">
+                <FpcNode GUID="{CAD56649-166E-4152-A37D-C94B74B9C92F}" DisplayName="Toolbox">
+                    <IsaToolBox CurCategory="4" />
+                </FpcNode>
+                <FpcNode GUID="{B3C49CA1-DC7B-4AD6-9172-9EB5552E76DA}" DisplayName="Access Rules">
+                    <FpcNode GUID="{904AF5AB-43A5-4D91-973F-EA36A801C2C6}" DisplayName="Array Policy">
+                        <IsaList SortColumnId="7646" SortDirection="-1">
+                            <Column Id="7653" Width="88" Visible="0" />
+                            <Column Id="7646" Width="59" Visible="-1" />
+                            <Column Id="231" Width="98" Visible="-1" />
+                            <Column Id="7648" Width="55" Visible="-1" />
+                            <Column Id="7649" Width="86" Visible="-1" />
+                            <Column Id="7650" Width="96" Visible="-1" />
+                            <Column Id="7651" Width="90" Visible="-1" />
+                            <Column Id="7652" Width="111" Visible="-1" />
+                            <FocusedRow Id="{610655D7-CC2D-490D-AAAA-F876A3BB4142}" Index="0" />
+                            <Row Id="PolicyRules" Selected="0" Mode="0" />
+                            <Row Id="{610655D7-CC2D-490D-AAAA-F876A3BB4142}" Selected="-1" Mode="0" />
+                            <FirstVisible Index="0" />
+                        </IsaList>
+                    </FpcNode>
+                    <FpcNode GUID="{9ABAD875-A653-4DC1-9997-8713A9DE01AD}" DisplayName="System Policy Rules">
+                        <IsaList SortColumnId="7646" SortDirection="-1">
+                            <Column Id="7653" Width="88" Visible="0" />
+                            <Column Id="7646" Width="59" Visible="-1" />
+                            <Column Id="231" Width="98" Visible="-1" />
+                            <Column Id="7648" Width="55" Visible="-1" />
+                            <Column Id="7649" Width="86" Visible="-1" />
+                            <Column Id="7650" Width="96" Visible="-1" />
+                            <Column Id="7651" Width="90" Visible="-1" />
+                            <Column Id="7652" Width="111" Visible="-1" />
+                            <FocusedRow Id="{610655D7-CC2D-490D-AAAA-F876A3BB4142}" Index="0" />
+                            <Row Id="PolicyRules" Selected="0" Mode="0" />
+                            <Row Id="{610655D7-CC2D-490D-AAAA-F876A3BB4142}" Selected="-1" Mode="0" />
+                            <FirstVisible Index="0" />
+                        </IsaList>
+                    </FpcNode>
+                </FpcNode>
+                <ActivePage HtcTabGUID="htcTabs" PageId="{B3C49CA1-DC7B-4AD6-9172-9EB5552E76DA}" />
+                <ActivePage HtcTabGUID="htcToolsTabs" PageId="{00C2F27A-B6EE-4B5B-9766-451D752EB8E7}" />
+            </FpcNode>
+            <FpcNode GUID="{EB601D5F-8909-48DB-8FA8-CCAD1BA895DD}" DisplayName="Virtual Private Networks (VPN)">
+                <FpcNode GUID="{181C2400-AE58-468B-A268-F8872AC6091D}" DisplayName="Remote Sites">
+                    <FpcNode GUID="{BD325A51-DB15-4730-A414-E0486350DCB8}" DisplayName="VPN site-to-site networks">
+                        <IsaList SortColumnId="231" SortDirection="-1">
+                            <Column Id="231" Width="100" Visible="-1" />
+                            <Column Id="232" Width="100" Visible="-1" />
+                            <Column Id="15010" Width="100" Visible="-1" />
+                            <Column Id="15011" Width="100" Visible="-1" />
+                            <Column Id="15012" Width="100" Visible="-1" />
+                            <FirstVisible Index="0" />
+                        </IsaList>
+                    </FpcNode>
+                </FpcNode>
+                <ActivePage HtcTabGUID="htcTabs" PageId="{4BD074B3-53E4-4B06-9B14-ECF37E375A61}" />
+                <ActivePage HtcTabGUID="htcToolsTabs" PageId="{00C2F27A-B6EE-4B5B-9766-451D752EB8E7}" />
+            </FpcNode>
+            <FpcNode GUID="{57E67A24-4EBC-4F39-B295-BB427CDB370B}" DisplayName="Network Policy">
+                <FpcNode GUID="{C9D6847F-87D0-4B54-8408-632B65715B1D}" DisplayName="Networks">
+                    <IsaList SortColumnId="231" SortDirection="-1">
+                        <Column Id="231" Width="159" Visible="-1" />
+                        <Column Id="232" Width="153" Visible="-1" />
+                        <Column Id="15068" Width="212" Visible="-1" />
+                    </IsaList>
+                </FpcNode>
+                <FpcNode GUID="{E0A32B47-B1B9-4848-976E-3135F816A8AC}" DisplayName="Network Sets">
+                    <IsaList SortColumnId="231" SortDirection="-1">
+                        <Column Id="231" Width="148" Visible="-1" />
+                        <Column Id="232" Width="167" Visible="-1" />
+                        <Column Id="15132" Width="100" Visible="-1" />
+                        <Column Id="15044" Width="145" Visible="-1" />
+                    </IsaList>
+                </FpcNode>
+                <FpcNode GUID="{7F627C3E-1130-4FA6-BC97-7CC1D7C9E77C}" DisplayName="Network Rules">
+                    <IsaList SortColumnId="15301" SortDirection="-1">
+                        <Column Id="232" Width="100" Visible="0" />
+                        <Column Id="15301" Width="70" Visible="-1" />
+                        <Column Id="231" Width="162" Visible="-1" />
+                        <Column Id="15123" Width="100" Visible="-1" />
+                        <Column Id="15118" Width="147" Visible="-1" />
+                        <Column Id="15120" Width="165" Visible="-1" />
+                    </IsaList>
+                </FpcNode>
+                <ActivePage HtcTabGUID="htcTabs" PageId="{7F627C3E-1130-4FA6-BC97-7CC1D7C9E77C}" />
+            </FpcNode>
+            <FpcNode GUID="{16DCA601-E902-4655-8BCB-443B76696C01}" DisplayName="Cache Configuration">
+                <FpcNode GUID="{00C2F27A-B6EE-4B5B-9766-451D752EB8E7}" DisplayName="Taskbar" />
+                <FpcNode GUID="{327C8037-AF79-41E0-9466-C7EE0D3BE4B8}" DisplayName="Cache Rules">
+                    <IsaList>
+                        <Column Id="10503" Width="100" Visible="-1" />
+                        <Column Id="10501" Width="100" Visible="-1" />
+                        <Column Id="10502" Width="100" Visible="-1" />
+                        <Column Id="16480" Width="100" Visible="-1" />
+                        <Column Id="7651" Width="100" Visible="-1" />
+                        <Column Id="10605" Width="100" Visible="-1" />
+                        <Column Id="10610" Width="100" Visible="-1" />
+                        <Column Id="10611" Width="100" Visible="-1" />
+                        <Column Id="10612" Width="100" Visible="-1" />
+                        <Column Id="10613" Width="100" Visible="-1" />
+                        <Column Id="10614" Width="100" Visible="-1" />
+                        <Column Id="10615" Width="100" Visible="-1" />
+                    </IsaList>
+                </FpcNode>
+                <FpcNode GUID="{349D0A04-F44C-45A5-998F-FD690C5332B8}" DisplayName="Scheduled Content Download Jobs">
+                    <IsaList>
+                        <Column Id="10501" Width="100" Visible="-1" />
+                        <Column Id="10502" Width="100" Visible="-1" />
+                        <Column Id="10518" Width="100" Visible="-1" />
+                        <Column Id="10601" Width="100" Visible="-1" />
+                        <Column Id="10519" Width="100" Visible="-1" />
+                        <Column Id="10602" Width="100" Visible="-1" />
+                        <Column Id="10603" Width="100" Visible="-1" />
+                        <Column Id="10604" Width="100" Visible="-1" />
+                        <Column Id="10605" Width="100" Visible="-1" />
+                        <Column Id="10506" Width="100" Visible="-1" />
+                        <Column Id="10606" Width="100" Visible="-1" />
+                    </IsaList>
+                </FpcNode>
+                <ActivePage HtcTabGUID="htcTabs" PageId="{349D0A04-F44C-45A5-998F-FD690C5332B8}" />
+                <ActivePage HtcTabGUID="htcToolsTabs" PageId="{00C2F27A-B6EE-4B5B-9766-451D752EB8E7}" />
+            </FpcNode>
+            <FpcNode GUID="{DF766C48-C4FF-4AB5-AD91-077DDDEA44BA}" DisplayName="Extensions">
+                <FpcNode GUID="{CDBFA48A-C5AF-4040-8755-C1CF8570389C}" DisplayName="Application Filters">
+                    <IsaList SortColumnId="10501" SortDirection="-1">
+                        <Column Id="10501" Width="208" Visible="-1" />
+                        <Column Id="10502" Width="150" Visible="-1" />
+                        <Column Id="10514" Width="100" Visible="-1" />
+                        <Column Id="10515" Width="59" Visible="-1" />
+                    </IsaList>
+                </FpcNode>
+                <ActivePage HtcTabGUID="htcTabs" PageId="{10810635-11B0-46D3-A0C9-1D194030E1DC}" />
+                <ActivePage HtcTabGUID="htcToolsTabs" PageId="{00C2F27A-B6EE-4B5B-9766-451D752EB8E7}" />
+                <FpcNode GUID="{00C2F27A-B6EE-4B5B-9766-451D752EB8E7}" DisplayName="Taskbar" />
+            </FpcNode>
+            <FpcNode GUID="{7A461DD2-311D-43F9-8686-E9CB4E230309}" DisplayName="Configuration">
+                <FpcNode GUID="{57E67A24-4EBC-4F39-B295-BB427CDB370B}" DisplayName="Networks">
+                    <FpcNode GUID="{C9D6847F-87D0-4B54-8408-632B65715B1D}" DisplayName="Networks">
+                        <IsaList SortColumnId="231" SortDirection="-1">
+                            <Column Id="231" Width="149" Visible="-1" />
+                            <Column Id="15068" Width="185" Visible="-1" />
+                            <Column Id="232" Width="922" Visible="-1" />
+                            <Row Id="Networks" Selected="0" Mode="0" />
+                            <FirstVisible Index="0" />
+                        </IsaList>
+						<FpcNode GUID="{C043DBE9-2E57-499F-8D61-D55B3DAA17AE}" DisplayName="Networks">
+							<IsaList SortColumnId="231" SortDirection="-1">
+								<Column Id="231" Width="100" Visible="-1"/>
+								<Column Id="232" Width="100" Visible="-1"/>
+								<Column Id="15068" Width="100" Visible="-1"/>
+	    						<Row Id="Networks" Selected="0" Mode="0"/>
+								<Row Id="{F129EACF-778B-44FE-B339-5B752D7220A3}" Selected="0" Mode="1"/>
+								<Row Id="{4E32B556-0FAF-4A27-9111-085F679EDC9B}" Selected="0" Mode="1"/>
+								<Row Id="{5ED77DCE-8110-4821-B445-008B7E6B7F6D}" Selected="0" Mode="1"/>
+								<Row Id="{394b94a2-36d5-4811-9db8-f0754aef4f79}" Selected="0" Mode="1"/>
+								<Row Id="{08e7b0e1-287a-4fbd-a33d-b13012e4bc4a}" Selected="0" Mode="1"/>
+								<FirstVisible Index="0"/>
+							</IsaList>
+						</FpcNode>
+					</FpcNode>
+                    <FpcNode GUID="{82069078-C53C-44AF-A0D7-06F6C6E2CED5}" DisplayName="Web Routing">
+                        <IsaList SortColumnId="10503" SortDirection="-1">
+                            <Column Id="10502" Width="100" Visible="0" />
+                            <Column Id="10503" Width="60" Visible="-1" />
+                            <Column Id="10501" Width="151" Visible="-1" />
+                            <Column Id="7651" Width="119" Visible="-1" />
+                            <Column Id="10511" Width="183" Visible="-1" />
+                            <Row Id="Proxy-Routing-Rules" Selected="0" Mode="0" />
+                            <FirstVisible Index="0" />
+                        </IsaList>
+                    </FpcNode>
+                    <FpcNode GUID="{E0A32B47-B1B9-4848-976E-3135F816A8AC}" DisplayName="Network Sets">
+                        <IsaList SortColumnId="231" SortDirection="-1">
+                            <Column Id="231" Width="152" Visible="-1" />
+                            <Column Id="15044" Width="70" Visible="-1" />
+                            <Column Id="15132" Width="57" Visible="-1" />
+                            <Column Id="232" Width="481" Visible="-1" />
+                            <Row Id="NetworkSets" Selected="0" Mode="0" />
+                            <FirstVisible Index="0" />
+                        </IsaList>
+                    </FpcNode>
+                    <FpcNode GUID="{7F627C3E-1130-4FA6-BC97-7CC1D7C9E77C}" DisplayName="Address Translation Rules">
+                        <IsaList SortColumnId="15301" SortDirection="-1">
+                            <Column Id="232" Width="100" Visible="0" />
+                            <Column Id="15301" Width="56" Visible="-1" />
+                            <Column Id="231" Width="160" Visible="-1" />
+                            <Column Id="15123" Width="54" Visible="-1" />
+                            <Column Id="15118" Width="149" Visible="-1" />
+                            <Column Id="15120" Width="122" Visible="-1" />
+                            <Row Id="NetworkRules" Selected="0" Mode="0" />
+                            <FirstVisible Index="0" />
+                        </IsaList>
+                    </FpcNode>
+                    <ActivePage HtcTabGUID="htcTabs" PageId="{C9D6847F-87D0-4B54-8408-632B65715B1D}" />
+                    <ActivePage HtcTabGUID="htcToolsTabs" PageId="{181060BA-6EF5-4EA0-A83A-68A7888FB161}" />
+                </FpcNode>
+                <FpcNode GUID="{B9FE792D-76C3-4AEA-847F-BA661AC28AD1}" DisplayName="General">
+                    <ActivePage HtcTabGUID="htcTabs" PageId="{DAEF11F2-1CB8-4FE4-80F4-2B18D38A62EB}" />
+                    <ActivePage HtcTabGUID="htcToolsTabs" PageId="{D06D2275-9F76-44C9-9813-A75FC2DA8D4F}" />
+                </FpcNode>
+                <FpcNode GUID="{DF766C48-C4FF-4AB5-AD91-077DDDEA44BA}" DisplayName="Add-ins">
+                    <FpcNode GUID="{CDBFA48A-C5AF-4040-8755-C1CF8570389C}" DisplayName="Application Filters">
+                        <IsaList SortColumnId="10501" SortDirection="-1">
+                            <Column Id="10501" Width="190" Visible="-1" />
+                            <Column Id="10502" Width="244" Visible="-1" />
+                            <Column Id="10514" Width="60" Visible="-1" />
+                            <Column Id="10515" Width="53" Visible="-1" />
+                            <Row Id="Proxy-Plugins" Selected="0" Mode="0" />
+                            <FirstVisible Index="0" />
+                        </IsaList>
+                    </FpcNode>
+                    <FpcNode GUID="{FC8F680B-7915-470F-B104-7A103FAEB887}" DisplayName="Web Filters">
+                        <IsaList SortColumnId="10503" SortDirection="-1">
+                            <Column Id="10503" Width="69" Visible="-1" />
+                            <Column Id="10501" Width="148" Visible="-1" />
+                            <Column Id="10502" Width="237" Visible="-1" />
+                            <Column Id="10516" Width="136" Visible="-1" />
+                            <Column Id="10515" Width="58" Visible="-1" />
+                            <Column Id="10514" Width="55" Visible="-1" />
+                            <Column Id="10701" Width="100" Visible="-1" />
+                            <Column Id="10517" Width="100" Visible="-1" />
+                            <Row Id="ISAPI-Filters" Selected="0" Mode="0" />
+                            <FirstVisible Index="0" />
+                        </IsaList>
+                    </FpcNode>
+                    <ActivePage HtcTabGUID="htcTabs" PageId="{CDBFA48A-C5AF-4040-8755-C1CF8570389C}" />
+                    <ActivePage HtcTabGUID="htcToolsTabs" PageId="{00C2F27A-B6EE-4B5B-9766-451D752EB8E7}" />
+                </FpcNode>
+                <FpcNode GUID="{16DCA601-E902-4655-8BCB-443B76696C01}" DisplayName="Cache">
+                    <FpcNode GUID="{327C8037-AF79-41E0-9466-C7EE0D3BE4B8}" DisplayName="Cache Rules">
+                        <IsaList SortColumnId="10503" SortDirection="-1">
+                            <Column Id="10502" Width="100" Visible="0" />
+                            <Column Id="10503" Width="60" Visible="-1" />
+                            <Column Id="10501" Width="109" Visible="-1" />
+                            <Column Id="7651" Width="107" Visible="-1" />
+                            <Column Id="10605" Width="91" Visible="-1" />
+                            <Column Id="10610" Width="97" Visible="-1" />
+                            <Column Id="10611" Width="344" Visible="-1" />
+                            <Column Id="10612" Width="85" Visible="-1" />
+                            <Column Id="10613" Width="178" Visible="-1" />
+                            <Column Id="10614" Width="78" Visible="-1" />
+                            <Column Id="10615" Width="100" Visible="-1" />
+                            <Row Id="Proxy-Cache-Rules" Selected="0" Mode="0" />
+                            <FirstVisible Index="0" />
+                        </IsaList>
+                    </FpcNode>
+                    <FpcNode GUID="{349D0A04-F44C-45A5-998F-FD690C5332B8}" DisplayName="Content Download Jobs" RefreshRate="60">
+                        <IsaList SortColumnId="10501" SortDirection="-1">
+                            <Column Id="10501" Width="100" Visible="-1" />
+                            <Column Id="10502" Width="100" Visible="-1" />
+                            <Column Id="10518" Width="100" Visible="-1" />
+                            <Column Id="10601" Width="100" Visible="-1" />
+                            <Column Id="10519" Width="100" Visible="-1" />
+                            <Column Id="10602" Width="100" Visible="-1" />
+                            <Column Id="10603" Width="100" Visible="-1" />
+                            <Column Id="10604" Width="100" Visible="-1" />
+                            <Column Id="10605" Width="100" Visible="-1" />
+                            <Column Id="10506" Width="100" Visible="-1" />
+                            <Column Id="10606" Width="100" Visible="-1" />
+                            <Row Id="Prefetcher" Selected="0" Mode="0" />
+                            <FirstVisible Index="0" />
+                        </IsaList>
+                    </FpcNode>
+                    <FpcNode GUID="{5349E8D9-AD32-4706-AE53-45537012314F}" DisplayName="Cache Drives" RefreshRate="-1">
+                        <IsaList>
+                            <Column Id="288" Width="172" Visible="-1" />
+                            <Column Id="289" Width="72" Visible="-1" />
+                            <Column Id="709" Width="82" Visible="-1" />
+                            <Row Id="Servers" Selected="0" Mode="0" />
+                            <FirstVisible Index="0" />
+                        </IsaList>
+                    </FpcNode>
+                    <ActivePage HtcTabGUID="htcTabs" PageId="{5349E8D9-AD32-4706-AE53-45537012314F}" />
+                    <ActivePage HtcTabGUID="htcToolsTabs" PageId="{00C2F27A-B6EE-4B5B-9766-451D752EB8E7}" />
+                </FpcNode>
+                <ActivePage HtcTabGUID="htcTabs" PageId="{2015817C-01A1-4178-8399-CE2D3713A677}" />
+                <ActivePage HtcTabGUID="htcToolsTabs" PageId="{D06D2275-9F76-44C9-9813-A75FC2DA8D4F}" />
+            </FpcNode>
+            <ActivePage HtcTabGUID="htcTabs" PageId="{5B93E828-7104-4BEF-9B62-D11FEA918DEA}" />
+            <ActivePage HtcTabGUID="htcToolsTabs" PageId="{00C2F27A-B6EE-4B5B-9766-451D752EB8E7}" />
+        </FpcNode>
+        <ActivePage HtcTabGUID="htcTabs" PageId="{5EBC009A-EB63-4EA2-8A17-1951DD44D1F9}" />
+        <ActivePage HtcTabGUID="htcToolsTabs" PageId="{00C2F27A-B6EE-4B5B-9766-451D752EB8E7}" />
+    </FpcNode>
+    <GlobalFlags />
+</FpcPersistenceRoot>

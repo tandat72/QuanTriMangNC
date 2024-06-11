@@ -1,0 +1,89 @@
+A {
+	color: #336699 ;
+	text-decoration: none ;
+	font-weight : bold;
+}
+
+
+A:hover {
+	color: #000033 ;
+	text-decoration: underline ;
+	font-weight : bold;
+}
+
+A:active {
+	color: #990033 ;
+}
+
+
+
+
+td {
+	font-family : verdana; 
+	font-size : 8pt;
+	color : black; 
+}
+
+body {
+	background: #F9F8F3;
+}
+
+.title	{
+	font-family : verdana; 
+	font-size : 12pt;
+	color : black; 
+	padding-left : 3px;
+	padding-top : 5px;
+}
+
+
+.markIcon	{
+	width : 19px;
+	text-align : right;
+	vertical-align : top;
+}
+
+
+.bodyCopy	{
+	width : 100%;
+	text-align : left;
+	vertical-align : top;
+	padding-top : 3px;
+}
+
+
+
+
+.related	{
+	color : #405A8A;
+}
+
+
+li {
+	margin-left : -11px;
+	margin-top : 3px;
+
+}
+
+ul.related		{
+	font-family : verdana;
+	font-size : 8pt;
+	color : black;
+	list-style-image : url(mark.png);
+	vertical-align : middle;
+	margin-top : 6px;
+	margin-left : 28px;
+}
+
+
+ul.tasks	{
+	font-family : verdana;
+	font-size : 8pt;
+	color : black;
+	list-style-image : url(tasks.png);
+	vertical-align : middle;
+	margin-top : 10px;
+	margin-left : 28px;
+	margin-bottom : 8px;
+}
+

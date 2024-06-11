@@ -1,0 +1,42 @@
+# map_browser
+# Browser;map  -1 if no mapping included
+msie;-1
+mspie;-1
+copernic;-1
+mal;-1
+loadtv;-1
+e-parcel;-1
+ms frontpage;-1
+alphaconnect;-1
+oracle;-1
+opera;Opera
+Microsoft Outlook;Microsoft Outlook
+Microsoft-Outlook;Microsoft Outlook
+Microsoft Office Outlook;Microsoft Outlook
+Microsoft Office Word;Microsoft Word
+Microsoft Office PowerPoint;Microsoft PowerPoint
+Microsoft Office OneNote;Microsoft OneNote
+Microsoft Office Visio;Microsoft Visio
+Microsoft Office Access;Microsoft Access
+Microsoft Excel;Microsoft Excel
+Microsoft Office;Microsoft Office
+msmsgs;Microsoft Messenger
+MSN Explorer;MSN Explorer
+Gator;Gator
+Microsoft BITS;Microsoft Background Intelligent Transfer Service(BITS)
+NSPlayer;Windows Media Player
+Windows-Media-Player;Windows Media Player
+Windows-Media-DRM;Windows Media Player
+Industry Update Control;Windows Update
+Windows Update;-1
+MSInvestor;Microsoft Investor
+MSNBC;-1
+Firefox;Firefox
+Safari;Safari
+Camino;Camino
+Chimera;Camino
+Konqueror;Konqueror
+Galeon;Galeon
+Netscape;Netscape
+#  '$' end of file
+$

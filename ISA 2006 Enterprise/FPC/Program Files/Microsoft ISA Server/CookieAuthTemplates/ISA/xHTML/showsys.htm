@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@@L_WindowTitle_Text</title>
+   <link rel="stylesheet"  href="/CookieAuth.dll?GetPic?formdir=@@FORMDIR&image=logon_style.css" type="text/css" />
+</head>
+<body>
+<form action="@@URL?Logon" method="post" id="logonForm">
+<div class="direction">
+<input id="userid" type="hidden" name="userid" value="@@USER" />
+<input id="curl" type="hidden" name="curl" value="@@DESTINATION" />
+<input id="sessionid" type="hidden" name="sessionid" value="@@SESSIONID" />
+<input id="stage" type="hidden" name="stage" value="userid" />
+<input id="formdir" type="hidden" name="formdir" value="@@FORMDIR" />
+<br />
+<img src="/CookieAuth.dll?GetPic?formdir=@@FORMDIR&image=mslogo.gif" alt=""/>
+<br />
+<p>@@NEWPIN</p>
+<p>@@L_Showsys_Text2_Text</p>
+<p>
+<input type="submit" id="L_Showsys_ButtonContinue" name="L_Showsys_ButtonContinue" value="@@L_ContinueButton" />
+</p>
+</div>
+</form>
+</body>
+</html>

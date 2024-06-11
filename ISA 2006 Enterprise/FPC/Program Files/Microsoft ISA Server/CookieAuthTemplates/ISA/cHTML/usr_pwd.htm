@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD Compact HTML 1.0 Draft //EN">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>@@L_WindowTitle_Text</title>
+</head>
+<body>
+<form action="/CookieAuth.dll?Logon" method="post">
+<div>
+<input type="hidden" name="curl" value="@@DESTINATION" />
+<input type="hidden" name="flags" value="@@GZIP_VAL" />
+<input type="hidden" name="forcedownlevel" value="0" />
+<input type="hidden" name="formdir" value="@@FORMDIR" />
+<br />
+<center>
+    <img src="/CookieAuth.dll?GetPic?formdir=@@FORMDIR&image=mslogo.gif" alt="" />
+</center>
+<p>@@INSERT_USER_TEXT</p>
+<p>@@L_NamePassword_Help_Text</p>
+<p>@@L_UserName_Text<br />
+<input name="username" type="text" />
+</p>
+<p>@@L_Password_Text<br />
+<input name="password" type="password" />
+</p>
+<p>
+<input type="submit" name="SubmitCreds" value="@@L_LoginButton_Text" />
+</p>
+</div>
+</form>
+</body>
+</html>

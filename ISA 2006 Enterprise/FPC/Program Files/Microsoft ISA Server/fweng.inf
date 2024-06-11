@@ -1,0 +1,84 @@
+;
+; File:     FwEng.inf                      
+; Purpose:  Installation file for the Microsoft ISA Server 2006 Packet Engine Driver
+; 
+ 
+ 
+[Version] 
+Signature = "$Windows NT$" 
+Class=System
+ClassGUID={4d36e97d-e325-11ce-bfc1-08002be10318} 
+Provider=%MS% 
+DriverVer= 06/29/2006,5.0.5720.100
+DriverPackageType=KernelService
+CatalogFile=fweng.cat
+
+[DestinationDirs] 
+Fweng.Files.x86_12 = 12 
+
+[SourceDisksNames.x86]
+0=%Desc_x860%
+
+[SourceDisksNames.ia64]
+
+
+[SourceDisksFiles.x86]
+fweng.sys=0,,
+
+[SourceDisksFiles.ia64]
+
+
+[Manufacturer] 
+%MS%=MS
+
+[MS]
+%FwengDesc%=Fweng_Inst,Fweng
+
+[Fweng_Inst.ntx86] 
+CopyFiles = Fweng.Files.x86_12 
+
+[Fweng_Inst.ntx86.Services] 
+AddService = FwEng,0x000001C8,Fweng_Service_Instx86
+; 0x000001C8 = Do not overwrite the service friendly name and description if it already exists (avoid localization issues
+; in patching scenarios).
+
+[Fweng_Service_Instx86] 
+ServiceType = %SERVICE_KERNEL_DRIVER% 
+StartType = %SERVICE_SYSTEM_START% 
+ErrorControl = %SERVICE_ERROR_CRITICAL% 
+ServiceBinary = %12%\fweng.sys
+LoadOrderGroup = "ISA_FW"
+Dependencies = Tcpip,IpFilterDriver
+
+[Fweng.Files.x86_12] 
+fweng.sys,,,0x00000004
+
+[Fweng_Inst.ntx86.Remove]
+DelFiles = Fweng.Files.x86_12 
+
+[Fweng_Inst.ntx86.Remove.Services] 
+DelService = FwEng, 0x00000200	; stop the service, delete it and issue an event log
+
+
+[Strings] 
+; *******Non Localizable Strings******* 
+MS= "Microsoft (R) Corporation" 
+Desc_x860= "Microsoft ISA Server 2006" 
+FwengDesc= "Microsoft ISA Server 2006"
+
+
+
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+REG_EXPAND_SZ = 0x00020000 
+REG_DWORD = 0x00010001 

@@ -1,0 +1,384 @@
+<meta name=vs_targetSchema content="http://schemas.microsoft.com/intellisense/ie5">
+
+<public:component tagName="BasicPane" literalcontent="false">
+
+    <public:property name="Heading" internalname="m_sHeading" value="" />
+    <public:property name="StatusIcon" internalname="m_sStatusIcon" value="" get="getStatusIcon" put="setStatusIcon" />
+    <public:property name="RowContext" get="getRowContext" put="setRowContext" />
+    <public:property name="ColContext" get="getColContext" put="setColContext" />
+    <public:property name="State" internalname="m_sState" get="getState" put="setState" />
+    <public:property name="ImgPrefix" internalname="m_sImgPrefix" value="" />
+    <public:property name="ContainedHtml" get="getContainedHtml" put="setContainedHtml"/>
+    <public:property name="TitleHeight" get="getHeightTitle"/>
+    <public:property name="BottomHeight" get="getHeightBottom"/>
+    <public:property name="InnerDocument" get="getInnerDocument" />
+    <public:property name="HasTitleLink" internalname="m_sHasTitleLink" value="true" />
+
+    <public:method name="getContainedObjectById" />
+    <public:method name="refresh" />
+
+    <public:event name="onPreMinimize" id="m_eventPreMinimize" />
+    <public:event name="onPostMinimize" id="m_eventPostMinimize" />
+    <public:event name="onPreMaximize" id="m_eventPreMaximize" />
+    <public:event name="onPostMaximize" id="m_eventPostMaximize" />
+    <public:event name="onTitleClicked" id="m_eventTitleClicked" />
+
+    <public:defaults viewLinkContent style="font-family: tahoma; font-size: 8pt" />
+    <public:defaults tabStop="true" />
+    <public:attach event="oncontentready" onevent="init()" />
+
+<html xmlns:controls>
+<head>
+<LINK href="_common\isa.css" type="text/css" rel="stylesheet">
+<script language="JavaScript">
+
+    // Constants
+    var m_csListGuid         = "7B800019-6212-41DC-B208-520B501FBFB2";
+
+    var m_csMaximized        = "Maximized";
+    var m_csMinimized        = "Minimized";
+
+    var m_csOk               = "Ok";
+    var m_csInfo             = "Info";
+    var m_csGraph            = "Graph";
+    var m_csWarning          = "Warning";
+    var m_csError            = "Error";
+    var m_csNone             = "None";
+
+    // Members
+    var m_sHeading           = "";                              //Text Heading
+    var m_sStatusIcon        = m_csOk;          //Status icon
+    var m_sState             = m_csMaximized;   //Pane's size (Maximized/Minimized)
+    var m_bmMouseOver        = 0;                               //BitMask for mouse over, 0:None, 1:Status, 2:Heading, 4:MinMax
+    var oEvent               = createEventObject();  //used for triggering events
+    var m_sImgPrefix         = "" ;
+    var m_nHeightTitle       = 22;
+    var m_nHeightBottom      = 0;
+    var m_sHasTitleLink      = "true";
+
+    var m_sArrowDown              = "";
+    var m_sArrowUp            = "";
+    var m_sBackground_Off     = "";
+    var m_sBackground_On      = "";
+    var m_sIconError              = "";
+    var m_sIconGraph              = "";
+    var m_sIconInfo                   = "";
+    var m_sIconOk             = "";
+    var m_sIconWarning        = "";
+
+    // Initialization method
+    function init()
+    {
+        if (tdContainedHtml.innerHTML == "")
+        {
+            //Insert List object as the default contained html
+            tdContainedHtml.innerHTML = "<object classid='clsid:" + m_csListGuid + "' id='objList' width='100%' VIEWASTEXT></object>";
+        }
+
+        m_sArrowDown              = m_sImgPrefix + "arrowdown.gif";
+        m_sArrowDownH              = m_sImgPrefix + "arrowdownh.gif";
+        m_sArrowUp            = m_sImgPrefix + "arrowup.gif";
+        m_sArrowUpH            = m_sImgPrefix + "arrowuph.gif";
+        m_sBackground_Off     = m_sImgPrefix + "bg_off.png";
+        m_sBackground_On      = m_sImgPrefix + "bg_on.png";
+        m_sIconError              = m_sImgPrefix + "error.gif";
+        m_sIconGraph              = m_sImgPrefix + "graph.gif";
+        m_sIconInfo                       = m_sImgPrefix + "info.gif";
+        m_sIconOk             = m_sImgPrefix + "ok.gif";
+        m_sIconWarning        = m_sImgPrefix + "warning.gif";
+
+        tdHeading.innerText = m_sHeading;
+        setStatusIcon(m_sStatusIcon);
+        render();
+    }
+
+    // Interface implementation
+    function getInnerDocument ()
+    {
+                return document ;
+    }
+
+    function setHeading(sHeading)
+    {
+        m_sHeading = sHeading;
+        tdHeading.innerText = m_sHeading;
+    }
+
+    function getStatusIcon ()
+    {
+        return m_sStatusIcon;
+    }
+
+    function setStatusIcon (statusIcon)
+    {
+        switch (statusIcon)
+        {
+            case m_csOk:
+                imgStatusIcon.src = m_sIconOk;
+                imgStatusIcon.style.display = 'inline';
+                break;
+            case m_csInfo:
+                imgStatusIcon.src = m_sIconInfo;
+                imgStatusIcon.style.display = 'inline';
+                break;
+            case m_csGraph:
+                imgStatusIcon.src = m_sIconGraph;
+                imgStatusIcon.style.display = 'inline';
+                break;
+            case m_csWarning:
+                imgStatusIcon.src = m_sIconWarning;
+                imgStatusIcon.style.display = 'inline';
+                break;
+            case m_csError:
+                imgStatusIcon.src = m_sIconError;
+                imgStatusIcon.style.display = 'inline';
+                break;
+            case m_csNone:
+                imgStatusIcon.src = "";
+                imgStatusIcon.style.display = 'none';
+                break;
+            default:
+                return;
+        }
+        m_sStatusIcon = statusIcon;
+    }
+
+    function getState()
+    {
+        return m_sState;
+    }
+
+    function setState(size)
+    {
+        if (size == m_csMaximized)
+                        maximize();
+                else
+            minimize();
+    }
+
+    function getRowContext()
+    {
+        return oEvent.sTaskContext;
+    }
+
+    function setRowContext(rowContext)
+    {
+        oEvent.sTaskContext = rowContext;
+    }
+
+    function getColContext()
+    {
+        return oEvent.iTaskID;
+    }
+
+    function setColContext(colContext)
+    {
+        oEvent.iTaskID = colContext;
+    }
+
+    function getHeightTitle()
+    {
+        return m_nHeightTitle;
+    }
+
+    function getHeightBottom()
+    {
+        return m_nHeightBottom;
+    }
+
+    function getHeight()
+    {
+        return m_nHeight;
+    }
+
+    function getContainedHtml()
+    {
+        return tdContainedHtml.innerHTML;
+    }
+
+    function setContainedHtml(HtmlAsString)
+    {
+		if (HtmlAsString == "")
+		{
+			// empty text - crete a div to be filled later
+			tdContainedHtml.innerHTML = "<div id='divContaining' style='height: 100px; overflow: auto;' width='100%'></div>"; 
+		}
+		else
+		{
+			// If we have a containing div - fill it, 
+			// otherwise fill the containg TD directly
+			var div = getContainedObjectById('divContaining');
+			if (div != null)
+			{
+				div.innerHTML = HtmlAsString;
+			}
+			else
+			{
+				tdContainedHtml.innerHTML = HtmlAsString;
+			}
+		}
+    }
+
+    function getContainedObjectById(Id)
+    {
+        return document.getElementById(Id);
+    }
+
+    function refresh()
+    {
+        render();
+    }
+
+    // Rendering methods
+    function render()
+    {
+                if (m_sHasTitleLink == "false")
+                {
+                        tdHeading.style.cursor = "auto";
+                }
+                else
+                {
+                        tdHeading.style.cursor = "hand";
+                }
+                if ( (m_bmMouseOver & 2) == 2)
+                {
+			tdHeading.style.textDecorationUnderline = true;
+		} else {
+			tdHeading.style.textDecorationUnderline = false;
+		}
+
+                if (m_bmMouseOver)
+                {
+                        // Set all BG images to On (highlighted)
+                        tdStatus.style.backgroundImage = "url('" + m_sBackground_On + "')";
+                        tdMinMax.style.backgroundImage = "url('" + m_sBackground_On + "')";
+                        tdHeading.style.backgroundImage = "url('" + m_sBackground_On + "')";
+                }
+                else
+                {
+                        // Set all BG images to Off
+                        tdStatus.style.backgroundImage = "url('" + m_sBackground_Off + "')";
+                        tdMinMax.style.backgroundImage = "url('" + m_sBackground_Off + "')";
+                        tdHeading.style.backgroundImage = "url('" + m_sBackground_Off + "')";
+                }
+
+
+        if (m_sState == m_csMinimized)
+        {
+            if (imgMinMaxButton.src != m_sArrowUp)
+            {
+                if ( (m_bmMouseOver & 4) == 4)
+                {
+			imgMinMaxButton.src = m_sArrowUpH;
+		} else {
+	                imgMinMaxButton.src = m_sArrowUp;
+		}
+            }
+
+            trBody.style.display = "none";
+        }
+        else
+        {
+            if (imgMinMaxButton.src != m_sArrowDown)
+            {
+                if ( (m_bmMouseOver & 4) == 4)
+                {
+	                imgMinMaxButton.src = m_sArrowDownH;
+		} else {
+	                imgMinMaxButton.src = m_sArrowDown;
+		}
+            }
+
+            trBody.style.display = "inline";
+        }
+    }
+
+    // Minimize & Maximize methods
+    function minimize()
+    {
+        if (m_sState == m_csMinimized)
+                        return;
+        m_eventPreMinimize.fire(oEvent);
+        m_sState = m_csMinimized;
+        render() ;
+        m_eventPostMinimize.fire(oEvent);
+    }
+
+    function maximize()
+    {
+        if (m_sState == m_csMaximized)
+                        return;
+        m_eventPreMaximize.fire(oEvent);
+        m_sState = m_csMaximized;
+        render() ;
+        m_eventPostMaximize.fire(oEvent);
+    }
+
+    // Event handlers
+    function onClickMinMaxButton()
+    {
+        if (m_sState == m_csMaximized)
+                        minimize();
+                else
+                        maximize();
+    }
+
+    function onMouseOverMinMaxButton()
+    {
+        m_bmMouseOver += 4;
+        render();
+    }
+
+    function onMouseOutMinMaxButton()
+    {
+        m_bmMouseOver -= 4;
+        render();
+    }
+
+    function onMouseOverHeading()
+    {
+        m_bmMouseOver += 2;
+        render();
+    }
+
+    function onMouseOutHeading()
+    {
+        m_bmMouseOver -= 2;
+        render();
+    }
+
+    function onMouseOverStatus()
+    {
+        m_bmMouseOver += 1;
+        render();
+    }
+
+    function onMouseOutStatus()
+    {
+        m_bmMouseOver -= 1;
+        render();
+    }
+
+</script>
+
+</head>
+<body width="100%" height="100%">
+        <table id="tbMainTable" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="100%" height="100%" class="dashFrame">
+                <tr id="trHeader" height="0%" tabIndex="1">
+            <td id="tdStatus" width="0%" class="dashFrame" nowrap><img id="imgStatusIcon" border="0" width="22" height="22" onmouseover="onMouseOverStatus()" onmouseout="onMouseOutStatus()" ></td>
+            <td id="tdHeading" TestKey="BasicPaneHeading" class="dashFrame" style="cursor: hand" width="100%" height="2" style="background-repeat: repeat-x; background-position-y: center" onclick="m_eventTitleClicked.fire(oEvent)" onmouseover="onMouseOverHeading()" onmouseout="onMouseOutHeading()"></td>
+            <td id="tdMinMax" class="dashFrame" width="0%" nowrap><a href="#none" onmousemove="ClearStatus()" onclick="onClickMinMaxButton()"><img TestKey="BasicPaneMinMaxImageButton" id="imgMinMaxButton" onmouseover="onMouseOverMinMaxButton()" onmouseout="onMouseOutMinMaxButton()" border="0" width="22" height="22"></a></td>
+                </tr>
+                <tr id="trBody" height="100%">
+                        <td id="tdContent" width="100%" height="100%"nowrap colspan="3">
+                                <table id="tdInnerTable" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="100%" height="100%">
+                                        <tr height="100%">
+                                                <td id="tdContainedHtml" width="100%" height="100%"></td>
+                                        </tr>
+                                </table>
+                        </td>
+                </tr>
+        </table>
+</body>
+</html>
+</public:component>

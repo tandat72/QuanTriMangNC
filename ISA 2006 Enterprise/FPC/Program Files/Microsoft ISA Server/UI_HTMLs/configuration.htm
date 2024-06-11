@@ -1,0 +1,127 @@
+<html xmlns:controls>
+    <head>
+        <LINK REL="stylesheet" type="text/css" href="_common/isa.css">
+            <script id="jsCommon" src="common.js"></script>
+            <script id="jsCommands" src="commands.js"></script>
+            <script>
+            var g_sPageContext = location.hash.slice(1);
+            
+            function body_onload()
+            {
+                aServers.TestKey = "ATASK_" + g_oNotifications["IDR_LINK_SERVERS"] + "_" + g_sPageContext;
+                aNetworks.TestKey = "ATASK_" + g_oNotifications["IDR_LINK_NETWORKS"] + "_" + g_sPageContext;
+                aCache.TestKey = "ATASK_" + g_oNotifications["IDR_LINK_CACHE"] + "_" + g_sPageContext;
+                aAddIns.TestKey = "ATASK_" + g_oNotifications["IDR_LINK_ADDINS"] + "_" + g_sPageContext;
+                aGeneral.TestKey = "ATASK_" + g_oNotifications["IDR_LINK_GENERAL"] + "_" + g_sPageContext;
+                
+                
+                NotifySnapin("IDR_PAGE_LOADED", g_sPageContext);
+            }
+            
+            function GettingStartedJump(Code)
+            {
+                NotifySnapin(Code, g_sPageContext);
+            }
+            
+            //  Updates the UI according to specified ISA edition type
+            function UpdateViewForEditionType(EditionType)
+            {
+                if(EditionType == g_TypeStandardEdition)
+                {
+                    //  Hide Configure Array Members link and text
+                    tblConfigServers.style.display = "none";
+                    tblConfigServersSep.style.display = "none";
+                }
+            }
+            </script>
+    </head>
+    <body id="idBody" height="100%" width="100%" onload="body_onload();" dir="ltr">
+        <table cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td>
+                    <table cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td width="100%" height="15"></td>
+                        </tr>
+                    </table>
+                    <table cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td nowrap width="0"></td>
+                            <td nowrap width="81"><img src="_image/general/hexImage.png"></td>
+                            <td class="BodyCopy" valign="top" align="left" width="100%"><span class="header1"><ID id="L_Configuration_Title">Configuration</ID>
+                                </span>
+                                <br>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table id="tblConfigServers" cellpadding="0" cellspacing="0">
+            <tr>
+                <td nowrap width="0"></td>
+                <td class="conIcon" nowrap><img src="_image/config/conIcon5.gif"></td>
+                <td class="GSTDText"><p class="GSStepText"><A href="#none" onmousemove="ClearStatus()" ONCLICK="GettingStartedJump('IDR_LINK_SERVERS')" id="aServers"><ID id="L_Configuration_DefineServersLink">Configure Array Member Computers</ID></A></p>
+                    <p class="bodyCopy"><ID id="L_Configuration_Servers">View the properties of the ISA Server computers in this array. Configure array communication properties and Cache Array Routing Protocol (CARP) load factor for array members.</ID></p>
+                </td>
+            </tr>
+        </table>
+        <table id="tblConfigServersSep" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td class="GSSpacer"></td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <td nowrap width="0"></td>
+                <td class="conIcon" nowrap><img src="_image/config/conIcon1.gif"></td>
+                <td class="GSTDText"><p class="GSStepText"><A href="#none" onmousemove="ClearStatus()" ONCLICK="GettingStartedJump('IDR_LINK_NETWORKS')" id="aNetworks"><ID id="L_Configuration_DefineNetworksLink">Define Network Layout and Network Properties</ID></A></p>
+                    <p class="bodyCopy"><ID id="L_Configuration_DefineNetworks">Define your ISA Server network configuration and create network rules and Web chaining rules specifying how traffic is sent between networks.</ID></p>
+                </td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td class="GSSpacer"></td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <td nowrap width="0"></td>
+                <td class="conIcon" nowrap><img src="_image/config/conIcon2.gif"></td>
+                <td class="GSTDText"><p class="GSStepText"><A href="#none" onmousemove="ClearStatus()" ONCLICK="GettingStartedJump('IDR_LINK_CACHE')" id="aCache"><ID id="L_Configuration_ConfigureCacheLink">Configure Cache Properties</ID></A></p>
+                    <p class="bodyCopy"><ID id id="L_Configuration_ConfigureCache">Enable 
+            caching by defining a cache drive. Then create cache rules specifying how Web content is stored and updated in the cache. Create jobs for downloading content from specific Web sites on a recurring schedule.</ID></p>
+                </td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td class="GSSpacer"></td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <td nowrap width="0"></td>
+                <td class="conIcon" nowrap><img src="_image/config/conIcon3.gif"></td>
+                <td class="GSTDText"><p class="GSStepText"><A href="#none" onmousemove="ClearStatus()" onclick="GettingStartedJump('IDR_LINK_ADDINS')" id="aAddIns"><ID id="L_Configuration_ConfigureAddInsLink">Configure Add-in Properties</ID></A></p>
+                    <p class="bodyCopy"><ID id id="L_Configuration_ConfigureAddIns">Use application filters and Web filters to add additional security to your ISA Server networks.</ID></p>
+                </td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td class="GSSpacer"></td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <td nowrap width="0"></td>
+                <td class="conIcon" nowrap><img src="_image/config/conIcon4.gif"></td>
+                <td class="GSTDText"><p class="GSStepText"><A href="#none" onmousemove="ClearStatus()" onclick="GettingStartedJump('IDR_LINK_GENERAL')" id="aGeneral"><ID id="L_Configuration_GeneralLink">Define General and Administrative Security Policies</ID></A></p>
+                    <p class="bodyCopy"><ID id id="L_Configuration_ConfigureAddIns">Define global firewall administrative and security policies such as user permissions, Firewall client application settings, dial-up properties, intrusion detection, RADIUS server configuration, and more.</ID></p>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

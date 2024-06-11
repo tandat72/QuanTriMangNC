@@ -1,0 +1,230 @@
+
+
+<html>
+<head>
+     <LINK REL="stylesheet" type="text/css" href="_common/isa.css">
+        <script id="jsCommon" src="common.js"></script>
+        <script id="jsCommands" src="commands.js"></script>
+        <script>
+            var L_DelegateControl_text = "Delegate additional roles and permissions for administrators";
+            var L_ApplicationSettings_text = "View and modify allowed connection types and application settings";
+            var L_FirewallChaining_text = "Specify how requests from ISA Server clients are forwarded to upstream servers";
+            var L_ServerInfo_text = "View this computer's general properties";
+            var L_Dialup_text = "Specify and configure automatic dialing options";
+            var L_ContentGroups_text = "Enable global link translation and specify global link translation settings";
+            var L_NLB_text = "Configure load balancing";
+            var L_RadiusServers_text = "Specify the RADIUS and Active Directory servers used for authentication";
+            var L_IpOptions_text = "Enable and configure IP options filtering, IP fragmenting, and IP routing";
+            var L_IntrusionDetection_text = "Enable and configure intrusion detection and DNS attack mitigation";
+            var L_ConnectionLimit_text = "Specify how ISA Server mitigates against flood attacks and worm mitigations";
+            var L_CRLProps_text = "Specify if ISA Server checks certificates for revocation";
+            var g_sPageContext = location.hash.slice(1);
+            var L_CompressionProps_text = "Enable and configure whether HTTP content should be compressed";
+            var L_DiffServ_text = "Define how ISA Server prioritizes traffic according to DiffServ bits";
+
+            function body_onload()
+            {
+                tdDelegateControl.title = L_DelegateControl_text;
+                tdApplicationSettings.title = L_ApplicationSettings_text;
+                tdFirewallChaining.title = L_FirewallChaining_text;
+                tdServerInfo.title = L_ServerInfo_text;
+                tdDialup.title = L_Dialup_text;
+                tdContentGroups.title = L_ContentGroups_text;
+                tdRadiusServers.title = L_RadiusServers_text;
+                tdIpOptions.title = L_IpOptions_text;
+                tdIntrusionDetection.title = L_IntrusionDetection_text;
+                tdConnectionLimit.title = L_ConnectionLimit_text;
+                tdCrlProps.title = L_CRLProps_text;
+                tdCompressionProps.title = L_CompressionProps_text;
+				tdCrlQoS.title = L_DiffServ_text;
+
+                tdDelegateControl.TestKey = "ATASK_" + g_oNotifications["IDR_DELEGATE_CONTROL"] + "_{41223021-4684-4CF4-BD24-4AD71FFC4445}";
+                tdApplicationSettings.TestKey = "ATASK_" + g_oNotifications["IDR_APPLICATION_SETTINGS"] + "_" + g_sPageContext;
+                tdFirewallChaining.TestKey = "ATASK_" + g_oNotifications["IDR_FIREWALL_CHAINING"] + "_" + g_sPageContext;
+                tdServerInfo.TestKey = "ATASK_" + g_oNotifications["IDR_SERVER_INFO"] + "_" + g_sPageContext;
+                tdDialup.TestKey = "ATASK_" + g_oNotifications["IDR_DIALUP"] + "_" + g_sPageContext;
+                tdContentGroups.TestKey = "ATASK_" + g_oNotifications["IDR_CONTENT_GROUPS"] + "_" + g_sPageContext;
+                tdRadiusServers.TestKey = "ATASK_" + g_oNotifications["IDR_RADIUS_SERVERS"] + "_" + g_sPageContext;
+                tdIpOptions.TestKey = "ATASK_" + g_oNotifications["IDR_IP_OPTIONS"] + "_" + g_sPageContext;
+                tdIntrusionDetection.TestKey = "ATASK_" + g_oNotifications["IDR_INTRUSION_DETECTION"] + "_" + g_sPageContext;
+                tdConnectionLimit.TestKey = "ATASK_" + g_oNotifications["IDR_CONNECTION_QUOTA"] + "_" + g_sPageContext;
+                tdCrlProps.TestKey = "ATASK_"+ g_oNotifications["IDR_CRL_PROPS"] + "_" + g_sPageContext;
+                tdCrlQoS.TestKey = "ATASK_"+ g_oNotifications["IDR_QOS_PROPS"] + "_" + g_sPageContext;
+
+                NotifySnapin("IDR_PAGE_LOADED", g_sPageContext);
+            }
+
+            function GettingStartedJump(Code)
+            {
+                NotifySnapin(Code, g_sPageContext);
+            }
+            
+			//  Updates the UI according to specified ISA edition type
+            function UpdateViewForEditionType(EditionType)
+            {
+                if(EditionType == g_TypeEnterpriseEdition)
+                {
+                    //  Hide last row in ISA Server Administration table
+                    IsaServerAdminRow4.style.display = "none";
+                    IsaServerAdminSep3 .style.display = "none";
+                }
+            }
+        </script>
+</head>
+
+<body id="idBody" height="100%" width="100%" onload="body_onload();" >
+
+
+
+<table cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+        <td colspan="9" height="22"></td>
+    </tr>
+
+    <tr>
+        <td width="13" nowrap></td>
+        <td colspan="7"><span class="header1"><b><ID id = "L_Heading1">ISA Server Administration</ID></b></span><hr></td>
+        <td width="13" nowrap></td>
+    </tr>
+
+
+
+    <tr>
+        <td colspan="2" width="21" nowrap></td>
+        <td class="GPIcon" nowrap><img src="_image/general/genIcon1.gif"></td>
+        <td><a href="#none" onmousemove="ClearStatus()" onclick="NotifySnapin('IDR_DELEGATE_CONTROL','{41223021-4684-4CF4-BD24-4AD71FFC4445}')" id="tdDelegateControl" ><ID id="L_GeneralConfig_AdminPerminissionsLink">Assign Administrative Roles</ID></a></td>
+        <td width="25" nowrap></td>
+        <td class="GPIcon" nowrap><img src="_image/general/genIcon3.gif"></td>
+        <td><a href="#none" onmousemove="ClearStatus()" onclick="GettingStartedJump('IDR_APPLICATION_SETTINGS')" id="tdApplicationSettings" ><ID id="L_GeneralConfig_AppSettingText" >Define Firewall Client Settings</ID></a></td>
+        <td colspan="2" width="21" nowrap></td>
+    </tr>
+
+
+    <tr>
+        <td colspan="9" height="15"></td>
+    </tr>
+
+
+    <tr>
+        <td colspan="2" width="21" nowrap></td>
+        <td class="GPIcon" nowrap><img src="_image/general/genIcon2.gif"></td>
+        <td><a href="#none" onmousemove="ClearStatus()" onclick="GettingStartedJump('IDR_FIREWALL_CHAINING')" id="tdFirewallChaining" ><ID id="L_GeneralConfig_ChainingLink">Configure Firewall Chaining</ID></a></td>
+        <td width="25" nowrap></td>
+        <td class="GPIcon" nowrap><img src="_image/general/genIcon5.gif"></td>
+        <td><a href="#none" onmousemove="ClearStatus()" onclick="GettingStartedJump('IDR_DIALUP')" id="tdDialup" ><ID id="L_AutomaticDilaup">Specify Dial-Up Preferences</ID></a></td>
+        <td colspan="2" width="21" nowrap></td>
+    </tr>
+
+    <tr>
+        <td colspan="9" height="15"></td>
+    </tr>
+    
+    <tr>
+        <td colspan="2" width="21" nowrap></td>
+        <td class="GPIcon" nowrap><img src="_image/general/genIcon9.gif"></td>
+        <td><a href="#none" onmousemove="ClearStatus()" onclick="GettingStartedJump('IDR_RADIUS_SERVERS')" id="tdRadiusServers" ><ID id="L_GeneralConfig_RadiusServersLink" >Specify RADIUS and LDAP Servers</ID></a></td>
+        <td width="25" nowrap></td>
+        <td colspan="2" width="21" nowrap></td>
+    </tr>
+
+    <tr>
+        <td colspan="9" height="25"></td>
+    </tr>
+
+    <tr>
+        <td width="13" nowrap></td>
+        <td colspan="7"><span class="header1"><b><ID id="L_Heading2">Global HTTP Policy Settings</ID></b></span><hr></td>
+        <td width="13" nowrap></td>
+    </tr>
+
+    <tr>
+        <td colspan="2" width="21" nowrap></td>
+        <td class="GPIcon" nowrap><img src="_image/general/genIcon6.gif"></td>
+        <td><a href="#none" onmousemove="ClearStatus()" onclick="GettingStartedJump('IDR_CONTENT_GROUPS')"  id="tdContentGroups" ><ID id="L_ContentGroups">Configure Global Link Translation</ID></a></td>
+        <td width="25" nowrap></td>
+        <td class="GPIcon" nowrap><img src="_image/general/genIcon11.gif"></td>
+        <td><a href="#none" onmousemove="ClearStatus()" onclick="GettingStartedJump('IDR_CRL_PROPS')" id="tdCrlProps" ><ID id="L_CrlProps">Specify Certificate Revocation Settings</ID></a></td>
+        <td colspan="2" width="21" nowrap></td>
+    </tr>
+
+    <tr>
+        <td colspan="9" height="15"></td>
+    </tr>
+
+    <tr>
+        <td colspan="2" width="21" nowrap></td>
+<!-- TODO: Change icon -->
+        <td class="GPIcon" nowrap><img src="_image/general/genIcon13.gif"></td>
+        <td><a href="#none" onmousemove="ClearStatus()" onclick="GettingStartedJump('IDR_HTTP_COMPRESSION_PROPS')" id="tdCompressionProps" ><ID id="L_CompressionProps">Define HTTP Compression Preferences</ID></a></td>
+        <td width="25" nowrap></td>
+        <td class="GPIcon" nowrap><img src="_image/general/genIcon12.gif"></td>
+        <td><a href="#none" onmousemove="ClearStatus()" onclick="GettingStartedJump('IDR_QOS_PROPS')" id="tdCrlQoS" ><ID id="L_CrlProps">Specify DiffServ Preferences</ID></a></td>
+        <td colspan="2" width="21" nowrap></td>
+    </tr>
+   
+    <tr id="IsaServerAdminSep3">
+        <td colspan="9" height="15"></td>
+    </tr>
+    
+    <tr id="IsaServerAdminRow4">
+        <td colspan="2" width="21" nowrap></td>
+        <td class="GPIcon" nowrap><img src="_image/general/genIcon4.gif"></td>
+        <td><a href="#none" onmousemove="ClearStatus()" onclick="GettingStartedJump('IDR_SERVER_INFO')" id="tdServerInfo" ><ID id="L_GeneralConfig_GeneralPropsLink">View ISA Server Computer Details</ID></a></td>
+        <td width="25" nowrap></td>
+        <td colspan="2" width="21" nowrap></td>
+    </tr>
+   
+    <tr>
+        <td colspan="9" height="25"></td>
+    </tr>
+    
+	<tr>
+        <td width="13" nowrap></td>
+        <td colspan="7"><span class="header1"><b><ID id="L_Heading2">Additional Security Policy</ID></b></span><hr></td>
+        <td width="13" nowrap></td>
+    </tr>
+
+
+    <tr>
+        <td colspan="2" width="21" nowrap></td>
+        <td class="GPIcon" nowrap><img src="_image/general/genIcon8.gif"></td>
+        <td><a href="#none" onmousemove="ClearStatus()" onclick="GettingStartedJump('IDR_INTRUSION_DETECTION')" id="tdIntrusionDetection"><ID id="L_GeneralConfig_IntrusionDetectionText">Enable Intrusion Detection and DNS Attack Detection</ID></a></td>
+        <td width="25" nowrap></td>
+        <td class="GPIcon" nowrap><img src="_image/general/genIcon10.gif"></td>
+        <td><a href="#none" onmousemove="ClearStatus()" onclick="GettingStartedJump('IDR_CONNECTION_QUOTA')"  id="tdConnectionLimit" ><ID id="L_GeneralConfig_ConnectionLimit">Configure Flood Mitigation Settings</ID></a></td>
+        <td colspan="2" width="21" nowrap></td>
+    </tr>
+    
+    <tr>
+        <td colspan="9" height="15"></td>
+    </tr>
+    
+    <tr>
+        <td colspan="2" width="21" nowrap></td>
+        <td class="GPIcon" nowrap><img src="_image/general/genIcon7.gif"></td>
+        <td><a href="#none" onmousemove="ClearStatus()" onclick="GettingStartedJump('IDR_IP_OPTIONS')"  id="tdIpOptions" ><ID id="L_GeneralConfig_IPOptionsLink">Configure IP Protection</ID></a></td>
+        <td width="25" nowrap></td>
+        <td colspan="2" width="21" nowrap></td>
+    </tr>
+
+    <tr>
+        <td colspan="9" height="25"></td>
+    </tr>
+
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

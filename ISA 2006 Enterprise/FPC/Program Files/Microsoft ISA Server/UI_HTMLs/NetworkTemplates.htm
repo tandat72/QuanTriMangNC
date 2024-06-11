@@ -1,0 +1,55 @@
+<html xmlns:controls>
+    <head>
+        <?import namespace="controls" implementation="imgcombo\imgcombo.htc" ?>
+        <LINK REL="stylesheet" type="text/css" href="_common/isa.css">
+        <script id="jsCommon" src="common.js"></script>
+        <script id="jsCommands" src="commands.js"></script>
+        <script>
+            var g_sPageContext = location.hash.slice(1);
+            var g_sNetworkTemplatePath = "..\\NetworkTemplates\\";
+            
+            function body_onload(){
+                NotifySnapin("IDR_PAGE_LOADED", g_sPageContext);
+            }
+            
+            function setImageSrc(name, file){
+                var strPath = g_sNetworkTemplatePath + file;
+                idImg.src = strPath;
+                idImg.title = name;
+            }
+            
+            function SetMessage(msg){
+                idDivMsg.runtimeStyle.display = "block";
+                idDivMsg.innerText = msg;
+            }
+            
+            function DeleteMessage(){
+                idDivMsg.runtimeStyle.display = "none";
+                idDivMsg.innerText = "";
+            }
+
+            //  Updates the UI according to specified ISA edition type
+            function UpdateViewForEditionType(EditionType)
+            {
+                //  Nothing to do
+            }
+                
+        </script>
+    </head>
+    <body class="TabPageBody" id="idBody" onload="body_onload();" style="overflow:auto">
+        <table align="center" height="100%" width="100%">
+            <tr>
+                <td>
+                    <div align="center" id="idDivPic">
+                        <img id="idImg" src="">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div align="left" id="idDivMsg"></div>
+                </td>
+            </tr>
+        </table>            
+    </body>
+</html>

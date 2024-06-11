@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>@@L_WindowTitle_Text</title>
+	<link rel="stylesheet" type="text/css" href="/CookieAuth.dll?GetPic?formdir=@@FORMDIR&image=logon_style.css" />
+</head>
+<body>
+<form action="@@URL?Logon" method="post" id="logonForm">
+<div class="direction">
+<input id="stage" type="hidden" name="stage" value="useridandpasscode" />
+<input id="curl" type="hidden" name="curl" value="@@DESTINATION" />
+<input id="flags" type="hidden" name="flags" value="0" />
+<input id="sessionid" type="hidden" name="sessionid" value="@@SESSIONID" />
+<input id="forcedownlevel" type="hidden" name="forcedownlevel" value="0" />
+<input id="formdir" type="hidden" name="formdir" value="@@FORMDIR" />
+<br />
+<img src="/CookieAuth.dll?GetPic?formdir=@@FORMDIR&image=mslogo.gif" alt="" />
+<br />
+<p>@@INSERT_USER_TEXT</p>
+<p>@@L_ISA_Credentials_Text</p>
+<p>@@L_PasscodeHelp_Text</p>
+<p><label for="userid">@@L_UserID_Text</label><br />
+<input id="userid" name="userid" type="text" class="textSize" maxlength="32" value="@@USER" />
+</p>
+<p><label for="passcode">@@L_Passcode_Text</label><br />
+<input id="passcode" name="passcode" type="password" class="textSize" />
+</p>
+<p>@@L_WebSrvCredentials_Text</p>
+<p>@@L_NamePassword_Help_Text</p>
+<p><label for="username">@@L_UserName_Text</label><br />
+<input id="username" name="username" type="text" class="textSize" />
+</p>
+<p><label for="password">@@L_Password_Text</label><br />
+<input id="Password" name="Password" type="password" class="textSize" />
+</p>
+<p>
+<input type="submit" id="SubmitCreds" name="SubmitCreds" value="@@L_LoginButton_Text" />
+</p>
+</div>
+</form>
+</body>
+</html>

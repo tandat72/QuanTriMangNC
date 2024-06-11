@@ -1,0 +1,189 @@
+<html xmlns:controls>
+    <head>
+        <link REL="stylesheet" type="text/css" href="_common/isa.css">
+            <script id="jsCommon" src="common.js"></script>
+            <script id="jsCommands" src="commands.js"></script>
+            <script>
+            var g_sPageContext = location.hash.slice(1);
+            var L_Site_text = "http://go.microsoft.com/fwlink/?LinkId=18363";
+            var L_Partners_text = "http://go.microsoft.com/fwlink/?LinkId=791";
+            var g_EditionType = g_TypeEnterpriseEdition;
+            
+            function body_onload()
+            {
+                aSite.TestKey = "ATASK_" + "SITE" + "_" + g_sPageContext;
+                aSite.href = L_Site_text;
+                aPartners.TestKey = "ATASK_" + "PARTNERS" + "_" + g_sPageContext;
+                aPartners.href = L_Partners_text;
+                aInstallGuide.TestKey = "ATASK_" + "INSTALL_GUIDE" + "_" + g_sPageContext;
+                aHardening.TestKey = "ATASK_" + g_oNotifications["IDR_HARDENING"] + "_" + g_sPageContext;
+                
+                NotifySnapin("IDR_PAGE_LOADED", g_sPageContext);
+            }
+            
+            //  Updates the UI according to specified ISA edition type
+            function UpdateViewForEditionType(EditionType)
+            {
+                g_EditionType = EditionType;
+				
+                if(g_EditionType == g_TypeEnterpriseEdition)
+                {
+                    //  Hide the whole area of SE servers
+                    ResetJumpGettingStarted(0);
+                }
+            }
+            
+            function JumpToArray(ArrayId)
+            {
+                NotifySnapin(ArrayId, g_sPageContext);
+            }
+
+            function ResetJumpGettingStarted(TotalConnectedArrays)
+            {
+                //  Hide entire HTML table if we are not connected to any machine
+                if((TotalConnectedArrays > 0) && (g_EditionType == g_TypeStandardEdition))
+                {
+                    Table_JumpGettingStartedMain.style.display = "block";
+                    Table_JumpGettingStartedMainSep.style.display = "block";
+                }
+                else
+                {
+                    Table_JumpGettingStartedMain.style.display = "none";
+                    Table_JumpGettingStartedMainSep.style.display = "none";
+                }
+
+                //  Remove current list of arrays we are connected to
+                ArraysList.innerHTML = "";
+            }
+            
+            function OnJumpToArrayClick()
+            {
+                JumpToArray(event.srcElement.ArrayId);
+            }
+            
+            function AddArray(ArrayName, ArrayId)
+            {
+                var oBR = document.createElement("BR");
+                ArraysList.appendChild(oBR);
+                
+                var oLinkArray = document.createElement("A");
+                oLinkArray.href = "#none";
+                oLinkArray.ArrayId = ArrayId;
+                oLinkArray.onclick = OnJumpToArrayClick;
+                oLinkArray.onmousemove = ClearStatus;
+                oLinkArray.TestKey = "ATASK_" + ArrayId + "_" + g_sPageContext;
+                oLinkArray.innerText = ArrayName;
+                ArraysList.appendChild(oLinkArray);
+            }
+            </script>
+    </head>
+    <body id="idBody" onload="body_onload()">
+        <table cellpadding="0" cellspacing="0" width="100%" ID="Table1">
+            <tr>
+                <td>
+                    <table cellpadding="0" cellspacing="0" width="100%" ID="Table2">
+                        <tr>
+                            <td width="100%" height="22"></td>
+                        </tr>
+                    </table>
+                    <table cellpadding="0" cellspacing="0" ID="Table3">
+                        <tr>
+                            <td nowrap width="0"></td>
+                            <td nowrap width="83" valign="top"><img src="_image/general/hexImage.png"></td>
+                            <td class="BodyCopy" valign="top" align="left" width="100%"><span class="header1"><ID id="L_Welcome_MainTitle">Welcome to Microsoft Internet Security and Acceleration Server 2006</ID>
+                                </span>
+                                <br>
+                                <br>
+                                <ID id="L_Welcome_Text1">
+                               ISA Server 2006 is an extensible firewall solution. Designed to support multi-network environments, ISA Server 2006 provides highly integrated virtual private networking capabilities, extensible user authentication models, comprehensive monitoring and alert notifications, as well as remote management options. </ID>
+                                <br>
+                                <br>
+                            </td>
+                        </tr>
+                    </table>
+                    <table cellpadding="0" cellspacing="0" ID="Table10">
+                        <tr>
+                            <td nowrap width="0"></td>
+                            <td class="GSIcon" nowrap></td>
+                            <td class="GSTDText"><p class="GSStepText"><a href="#none" onmousemove="ClearStatus()" onclick="NotifySnapin('IDR_GETTING_STARTED', g_sPageContext)" id="aInstallGuide"><ID id="L_Welcome_Link4" >Read the Getting Started Guide</ID></a></p>
+                                <p class="bodyCopy"><ID id="L_Welcome_Text4">Use the Getting Started Guide to learn about deploying your ISA Server.</ID></p>
+                            </td>
+                        </tr>
+                    </table>
+                    <table cellpadding="0" cellspacing="0" width="100%" ID="Table5">
+                        <tr>
+                            <td class="GSSpacer"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" ID="Table12">
+            <tr>
+                <td nowrap width="0"></td>
+                <td class="GSIcon" nowrap></td>
+                <td class="GSTDText"><p class="GSStepText"><a href="#none" onmousemove="ClearStatus()" onclick="NotifySnapin('IDR_HARDENING', g_sPageContext)" id="aHardening"><ID id="L_Welcome_Link5">Read about securing your ISA Server</ID></a></p>
+                    <p class="bodyCopy"><ID id="L_Welcome_Text5">Learn about best practices for keeping your ISA Server computer secure.</ID></p>
+                </td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" width="100%" ID="Table_JumpGettingStartedMainSep" style="display:none" >
+            <tr>
+                <td class="GSSpacer"></td>
+                </td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" ID="Table_JumpGettingStartedMain" style="display:none" >
+            <tr>
+                <td nowrap width="0"></td>
+                <td class="GSIcon" nowrap></td>
+                <td class="GSTDText"><p class="GSStepText"></p>
+                    <p class="bodyCopy"><ID id="L_Welcome_Text6">Go to the Getting Started page of:</ID><A id="ArraysList"></A></p>
+                </td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" width="100%" ID="Table9">
+            <tr>
+                <td class="GSSpacer"></td>
+                </td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" ID="Table6">
+            <tr>
+                <td nowrap width="0"></td>
+                <td class="GSIcon" nowrap></td>
+                <td class="GSTDText"><p class="GSStepText"><a target="_blank" id = "aSite"> <ID id="L_Welcome_Link2">Visit the Microsoft Internet Security and Acceleration Server 2006 Web site</ID></a></p>
+                    <p class="bodyCopy"><ID id="L_Welcome_Text2">Get the latest product updates and customer support information located on the ISA Server Web site.</ID></p>
+                </td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" width="100%" ID="Table11">
+            <tr>
+                <td class="GSSpacer"></td>
+                </td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" ID="Table8">
+            <tr>
+                <td nowrap width="0"></td>
+                <td class="GSIcon" nowrap></td>
+                <td class="GSTDText"><p class="GSStepText"><a  target="_blank" id = "aPartners"><ID id="L_Welcome_Link3">Get our partner products</ID></a></p>
+                    <p class="bodyCopy"><ID id="L_Welcome_Text3">Visit our ISA Server Partner Site to learn about our partner products and how these products extend and integrate with ISA Server.</ID></p>
+                </td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" width="100%" ID="Table13">
+            <tr>
+                <td class="GSSpacer"></td>
+                </td>
+            </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td no wrap width="100%" height="26">
+                </td>
+            </tr>
+        </table>
+        </td> </tr> </table>
+    </body>
+</html>

@@ -1,0 +1,342 @@
+<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+<public:component tagName="TasksHandler" literalcontent="false">
+    <public:property name="Task" get="getTask" />
+    <public:method name="AddTaskGroup" />
+    <public:method name="DeleteTaskGroup" />
+    <public:method name="DeleteAllTasks" />
+    <public:method name="AddTask" />
+    <public:method name="AddSelectTask" />
+    <public:method name="AddOptionTask" />
+    <public:method name="DeleteTask" />
+    <public:method name="EnableTask" />
+    <public:method name="DisableTask" />
+    <public:property name="imgPrefix" internalname="m_sImgPrefix" value="" />
+    <public:property name="InnerDocument" get="getInnerDocument" />
+    <public:property name="NumberOfTaskGroups" get="getNumberOfTaskGroups" />
+    <public:method name="GetNumberOfTasks" />
+    <public:method name="GetTaskId" />
+    <public:method name="GetTaskContext" />
+    <public:event name="onTaskActivated" id="m_eventTaskActivated" />
+    <public:defaults id=DefaultTaskFontID viewLinkContent style="font-family: tahoma; font-size: 8pt" />
+    <public:defaults tabStop="true" />
+    <public:attach event="oncontentready" onevent="init()" />
+
+<script>
+
+//////////////////////////////////////////////////////////////////////
+
+//      Member data.
+
+//
+
+var     m_bInitialized          = false;
+var     m_sImgPrefix            = "";
+
+//////////////////////////////////////////////////////////////////////
+//      Methods for: initialization
+//
+
+function href_OnClick()
+{
+    var oEvent = createEventObject();
+
+    oEvent.iTaskID = this.iTaskID;
+    oEvent.sTaskContext = this.sTaskContext;
+    m_eventTaskActivated.fire(oEvent);
+}
+
+function getClientLeftOf (e)
+{
+    var nClientLeft = 0;
+
+    while (e.tagName != "BODY")
+    {
+        if ((e != element) && (e.tagName != "TBODY") && (e.tagName != "TR"))
+        {
+            nClientLeft += e.offsetLeft;
+        }
+        e = e.parentElement;
+    }
+    return nClientLeft;
+}
+
+function getClientTopOf (e)
+{
+    var nClientTop = 0;
+    while (e.tagName != "BODY")
+    {
+        if ((e != element) && (e.tagName != "TBODY") && (e.tagName != "TR"))
+        {
+            nClientTop += e.offsetTop;
+        }
+        e = e.parentElement;
+    }
+    return nClientTop;
+}
+
+
+
+function AddTaskGroup(sTitle,TaskGroupLoaction)
+{
+
+    if ((TaskGroupLoaction > tblTasksGroups.rows.length) || (TaskGroupLoaction == -1))
+    {
+        TaskGroupLoaction = tblTasksGroups.rows.length;
+    }
+
+    var tr = tblTasksGroups.insertRow(TaskGroupLoaction);
+    tr.width = "100%"
+        tr.style.paddingTop = "5";
+    var td = tr.insertCell();
+    //td.width = "100%"
+    td.align = "left";
+    var captionTaskGroup = document.createElement ("caption");
+    captionTaskGroup.innerText = sTitle;
+    captionTaskGroup.align = "left";
+    captionTaskGroup.className = "taskListHeader";
+    captionTaskGroup.height  = 100;
+    tblTaskGroup = document.createElement ("table");
+    tblTaskGroup.className = "taskListHeader";
+    tblTaskGroup.appendChild(captionTaskGroup);
+    tblTaskGroup.width = "100%"
+        tblTaskGroup.cellSpacing        = 0;
+    tblTaskGroup.cellPadding        = 3;
+    td.appendChild(captionTaskGroup);
+    td.appendChild(tblTaskGroup);
+
+    return tr.rowIndex;
+}
+
+function DeleteTaskGroup(TaskGroupLoaction)
+{
+    tblTasksGroups.deleteRow(TaskGroupLoaction);
+}
+
+
+function DeleteAllTasks()
+{
+    while (tblTasksGroups.rows.length > 0)
+    {
+        tblTasksGroups.deleteRow(0);
+    }
+}
+
+function getNumberOfTaskGroups()
+{
+    return tblTasksGroups.rows.length;
+}
+
+
+function GetTasksTable(TaskGroupLoaction)
+{
+    return tblTasksGroups.rows[TaskGroupLoaction].cells[0].lastChild;
+}
+
+function select_OnChange()
+{
+    var oEvent = createEventObject ();
+
+    oEvent.iTaskID = parseInt(this.options[this.selectedIndex].value);
+    oEvent.sTaskContext = this.sTaskContext;
+    m_eventTaskActivated.fire(oEvent);
+}
+
+function ClearStatus()
+{
+    if (window.status.search("#none"))
+    {
+        window.status = "";
+    }
+}
+
+
+function AddTaskGeneral(TaskGroupLoaction,iTaskID,sTaskContext,sTaskHtml,iIconFileName,TaskLocation,bEnabled,bSelectTask)
+{
+    var TasksTable = GetTasksTable(TaskGroupLoaction);
+
+    if ((TaskLocation > TasksTable.rows.length) || (TaskLocation < 0))
+    {
+        TaskLocation = -1;
+    }
+    var trTask = TasksTable.insertRow(TaskLocation);
+    trTask.className = "taskList";
+    trTask.width = "100%";
+    trTask.iIconId = iIconFileName;
+    trTask.iTaskID = iTaskID;
+    trTask.sTaskContext = sTaskContext;
+    trTask.TestKey =  "TASK_"+iTaskID+"_"+sTaskContext;
+    trTask.height = 20;
+    trTask.disabled = !bEnabled;
+    trTask.runtimeStyle.display = bEnabled ? "block" : "none";
+
+    var tdTaskHTML = trTask.insertCell();
+    tdTaskHTML.style.width = "100%";
+    tdTaskHTML.style.verticalAlign = "top";
+
+    if (bSelectTask)
+    {
+        tdTaskHTML.innerHTML =
+            "<p style='MARGIN-LEFT:26px;TEXT-INDENT:-26px'>" +
+            "<IMG alt='' src='file://" + m_sImgPrefix + iIconFileName + "' align='textTop' border='0' width='16' hspace='5'/>" +
+            "<span class='TaskSelect'>" + sTaskHtml + "</span>" +
+            "<SELECT class='TaskSelect' sTaskContext='" + sTaskContext + "' onchange='select_OnChange'></SELECT>" +
+            "</p>";
+        tdTaskHTML.firstChild.children(2).onchange = select_OnChange;
+    }
+    else
+    {
+        var hrefHTML = document.createElement("a");
+        hrefHTML.href ="#none";
+        hrefHTML.onmousemove = ClearStatus;
+        hrefHTML.className = "taskHREF";
+        hrefHTML.innerHTML =
+            "<p style='MARGIN-LEFT:26px;TEXT-INDENT:-26px'>" +
+            "<IMG alt='' src='file://" + m_sImgPrefix + iIconFileName + "' align='textTop' border='0' width='16' hspace='5'/>" +
+            sTaskHtml +
+            "</p>";
+        hrefHTML.iTaskID = iTaskID;
+        hrefHTML.TestKey =  "TASK_"+iTaskID+"_"+sTaskContext;
+        hrefHTML.sTaskContext = sTaskContext;
+        hrefHTML.onclick = href_OnClick;
+        tdTaskHTML.appendChild(hrefHTML);
+    }
+
+    if (iIconFileName != "")
+    {
+        tdTaskHTML.style.paddingLeft="3";
+    }
+
+    return trTask.rowIndex;
+}
+
+function AddTask(TaskGroupLoaction,iTaskID,sTaskContext,sTaskHtml,iIconFileName,TaskLocation,bEnabled)
+{
+    return AddTaskGeneral(TaskGroupLoaction,iTaskID,sTaskContext,sTaskHtml,iIconFileName,TaskLocation,bEnabled, false);
+}
+
+function AddSelectTask(TaskGroupLoaction,iTaskID,sTaskContext,sTaskHtml,iIconFileName,TaskLocation,bEnabled)
+{
+    return AddTaskGeneral(TaskGroupLoaction,iTaskID,sTaskContext,sTaskHtml,iIconFileName,TaskLocation,bEnabled, true);
+}
+
+function AddOptionTask(TaskGroupLoaction,iTaskID,sTaskHtml,TaskLocation,bSelected)
+{
+    var trTask = GetTask(TaskGroupLoaction, TaskLocation);
+    var tdTaskHTML = null;
+    var oSelect = null;
+    for (var i = 0; i < trTask.cells.length && oSelect == null; ++i)
+    {
+        tdTaskHTML = trTask.cells(i);
+        if ((tdTaskHTML.childNodes.length > 0) &&
+            (tdTaskHTML.childNodes(0).childNodes.length == 3))
+        {
+            oSelect = tdTaskHTML.childNodes(0).childNodes(2);
+        }
+    }
+    if (oSelect == null)
+    {
+        alert("AddOptionTask: Failed to locate SELECT element");
+        return;
+    }
+
+    var oOption = document.createElement("OPTION");
+    oSelect.options.add(oOption);
+    oOption.innerText = sTaskHtml;
+    oOption.value = iTaskID;
+    oOption.selected = bSelected;
+}
+
+
+function DeleteTask(TaskGroupLoaction,TaskLocation)
+{
+    var TasksTable = GetTasksTable(TaskGroupLoaction);
+
+    TasksTable.deleteRow(TaskLocation);
+}
+
+function GetNumberOfTasks(TaskGroupLoaction)
+{
+    var TasksTable = GetTasksTable(TaskGroupLoaction);
+    return TasksTable.rows.length;
+}
+
+
+function GetTask(TaskGroupLoaction,TaskLocation)
+{
+    var TasksTable = GetTasksTable(TaskGroupLoaction);
+
+    return TasksTable.rows(TaskLocation);
+}
+
+function GetTaskId(TaskGroupLoaction,TaskLocation)
+{
+    var TasksTable = GetTasksTable(TaskGroupLoaction);
+
+    return TasksTable.rows(TaskLocation).iTaskID;
+}
+
+function GetTaskContext(TaskGroupLoaction,TaskLocation)
+{
+    var TasksTable = GetTasksTable(TaskGroupLoaction);
+
+    return TasksTable.rows(TaskLocation).sTaskContext;
+}
+
+function DisableTask(TaskGroupLoaction,TaskLocation)
+{
+    var trTask = GetTask(TaskGroupLoaction,TaskLocation);
+    if (trTask)
+    {
+        trTask.disabled = true;
+        trTask.runtimeStyle.display = "none";
+    }
+}
+
+function EnableTask(TaskGroupLoaction,TaskLocation)
+{
+    var trTask = GetTask(TaskGroupLoaction,TaskLocation);
+    if (trTask)
+    {
+        trTask.disabled = false;
+        trTask.runtimeStyle.display = "block";
+    }
+}
+
+function init ()
+{
+    element.style.display   = "block";
+    element.style.width     = "100%";
+    element.style.height    = "100%";
+    element.style.overflow  = "hidden";
+
+    m_bInitialized = true;
+}
+
+function getInnerDocument ()
+{
+    return document;
+}
+
+</script>
+
+    <html xmlns:controls>
+        <head>
+            <link rel="stylesheet" type="text/css" href="../_common/isa.css">
+        </head>
+        <body width="100%" style="overflow:auto">
+            <!-- Section Button Table  -->
+            <table cellpadding="0" cellspacing="0" class="TasksTable" height="100%" ID="Table1">
+                <tr>
+                    <td height="5" width="100%">&nbsp</td>
+                </tr>
+                <tr>
+                    <!-- td height="100%" width="3" nowrap></td -->
+                    <td align="left" valign="top">
+                        <table cellpadding="8" cellspacing="0" width="100%" ID="tblTasksGroups">
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </body>
+    </html>
+</public:component>

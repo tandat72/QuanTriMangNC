@@ -1,0 +1,2234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR="LTR"><HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=Windows-1252">
+<TITLE>Service Pack 4 for Microsoft SQL Server 2000 - Desktop Engine (MSDE 2000)</TITLE>
+</HEAD>
+<BODY>
+
+<!-- Document last modified on  Tuesday, March 29, 2005 - 10:05 AM -->
+
+<Style TYPE="text/css">
+<!--
+
+/* Style sheet optimized for IE4x - Last updated 2/9/99 */
+/* changed h1-h4 font sizes */
+
+body    		{ color: #000000;
+		background: #FFFFFF;  	
+		font-size: 70%;    		
+		font-family: Verdana, Arial, Helvetica, Sans Serif }
+
+a:link	 	{ color: "#0000FF"; text-decoration:"underline";}
+
+a:visited 	{ color: "#660000"; text-decoration:"underline";}
+
+a:active, a:hover 	{ color: "#FF0000";  cursor:hand; text-decoration:"underline";}
+
+h1
+		{ font-size: 190%; 
+		margin-bottom:" .5em"; clear:both; }
+
+h2
+		{ font-size: 175%;  
+		margin-top: 1.5em;
+		margin-bottom:" .5em"; clear:both; }
+
+h3
+		{ font-size: 160%; 
+		margin-top: 1.2em;  
+		margin-bottom: ".5em"; clear:both; }
+
+h4
+		{ font-size: 145%; 
+		margin-bottom:" .5em"; clear:both; }
+
+h5
+		{ font-size: 115%;  
+		margin-top: 1.5em;
+		margin-bottom:" .5em"; clear:both; }
+
+h6
+		{ font-size: 110%; 
+		margin-top: 1.2em;  
+		margin-bottom: ".5em"; clear:both; }
+
+p
+		{ margin-top:" .6em"; 
+		margin-bottom: ".6em"; }
+			
+ol
+		{ margin-top: ".5em"; 
+		margin-bottom: 0; 
+		margin-left: "2.1em"; 
+		padding-left: "0em"; }
+	
+ul
+		{ margin-top: ".6em"; 	
+		margin-bottom: 0;
+		list-style-type: disc;
+		margin-left: "1.5em";
+		padding-left: "0em"; }
+		
+li
+		{ margin-bottom: ".7em"; clear:both; }
+
+dd
+		{ margin-bottom: 0; 
+		margin-left: "1.5em"; }
+
+em
+		{ color: "#FF0000"; } 
+
+/* for defined terms, follow the "Document Conventions" listing in the Microsoft Manual of Style: */
+/* Keywords, functions, and anything else the user must enter exactly as shown are bold--add "font-weight: bold;" to the dt tag */
+/* Variables, book titles, and placeholders the user must provide are italic--add "font-style: italic;" to the dt tag */
+/* pre-defined arguments are bold and italic--add "font-weight: bold;" and "font-style: italic;" to the dt tag */
+
+dt
+		{ margin-top: "2em"; }
+
+pre
+		{ margin-top: "1.2em";
+		margin-bottom: "1.5em"; }
+
+code
+		{ font-family: Courier New; 
+		font-size: 115% }
+
+table
+		{ font-size: 100%;
+		margin-top: "1em"; 
+		margin-bottom: "1em"; 
+		cellpadding: "0.5em"; }
+		
+th
+		{ text-align: left;
+		background: #DDDDDD;
+		vertical-align: bottom;}
+		
+tr
+		{ vertical-align: top; }
+
+td
+		{ background: #EEEEEE;
+		vertical-align: top; }
+
+/* Alert text ID formats */
+
+#Alert_Note        { color: "#000000"; margin-left:" 1.5em"; margin-top:" 1em"; margin-bottom:"1em" }
+
+#Alert_Important { color: "#8B0000"; margin-left:" 1.5em"; margin-top:" 1em"; margin-bottom:"1em"  }
+
+#Alert_Warning  { color: "B22222"; margin-left:" 1.5em"; margin-top:" 1em"; margin-bottom:"1em"  }
+		  
+// -->
+</style>
+<!--Document last modified on Tuesday, March 29, 2005 at 10:05 AM-->
+<H1>Service Pack 4 for Microsoft SQL Server 2000</H1>
+
+<H1>Desktop Engine (MSDE 2000)</H1>
+
+<H5>March 29, 2005</H5>
+
+<P>&copy; Copyright Microsoft Corporation, 2004. All rights reserved.</P>
+
+<P><P style="background-color: #C0FFFF">&nbsp;<BR>The SQL Server documentation team cannot answer technical support questions, but welcomes your suggestions and comments about this readme documentation. You can quickly and directly send e-mail feedback using the link below. Please submit your feedback in English.<BR><BR>To submit written feedback about this document, click here:&nbsp;&nbsp;<A HREF="mailto:sqldocfb@microsoft.com?subject=MSDE 2000 SP4 readme file&body=---Please type comments here, leaving the subject line in place.---">Submit feedback</A>.<BR>&nbsp;</P></P>
+
+<H1><A NAME="_contents_ar5q"></A>Contents</H1>
+
+<P>1.0 <A HREF="#_introduction">Introduction</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;1.1 <A HREF="#_1461463_hardware_and_software_requiremen_fzpy">System Requirements</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;1.2 <A HREF="#_planning_upgrades_to_msde_2000_sp4_d3jb">Before You Upgrade to MSDE 2000 SP4</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;1.3 <A HREF="#_3467462_security_considerations_for_msde_d3jb">Security Considerations for MSDE 2000 SP4</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;1.4 <A HREF="#_1464_know_the_instance_name_fzpy">Determine the Instance Name</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;1.5 <A HREF="#_verify_the_version_of_microsoft_data_acc_d3jb">Verify the Version of Microsoft Data Access Components</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;1.6 <A HREF="#_identifying_the_current_version_of_sql_server_or_analysis_services">Identify the Current Version of MSDE 2000</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;1.7 <A HREF="#_additional_information_about_sp4">Additional Information About SP4</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;1.8 <A HREF="#_updated_books_online_documentation_is_av_wluf">Updates to SQL Server 2000 Books Online Are Available</A></P>
+
+<P>2.0 <A HREF="#_acquiring_desktop_engine_sp4">Where to Find and Download MSDE 2000 SP4</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;2.1 <A HREF="#_2461_choosing_the_correct_language_ar5q">Choosing the Correct Language</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;2.2 <A HREF="#_2462_downloading_msde_2000_sp4_gq59">Downloading MSDE 2000 SP4</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;2.3 <A HREF="#_2463_extracting_the_msde_2000_sp4_files_2y0t">Extracting the MSDE 2000 SP4 Files</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;2.4 <A HREF="#_2464_download_and_extraction_phase_guide_0a8g">Download and Extraction Phase Guidelines</A></P>
+
+<P>3.0 <A HREF="#_service_pack_installation">Service Pack Installation</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;3.1 <A HREF="#_prepare_for_sp4_installation_wluf">Prepare for MSDE 2000 SP4 Installation</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;3.2 <A HREF="#_install_desktop_engine_sp4">Run MSDE 2000 SP4 Setup</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;3.3 <A HREF="#_restart_services">Restart Services and Applications</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;3.4 <A HREF="#_installing_on_replicated_servers">Install MSDE 2000 on Replicated Servers</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;3.5 <A HREF="#_applying_sp4_to_read-only_databases_or_filegroups">Apply MSDE 2000 SP4 to Read-Only Databases or Filegroups in a Replication Topology</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;3.6 <A HREF="#_34613_upgrading_the_catalog_of_linked_se_d3jb">Upgrade the Catalog of Linked Servers</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;3.7 <A HREF="#_uninstalling_sp4">Uninstall MSDE 2000 SP4</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;3.8 <A HREF="#_reapplying_sp4">Reapply MSDE 2000 SP4</A></P>
+
+<P>4.0 <A HREF="#_additional_installation_considerations">Additional Installation Considerations</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;4.1 <A HREF="#_3467467_redistributing_msde_2000_sp4_ar5q">Redistributing MSDE 2000 SP4</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;4.2 <A HREF="#_3467468_msde_2000_sp4_file_locations_gq59">MSDE 2000 SP4 File Locations</A></P>
+
+<P>5.0 <A HREF="#_documentation_notes">Documentation Notes</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;5.1 <A HREF="#_database_and_desktop_engine_enhancements">MSDE 2000 Enhancements</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;5.2 <A HREF="#_replication_enhancements">Replication Enhancements</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;5.3 <A HREF="#_5464_sql_server_agent_enhancements_705">SQL Server Agent and Shared Tools Enhancements</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;5.4 <A HREF="#_sqlxml_enhancement_d3jb">XML Enhancements</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;5.5 <A HREF="#_db-library_and_embedded_sql_for_c">DB-Library and Embedded SQL for C</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;5.6 <A HREF="#_desktop_engine_setup_enhancements_wluf">MSDE 2000 Setup Enhancements</A></P>
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;5.7 <A HREF="#_54610_supportability_enhancements_d3jb">Serviceability Enhancements</A></P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H1><A NAME="_introduction"></A>1.0 Introduction</H1>
+
+<P>This Readme file describes how to use the SQL Server Desktop Engine (MSDE) part of Microsoft&reg; SQL Server&trade; 2000 Service Pack 4 (SP4). You can use Desktop Engine SP4 either to upgrade existing instances of MSDE to MSDE 2000 SP4 or to install a new instance of MSDE 2000 SP4.</P>
+
+<P>The general process for installing SQL Server SP4 is as follows:
+
+<OL>
+	<LI>Determine whether you can use SP4 and if so, which part or parts of SP4 you need to install. Make sure to review all parts of <A HREF="#_introduction">Section 1.0</A> of this Readme before you download and install SP4.<BR><BR></LI>
+
+	<LI>Download and extract the service pack installation files. <A HREF="#_acquiring_desktop_engine_sp4">Section 2.0</A> describes how to obtain the SP4 installation files.<BR><BR></LI>
+
+	<LI>Prepare an instance for upgrade to SP4. <A HREF="#_service_pack_installation">Section 3.0</A>, and Sections 3.1 through 3.3 detail the preparatory steps to take before you install SP4.<BR><BR></LI>
+
+	<LI>Install SP4. <A HREF="#_install_desktop_engine_sp4">Section 3.2</A> details options for running SP4 Setup.</LI>
+</OL>
+
+<P class=indent><B>Note</B>&nbsp;&nbsp;&nbsp;Unless specified otherwise, all references to SQL Server 2000 Desktop Engine in this Readme are to MSDE 2000 Release A. The MSDE 2000 Release A download is functionally equivalent to SQL Server 2000 Desktop Engine SP3a, but includes a new End-User License Agreement (EULA) that gives users rights that are different from those in earlier MSDE 2000 licenses.</P>
+
+<P>SQL Server 2000 SP4 has four parts. You use each part to apply SP4 to different SQL Server components:
+
+<UL type=disc>
+	<LI><B>MSDE 2000 SP4</B> updates instances of SQL Server 2000 MSDE 2000 and MSDE 2000 Release A. The components updated by MSDE 2000 SP4 include:
+<UL type=disc>
+	<LI>The MSDE 2000 database engine.<BR><BR></LI>
+
+	<LI>The database command prompt utilities that come with MSDE 2000, such as the <B>osql</B> and <B>bcp</B> utilities.<BR><BR></LI>
+
+	<LI>Database client connectivity components, such as the Microsoft OLE DB Provider for SQL Server 2000, the SQL Server 2000 ODBC driver, and the client Net-Libraries.<BR><BR></LI>
+
+	<LI>Those parts of replication and Data Transformation Services (DTS) that are included with MSDE 2000.</LI>
+</UL>
+</LI>
+
+	<LI><B>Database Components SP4</B> updates an instance of the database engine for SQL Server 2000 Enterprise Edition, Standard Edition, Developer Edition, Enterprise Evaluation Edition, or Personal Edition.<BR><BR></LI>
+
+	<LI><B>Analysis Services SP4</B> updates the various parts of SQL Server 2000 Analysis Services in a SQL Server 2000 installation.<BR><BR></LI>
+
+	<LI><B>SQL Server 2000 SP4 (64-bit)</B> includes all updates for SQL Server 2000 (64-bit). This is the first service pack for SQL Server 2000 (64-bit). </LI>
+</UL>
+
+<P>All SQL Server service packs are cumulative. SQL Server SP4 includes the fixes delivered in SP1, SP2, SP3, and SP3a.</P>
+
+<P>MSDE 2000 SP4 can only be used on instances of SQL Server 2000 Desktop Engine or MSDE 2000 Release A. The other parts of SQL Server 2000 SP4 apply SP4 to the other SQL Server 2000 components, such as Analysis Services or the database engine. Separate Readme files describe how to use Database Components SP4 and Analysis Services SP4. The other Readme files are available at this <A HREF="http://go.microsoft.com/fwlink/?LinkId=36830" target=_blank>Microsoft Web site</A>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H5>Uses of MSDE 2000 SP4</H5>
+
+<P>The service pack for MSDE 2000 is intended for developers who create redistributable applications that use MSDE. MSDE 2000 SP4 can be used to do the following:
+
+<UL type=disc>
+	<LI>Upgrade an existing instance of 2000 MSDE 2000 or MSDE 2000 Release A to MSDE 2000 SP4, if the instance was originally installed by using the MSDE 2000 Setup program.<BR><BR></LI>
+
+	<LI>Install a new instance of MSDE 2000 SP4, if you have an MSDE 2000 license that lets you install instances of MSDE 2000.<BR><BR></LI>
+
+	<LI>Upgrade an instance of MSDE 1.0 to MSDE 2000, if you have an MSDE 2000 license that lets you run instances of MSDE 2000.<BR><BR></LI>
+
+	<LI>Provide the files for a developer to write an application setup program that can install an instance of MSDE 2000 SP4 as part of the installation of the application. The developer must have a license to distribute MSDE with applications.<BR><BR></LI>
+
+	<LI>Provide the files needed for a developer to build a patch module to distribute to customers whose applications installed an instance of MSDE 2000 by using the MSDE 2000 merge modules.</LI>
+</UL>
+
+<P>For more information about MSDE 2000 licensing, see <A HREF="http://go.microsoft.com/fwlink/?LinkId=10253" target=_blank>Uses of MSDE 2000</A>. If you do not already have a license to install or run MSDE 2000, you can obtain one by registering on the <A HREF="http://go.microsoft.com/fwlink/?LinkId=33808" target=_blank>MSDE 2000 Release A Web page</A>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H5>Before You Begin Installation of MSDE 2000 SP4</H5>
+
+<P>To install MSDE 2000 SP4, review the material in Section 1 and Section 2 of this Readme, and follow the instructions in Section 3 if the following apply:
+
+<UL type=disc>
+	<LI>You have determined that you can apply MSDE 2000 SP4 to your existing instance of MSDE.<BR><BR></LI>
+
+	<LI>You are installing a new instance of MSDE 2000.<BR><BR></LI>
+
+	<LI>You are incorporating the MSDE 2000 SP4 files into the setup utility of an application.</LI>
+</UL>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H5>What to Expect During Upgrade and Installation</H5>
+
+<P>The following sections in this Readme contain examples of the most common scenarios to upgrade an existing instance of MSDE to MSDE 2000 SP4 or install a new instance of MSDE 2000:
+
+<UL type=disc>
+	<LI>3.2.2 <A HREF="#_3467464_upgrading_existing_instances_of__fzpy">Upgrading Existing Instances of MSDE 2000 To MSDE2000 SP4</A><BR><BR></LI>
+
+	<LI>3.2.3 <A HREF="#_3467465_installing_a_new_instance_of_msd_cuy1">Installing a New Instance of MSDE 2000 SP4</A><BR><BR></LI>
+
+	<LI>3.2.4 <A HREF="#_3467466_upgrading_msde_1460_to_msde_2000_238p">Upgrading MSDE 1.0 to MSDE 2000 SP4</A></LI>
+</UL>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_1461463_hardware_and_software_requiremen_fzpy"></A>1.1 System Requirements</H2>
+
+<P>Your computer must meet these hardware and software requirements before you attempt to run MSDE 2000 SP4 Setup.</P>
+
+<H5>Hardware Requirements</H5>
+
+<P>This table shows the hardware requirements for installing and running MSDE 2000.</P>
+
+<TABLE border=1 cellpadding=2 cols=2 frame=box rules=rows width=595>
+
+<TR VALIGN="top">
+<TD width=50%><B>Hardware</B></TD>
+<TD width=50%><B>Minimum Requirements</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>Computer</TD>
+<TD width=50%>Intel Pentium or compatible, 166 MHz or higher</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>Memory (RAM)</TD>
+<TD width=50%>128 MB on Microsoft Windows XP and Windows 2003 Server
+<P>64 MB minimum on Windows 2000</P>
+</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>Hard disk space</TD>
+<TD width=50%>75 MB on Microsoft Windows XP and Windows 2003 Server
+<P>100 MB on Windows 2000</P>
+</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>Drive</TD>
+<TD width=50%>CD-ROM drive (when installing MSDE 2000 SP4 from a CD-ROM)</TD>
+</TR>
+</TABLE><BR>
+
+<P>MSDE 2000 does not have a hardware compatibility list (HCL). If your computer meets the minimum requirements listed in the preceding table, MSDE 2000 software works on the hardware certified for use with the Windows operating system. For more information about hardware certified for use with the Windows operating system, see the Windows Hardware Compatibility List on this <A HREF="http://go.microsoft.com/fwlink/?LinkId=20287" target=_blank>Microsoft Web site</A>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H5>Operating System Requirements</H5>
+
+<P>To use MSDE 2000, you must have installed one of these operating systems:
+
+<UL type=disc>
+	<LI>Windows Server 2003 Standard Edition, Windows Server 2003 Enterprise Edition, Windows Server 2003 Datacenter Edition, Windows Server 2003 Web Edition.<BR><BR></LI>
+
+	<LI>Windows 2000 Server, Windows 2000 Advanced Server, Windows 2000 Datacenter Server.<BR><BR></LI>
+
+	<LI>Windows XP Professional, Windows XP Home Edition.<BR><BR></LI>
+
+	<LI>Windows 2000 Professional.</LI>
+</UL>
+
+<P class=indent><B>Important</B>&nbsp;&nbsp;&nbsp;SQL Server 2000 SP4 is not supported on Windows NT 4.0, Windows Millennium Edition, and Windows 98 platforms. SQL Server 2000 SP3a installations on Windows NT 4.0, Windows Millennium Edition and Windows 98 platforms continue to receive critical hotfix support for 12 months after the final release of SQL Server 2000 SP4. </P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H5>Software and System Requirements</H5>
+
+<P>File and print sharing must be active if you want to run MSDE 2000 Setup.</P>
+
+<P><B>To verify that file and print sharing are active</B>
+
+<OL>
+	<LI>In Control Panel, double-click <B>Network Connections</B>.<BR><BR></LI>
+
+	<LI>On the <B>Advanced</B> menu, click <B>Advanced Settings</B>.<BR><BR></LI>
+
+	<LI>On the <B>Adaptors and Bindings</B> tab, ensure that <B>File and Print Sharing for Microsoft Networks</B> is selected.</LI>
+</OL>
+
+<P>An MSDE 2000 SP4 installation fails if either of the following security policies has been set to <B>Do not allow installation</B>:
+
+<UL type=disc>
+	<LI>The <B>Devices: Unsigned driver installation behavior</B> local security policy for Windows XP.<BR><BR></LI>
+
+	<LI>The <B>Unsigned non-driver installation behavior</B> local security policy for Windows 2000.</LI>
+</UL>
+
+<P>If you use the <B>Do not allow installation</B> setting, you must change it to <B>Silently succeed</B> before you install MSDE 2000 SP4. If necessary, you can return the policy to its previous setting after installation is complete.</P>
+
+<P class=indent><B>Note</B>&nbsp;&nbsp;&nbsp;<B>Do not allow installation</B> is not the default setting for these security policies.</P>
+
+<P><B>To set security policies</B>
+
+<OL>
+	<LI>In Control Panel, double-click <B>Administrative Tools</B>.<BR><BR></LI>
+
+	<LI>Double-click <B>Local Security Policy</B>.<BR><BR></LI>
+
+	<LI>Expand <B>Local Policies</B>.<BR><BR></LI>
+
+	<LI>Select <B>Security Options</B>.<BR><BR></LI>
+
+	<LI>Ensure that the following option in the right pane is set to <B>Silently Succeed</B> before you install MSDE 2000 SP4:
+<UL type=disc>
+	<LI>On Windows XP and Windows 2003: <B>Devices: Unsigned driver installation behavior</B>.<BR><BR></LI>
+
+	<LI>On Windows 2000: <B>Unsigned non-driver installation behavior</B>.</LI>
+</UL>
+</LI>
+</OL>
+
+<P>You can install the upgrade file for MSDE 2000 SP4 from a CD-ROM only if you use Microsoft Windows Installer 2.0.2600.0 or later. If you need to upgrade Windows Installer, MSDE 2000 SP4 contains the necessary files.</P>
+
+<P class=label><B>To upgrade Windows Installer</B>
+
+<OL>
+	<LI>In Windows Explorer, navigate to the \MSDE\MSI folder, which is located either on the SQL Server 2000 SP4 CD or in the folders that you extracted from the self-extracting Service Pack 4 download file SQL2000.MSDE-KB884525-SP4-x86-<I>LLL</I>.exe, where <I>LLL</I> varies by language.<BR><BR></LI>
+
+	<LI>Run InstMsi20.exe.<BR><BR></LI>
+
+	<LI>When prompted, reboot the computer.</LI>
+</OL>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H5>Application Requirements</H5>
+
+<P>If your instance of MSDE is being used by an application, before you upgrade to MSDE 2000 SP4 ask the provider of the application whether any MSDE upgrade considerations apply to that application.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_planning_upgrades_to_msde_2000_sp4_d3jb"></A>1.2 Before You Upgrade to MSDE 2000 SP4</H2>
+
+<P>This section describes issues that you must address and tasks you must perform before using MSDE 2000 SP4 to upgrade an existing instance of MSDE to MSDE 2000 SP4.</P>
+
+<P>Databases or database backups created on an instance of Database Components SP4 can be attached or restored on an earlier version of SQL Server 2000. However, there are restrictions for databases in a replication topology. For more information, see Section 1.2.3 <A HREF="#_1462463_considerations_for_an_instance_i_fzpy">Considerations for an Instance in a Replication or Log Shipping Topology</A>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_1462461_determine_if_you_can_apply_msde__d3jb"></A>1.2.1 Determine if You Can Apply MSDE 2000 SP4 to an Existing Instance of MSDE 2000</H3>
+
+<P>The procedures to apply MSDE 2000 SP4 to an existing instance of MSDE 2000 vary according to the manner in which the instance was installed. Most applications install MSDE 2000 in one of the following ways:
+
+<UL type=disc>
+	<LI>By running MSDE 2000 Setup. Instances of MSDE 2000 installed this way can be upgraded to SP4 by using the MSDE 2000 SP4 files. The MSDE 2000 setup utility can be run from the command prompt, or it can be called by the setup utility of an application.<BR><BR></LI>
+
+	<LI>By directly consuming the MSDE 2000 merge modules. This method of installation is possible when the setup utility of the application uses Windows Installer technology. Instances of MSDE 2000 installed this way cannot be upgraded by means of the MSDE 2000 SP4 files. To upgrade, you must ask the application vendor for a patch file. MSDE 2000 SP4 provides merge modules to support existing applications that use merge modules.
+<P class=atl><B>Note</B>&nbsp;&nbsp;&nbsp;Setup utilities for new applications must be written to call the MSDE 2000 Setup utility rather than written to consume the MSDE 2000 merge modules directly. MSDE 2000 SP4 includes merge modules. However, these merge modules can be used only by application vendors who must build patch files for MSDE instances that they originally installed by means of utilities that directly consumed merge modules.</p></LI>
+</UL>
+
+<P>If multiple instances of MSDE 2000 are on a computer, you must evaluate each instance individually to determine whether you can apply MSDE 2000 SP4. You must also apply SP4 separately to each instance.</P>
+
+<P class=atl><B>Note</B>&nbsp;&nbsp;&nbsp;Microsoft does not support configurations where more than 16 instances of the SQL Server database engine are on one computer. These include instances of SQL Server 6.5, SQL Server 7.0, SQL Server 2000, MSDE 1.0, and MSDE 2000.</p>
+<P>Microsoft Knowledge Base Article <A HREF="http://support.microsoft.com?kbid=311762" target=_blank>311762</A> contains instructions to determine the way in which an instance of MSDE 2000 was installed. After you follow the procedures in article 311762, keep the following points in mind:
+
+<UL type=disc>
+	<LI>If information indicates that the instance was installed by using the MSDE 2000 setup files SqlRun01.msi through SqlRun16.msi, you can upgrade your instance of MSDE 2000 by using the SQL Server 2000 SP4 download files.<BR><BR></LI>
+
+	<LI>If the information indicates that the instance was installed by a Microsoft application, see the instructions to upgrade that instance of MSDE 2000 at this <A HREF="http://go.microsoft.com/fwlink/?LinkId=14961" target=_blank>Microsoft Web site</A>.<BR><BR></LI>
+
+	<LI>Knowledge Base Article 311762 directs you to read the value of a <B>ProductCode</B> field in a registry key and to find the value in a table of known values. If the value in your registry key is not listed in article 311762, then the instance was installed by the setup utility of an application. You cannot use the download files of SQL Server 2000 SP4 to apply SP4 to such MSDE instances. Instead, you must get a patch file from the company that wrote the application. If the application came from a company other than Microsoft, you must ask that company for a patch file. If the application came from Microsoft, see the following page that lists the MSDE applications from Microsoft (this page is kept up to date with information about how to upgrade these instances of MSDE 2000): <A HREF="http://go.microsoft.com/fwlink/?LinkId=14961" target=_blank>Microsoft MSDE Applications Web page</A><BR><BR></LI>
+
+	<LI>If article 311762 indicates that the original package name for your <B>ProductCode</B> value was Sample.msi or SampleUpg.msi, see Knowledge Base article <A HREF="http://support.microsoft.com?kbid=314131" target=_blank>314131</A> for instructions on how to build a patch for this instance of MSDE 2000.</LI>
+</UL>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_1462462_determine_if_the_original_msde_2_wluf"></A>1.2.2 Determine if the Original MSDE 2000 Installation Files Are Required</H3>
+
+<P>You can run the MSDE 2000 SP4 Setup program from your hard disk, a network share, or a CD-ROM. The original MSDE 2000 installation files are not required if you run Setup from your hard disk. But if you upgrade an instance of MSDE 2000 to MSDE 2000 SP4 from a network share or a CD, the files that were used to install MSDE 2000 originally must be in the same location they occupied during that original installation. If the original installation was from a CD, MSDE 2000 SP4 setup will request the original CD during the upgrade. If the original files are no longer in their original location on the network share, or the original CD-ROM is not available, you must copy the MSDE 2000 SP4 files to your hard drive and run Setup there.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_1462463_considerations_for_an_instance_i_fzpy"></A>1.2.3 Considerations for an Instance in a Replication or Log Shipping Topology</H3>
+
+<P>MSDE 2000 SP4 Setup upgrades user databases that are members of a replication topology. This upgrade factor can affect backup-and-restore functionality of replicated user databases. Before you install MSDE 2000 SP4, ensure that replication databases and filegroups are writable.</P>
+
+<P>For more information about applying SP4 to databases that are included in replication topologies, see Section 3.4 <A HREF="#_installing_on_replicated_servers">Install MSDE 2000 on Replicated Servers</A>. Additional backup and restore considerations for replication are detailed in Section 5.2.4 <A HREF="#_backup_and_restore_issues_for_merge_replication">Backup and Restore Issues for Merge Replication</A>.</P>
+
+<P class=indent><B>Note</B>&nbsp;&nbsp;&nbsp;If an instance of MSDE 2000 is not part of a replication topology, you can back up a user database and restore it on any other release of SQL Server 2000 or MSDE 2000. </P>
+
+<P>If Setup detects user databases or filegroups that are not writable, it does the following:
+
+<UL type=disc>
+	<LI>Applies the SP4 replication updates to all writable user databases.<BR><BR></LI>
+
+	<LI>Writes a list of the non-writable databases to the Setup log, which is located at Winnt\Sqlsp.log.<BR><BR></LI>
+
+	<LI>Displays the following warning message:
+<PRE><CODE>Setup has detected one or more databases and filegroups which are not writable.</CODE></PRE>
+</LI>
+</UL>
+
+<P>You can ignore this warning unless some of the databases listed in the Setup log are members of a replication topology. If any of the non-writable databases listed in the Setup log are members of a replication topology, you must make those databases writable and reapply SP4 to that instance of MSDE 2000.</P>
+
+<P>For information about making a database writable, see Section 3.5 <A HREF="#_applying_sp4_to_read-only_databases_or_filegroups">Apply MSDE 2000 SP4 to Read-Only Databases or Filegroups in a Replication Topology</A>. For more information about reapplying SP4, see Section 3.8 <A HREF="#_reapplying_sp4">Reapply MSDE 2000 SP4</A>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_1462464_determine_how_to_remove_msde_200_cuy1"></A>1.2.4 Determine How to Remove MSDE 2000 SP4</H3>
+
+<P>Before you use MSDE 2000 SP4 to upgrade an existing instance of MSDE, it is advisable to plan how to return the instance to its previous state, in case that becomes necessary later. When MSDE 2000 SP4 is installed, it makes changes to the system tables for maintenance purposes. It also upgrades user and distribution databases that are members of a replication topology. Because of the nature of these changes, MSDE 2000 SP4 cannot be removed easily. To revert to the build that you were running before you installed MSDE 2000 SP4, you must first uninstall the instance of MSDE 2000 and then reinstall that instance. Second, if you ran a previous SQL Server 2000 service pack or applied any hotfixes, you must reapply the service pack and hotfixes to the instance being reverted.</P>
+
+<P class=indent><B>Important</B>&nbsp;&nbsp;&nbsp;To restore your system safely to its pre-MSDE 2000 SP4 state, you must have made backups of the <B>master</B>, <B>model</B>, and <B>msdb</B> databases immediately before you installed MSDE 2000 SP4. For more information, see Section 3.1.1 <A HREF="#_back_up_your_sql_server_databases">Back Up Your SQL Server Databases</A>.</P>
+
+<P>For more information, see Section 3.7 <A HREF="#_uninstalling_sp4">Uninstall MSDE 2000 SP4</A>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_3467462_security_considerations_for_msde_d3jb"></A>1.3 Security Considerations for MSDE 2000 SP4</H2>
+
+<P>The behavior of MSDE 2000 Setup was changed in SP3a so that the default settings resulted in a more secure configuration. These changes are carried forward in SP4, as follows:
+
+<UL type=disc>
+	<LI><B>Network Support is Disabled by Default</B>
+<P class=tl>SP4 disables the network support by default when new instances of MSDE 2000 are installed. When an existing instance is upgraded, its network support settings are retained. If no application on another computer connects to your instance of MSDE 2000, the instance has no need for network support. It is prudent to turn off a resource that is not being used. You can enable network support during setup if you specify a value of 0 for the DISABLENETWORKPROTOCOLS setup parameter. If you enable network support when you install an instance of MSDE 2000 SP4, you can later reconfigure the instance to disable the support. For more information about how to disable and restore network access, see Microsoft Knowledge Base article <A HREF="http://support.microsoft.com?kbid=814130" target=_blank>814130</A>.</P></LI>
+
+	<LI><B>Setup Requires Strong sa Password</B>
+<P class=tl>The MSDE 2000 SP4 Setup does not install a new instance of MSDE 2000 unless you specify a strong <B>sa</B> password. Use the SAPWD parameter to specify the strong <B>sa</B> password. The MSDE 2000 SP4 Setup does not upgrade an existing instance of MSDE 2000 unless you assign a strong password to the <B>sa</B> login. You must assign a strong password to the <B>sa</B> login, even when you upgrade an existing instance, unless the application that uses your instance of MSDE depends in some way on a null <B>sa</B> password. Even if the instance of MSDE 2000 uses Windows Authentication, <B>sa</B> login immediately becomes active if the instance is switched to Mixed Mode Authentication. A null, blank, simple, or well-known <B>sa</B> password is vulnerable to use for unauthorized access. If you need to assign a strong <B>sa</B> password before you upgrade your instance of MSDE 2000 to MSDE 2000 SP4, see Microsoft Knowledge Base article <A HREF="http://support.microsoft.com?kbid=322336" target=_blank>322336</A>.</P></LI>
+
+	<LI><B>Windows Authentication</B>
+<P class=tl>Whenever possible, for greater security, use Windows Authentication with your MSDE 2000 installation. Consider switching from Mixed Mode Authentication to Windows Authentication if both of the following are true:</P>
+<UL type=disc>
+	<LI>The applications that use MSDE 2000 can run if the Windows Authentication option is selected.<BR><BR></LI>
+
+	<LI>You have defined Windows Authentication logins for all users who need to connect to the instance. For more information about how to add logins, see "Adding a Windows User or Group" in SQL Server 2000 Books Online.</LI>
+</UL>
+
+<P class=tl>For more information on changing an instance of MSDE 2000 from Mixed Mode Authentication to Windows Authentication, see Microsoft Knowledge Base article <A HREF="http://support.microsoft.com?kbid=322336" target=_blank>322336</A>.</P></LI>
+</UL>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_1464_know_the_instance_name_fzpy"></A>1.4 Determine the Instance Name</H2>
+
+<P>You must know the instance names if you want to install multiple copies, or instances, of MSDE 2000 and the SQL Server 2000 database engine on one computer. You can have up to 16 instances on a computer. One instance has no instance name and is called the <I>default instance</I>. The other 15 instances must have unique instance names and are called <I>named instances</I>. </P>
+
+<P>You use the MSDE SP4 Setup program to install or upgrade instances of MSDE. If you are installing or upgrading a named instance of MSDE, you must use the INSTANCENAME parameter to specify the instance name. If you do not specify INSTANCENAME, Setup operates on the default instance of MSDE on that computer. You cannot use MSDE 2000 SP4 to upgrade an instance of the SQL Server 2000 database engine.</P>
+
+<P><B>To find the existing instances on your computer:</B>
+
+<OL>
+	<LI>In Windows Explorer, right-click <B>My Computer</B>, and then click <B>Manage</B>.<BR><BR></LI>
+
+	<LI>Expand <B>Services and Applications</B>.<BR><BR></LI>
+
+	<LI>Click <B>Services</B>.</LI>
+</OL>
+
+<P>A default instance appears in the right list pane as a service named MSSQLSERVER. Named instances are listed as services named MSSQL$<I>InstanceName</I>, where <I>InstanceName</I> is the name of the instance. </P>
+
+<P>Instance names must follow the rules that are on this <A HREF="http://go.microsoft.com/fwlink/?LinkId=20337" target=_blank>Microsoft Web page</A>. </P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_verify_the_version_of_microsoft_data_acc_d3jb"></A>1.5 Verify the Version of Microsoft Data Access Components</H2>
+
+<P>MSDE 2000 SP4 setup determines whether to upgrade an installed version of Microsoft Data Access Components (MDAC) to MDAC 2.8 SP1:
+
+<UL type=disc>
+	<LI>Computers that run Windows 2000 are upgraded to MDAC 2.8 SP1.<BR><BR></LI>
+
+	<LI>Computers that run Windows XP or Windows Server 2003 are not upgraded to MDAC 2.8 SP1. If your system requires any of the fixes included in MDAC 2.8 SP1, upgrade your system to Windows XP SP2 or Windows Server 2003 SP1 to obtain MDAC 2.8 SP2.<BR><BR></LI>
+
+	<LI>MDAC 2.8 SP1 is not installed on computers that already have installed an equal or later version of MDAC.
+<P class=atl><B>Note</B>&nbsp;&nbsp;&nbsp;If a computer on which MSDE 2000 SP4 is installed is upgraded to a newer operating system platform, the version of MDAC installed by SP4 is no longer present.</p></LI>
+</UL>
+
+<P class=indent><B>Note</B>&nbsp;&nbsp;&nbsp;See Knowledge Base article <A HREF="http://support.microsoft.com?kbid=301202" target=_blank>301202</A> for instructions on determining the version of MDAC on your computer.</P>
+
+<P>When MSDE 2000 SP4 installs MDAC 2.8 SP1, the MDAC language version is the same as the language version of MSDE 2000 SP4. If you want to maintain a language version of MDAC that is different from that of MSDE 2000 SP4, you must download and install the intended language version of MDAC 2.8 SP1 before you run MSDE 2000 SP4 Setup. You can download language-specific versions of MDAC 2.8 SP1 from the <A HREF="http://go.microsoft.com/fwlink/?LinkId=35657" target=_blank>Microsoft Data Access Downloads page</A>.</P>
+
+<P>MDAC 2.8 SP1 includes an upgrade to MSXML 3.0 SP7. MDAC 2.81 also updates SQLXML 1.0, which shipped with Microsoft SQL Server 2000. This service pack does not install or update SQLXML 3.0. If your application requires SQLXML 3.0, you must download and install it from this <A HREF="http://go.microsoft.com/fwlink/?LinkId=38804" target=_blank>Microsoft Web site</A>. For more information about MDAC 2.8 SP1, see the <A HREF="http://go.microsoft.com/fwlink/?LinkId=44403" target=_blank>Microsoft Data Access Downloads page</A>. For more information about MDAC versions, see Knowledge Base article <A HREF="http://support.microsoft.com?kbid=822758" target=_blank>822758</A>. Fixes included in MDAC 2.8 SP1 are documented in Knowledge Base article <A HREF="http://support.microsoft.com?kbid=884930" target=_blank>884930</A>.</P>
+
+<P>All versions of Windows that are supported for use with MSDE 2000 include a version of the MDAC software that works with MSDE 2000 SP4. If you configure an instance of MSDE 2000 to support network communications and to operate as a database server, you need not install client software on any Windows computers to enable applications to connect from that computer to the instance of MSDE 2000. For more information about network communications, see this <A HREF="http://go.microsoft.com/fwlink/?LinkId=20385" target=_blank>Microsoft Web page</A>.</P>
+
+<P class=indent><B>Note</B>&nbsp;&nbsp;&nbsp;Prerelease versions of SQL Server 2000 SP4 installed a prerelease version of MSXML 3.0 SP7. If you installed a prerelease version of SQL Server 2000 SP4, it is recommended that you download and install the final release version of MSXML 3.0 SP7 from this <A HREF="http://go.microsoft.com/fwlink/?LinkId=44069" target=_blank>Microsoft Web site</A>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_identifying_the_current_version_of_sql_server_or_analysis_services"></A>1.6 Identify the Current Version of MSDE 2000</H2>
+
+<P>Before running Setup, identify the version of the MSDE 2000 instance that is being upgraded. If the version of MSDE 2000 is already at or greater than SP4, you do not need to install SP4.</P>
+
+<P><B>To identify the installed version of MSDE 2000:</B>
+
+<OL>
+	<LI>Execute one of the following queries against an instance of the database engine by using <B>isql</B>, <B>osql</B>, or Query Analyzer.
+<UL type=disc>
+	<LI><CODE>SELECT SERVERPROPERTY('ProductLevel')</CODE><BR><BR></LI>
+
+	<LI><CODE>SELECT @@VERSION</CODE> <BR><BR></LI>
+
+	<LI><CODE>SELECT SERVERPROPERTY('ProductVersion')</CODE></LI>
+</UL>
+</LI>
+
+	<LI>Find out your version of MSDE by means of the following table.
+<TABLE border=1 cellpadding=2 cols=3 frame=box rules=rows width=555>
+
+<TR VALIGN="top">
+<TD width=46%><B>SQL Server 2000 Version and Level</B></TD>
+<TD width=30%><B>@@VERSION</B></TD>
+<TD width=24%><B>Product Level</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=46%>SQL Server 2000 Original Release</TD>
+<TD width=30%>8.00.194</TD>
+<TD width=24%>RTM</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=46%>Desktop Engine SP1</TD>
+<TD width=30%>8.00.384</TD>
+<TD width=24%>SP1</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=46%>Desktop Engine SP2</TD>
+<TD width=30%>8.00.534</TD>
+<TD width=24%>SP2</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=46%>Desktop Engine SP3, SP3a, or MSDE 2000 Release A.</TD>
+<TD width=30%>8.00.760</TD>
+<TD width=24%>SP3</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=46%>MSDE 2000 SP4</TD>
+<TD width=30%>8.00.2039</TD>
+<TD width=24%>SP4</TD>
+</TR>
+</TABLE><BR>
+
+<P class=atl><B>Note</B>&nbsp;&nbsp;&nbsp;Your product version may be different than these values if you applied a hotfix after installing the product or after installing a previous service pack. For example, <CODE>@@VERSION</CODE> returns a value of 8.00.818 after you apply the security fix MS03-031 to MSDE 2000 Release A.</p></LI>
+
+	<LI>(Optional) If you are not sure whether you have installed an edition of the SQL Server 2000 database engine or MSDE 2000, use <B>isql</B>, <B>osql</B>, or Query Analyzer to execute the following query against the instance in question.
+<P class=tl><CODE>SELECT SERVERPROPERTY('Edition')</CODE></P>
+<P class=tl>When the value <B>Desktop Engine</B> is returned, the instance is MSDE 2000.</P></LI>
+</OL>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_additional_information_about_sp4"></A>1.7 Additional Important Information About SP4</H2>
+
+<P>A list of the fixes contained in this service pack will be provided in Microsoft Knowledge Base article <A HREF="http://support.microsoft.com?kbid=888799" target=_blank>888799</A>. Each fix listed in <A HREF="http://support.microsoft.com?kbid=888799" target=_blank>888799</A> has a link to a Knowledge Base article about the problem that is addressed by the particular fix. Follow the links to individual Knowledge Base articles to see information about each fix.</P>
+
+<P>Any information relevant to SQL Server 2000 Service Pack 4 that was not available in time to be included in this Readme file will be published in Microsoft Knowledge Base article <A HREF="http://support.microsoft.com?kbid=884525" target=_blank>884525</A>.</P>
+
+<P>The Knowledge Base articles mentioned in this Readme are available in the <A HREF="http://go.microsoft.com/fwlink/?LinkId=3930" target=_blank>Microsoft Knowledge Base</A>.</P>
+
+<P class=label><B>To find an article in the Knowledge Base</B>
+
+<OL>
+	<LI>Under <B>Advanced Search</B>, in the <B>For</B> text box, type the number of the article you want.<BR><BR></LI>
+
+	<LI>From the <B>Search Type</B> drop-down list, select <B>Article ID</B>.<BR><BR></LI>
+
+	<LI>Click the <B>Run the search</B> right-arrow button.</LI>
+</OL>
+
+<H5>Hotfixes</H5>
+
+<P>All publicly issued SQL Server 2000 SP3a and SQL Server 2000 (64-bit) security bulletins have been addressed in SP4.</P>
+
+<P>If you received a SQL Server 2000 hotfix after December 2, 2004, that hotfix is unlikely to be included in SP4. Contact your primary support provider about obtaining the same hotfix for SQL Server 2000 SP4.</P>
+
+<P>SQL Server 2000 SP4 includes serviceability enhancements that enable you to uninstall future hotfixes. For more information, see Section 5.7 <A HREF="#_54610_supportability_enhancements_d3jb">Serviceability Enhancements</A>.</P>
+
+<H5>Slammer Worm-Related Fixes</H5>
+
+<P>SQL Server 2000 SP4 incorporates changes to MSDE 2000 that address issues raised by the Slammer worm:
+
+<UL type=disc>
+	<LI>SP4 addresses setup issues that some customers encountered with the version of the Microsoft Data Access (MDAC) components in SQL Server 2000 SP3.<BR><BR></LI>
+
+	<LI>When an instance of MSDE 2000 SP4 or SP3a is configured to not support network connections, the instance also stops using UDP port 1434.</LI>
+</UL>
+
+<H5>SQL Server CE and SQL Mobile Server Tools Updates</H5>
+
+<P>Users of Microsoft SQL Server 2000 Windows&reg; CE Edition (SQL Server CE) and SQL Server 2005 Mobile Edition (SQL Mobile) who have upgraded or plan to upgrade SQL Server 2000 database and publisher servers to SP4 should also update the server replication components on Microsoft Internet Information Services (IIS) servers. Updated server tools installers are available for <A HREF="http://go.microsoft.com/fwlink/?LinkId=38715" target=_blank>SQL Server CE</A> and for <A HREF="http://go.microsoft.com/fwlink/?LinkId=45062" target=_blank>SQL Mobile</A>.</P>
+
+<P class=indent><B>Note</B>&nbsp;&nbsp;&nbsp;Even if you updated your server replication components after you upgraded to SQL Server 2000 SP3 or SP3a, you must install the latest SP4-specific updates to server tools components.</P>
+
+<H5>OPENXML Update</H5>
+
+<P>SQL Server 2000 SP4 removes the OPENXML dependency on the version of MSXML installed by the operating system. MSDE 2000 SP4 installs an internal version of the MSXML technology that is backward compatible with MSXML 2.6. </P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_updated_books_online_documentation_is_av_wluf"></A>1.8 Updates to SQL Server 2000 Books Online Are Available</H2>
+
+<P>SQL Server 2000 Books Online is the primary user documentation for MSDE 2000. Books Online is updated periodically with fixes and new information. In January 2004, Books Online was updated to include additional information about MSDE 2000. You are strongly encouraged to download and install the latest version of Books Online for the following reasons:
+
+<UL type=disc>
+	<LI>The MSDE 2000 Setup documentation is updated to reflect the changes introduced in SQL Server 2000 SP3 and SP3a. The setup documentation is also current for the SP4 version of MSDE 2000 Setup, except for the SAVESYSDB parameter, which was introduced in SP4. For more information, see Section 5.6.1 <A HREF="#_new_desktop_engine_setup_savesysdb_param_fzpy">New MSDE 2000 Setup SAVESYSDB Parameter</A>.<BR><BR></LI>
+
+	<LI>Usage of the <B>osql</B> utility is described. This material is intended primarily for new MSDE 2000 customers.<BR><BR></LI>
+
+	<LI>A new section explains which parts of SQL Server 2000 Books Online apply to MSDE 2000.<BR><BR></LI>
+
+	<LI>The description of the MSDE 2000 workload governor has been updated.<BR><BR></LI>
+
+	<LI>Topics specific to MSDE 2000 are indexed so that they appear with MSDE 2000. All these topics also contain the string MSDE 2000 so that they appear in searches for MSDE 2000 material.</LI>
+</UL>
+
+<P>Current versions of Books Online are available at the following locations:
+
+<UL type=disc>
+	<LI>The latest version of Books Online is available as a set of downloadable files at this <A HREF="http://go.microsoft.com/fwlink/?LinkId=9506" target=_blank>Books Online download site</A>.<BR><BR></LI>
+
+	<LI>The latest version of Books Online is also available in the MSDN Library. An English-language copy of the latest version of Books Online is available at this <A HREF="http://go.microsoft.com/fwlink/?LinkId=20283" target=_blank>Web site</A>.</LI>
+</UL>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H5>Updated SQL Server 2000 Samples Are Available</H5>
+
+<P>Samples for the SQL Server 2000 database engine that were updated for SQL Server 2000 SP3 and SP3a are available from this <A HREF="http://go.microsoft.com/fwlink/?LinkId=11615" target=_blank>Microsoft Web site</A>. All samples that reference the SQL Server 2000 components that are included in MSDE 2000 also apply to MSDE 2000, except for features that MSDE 2000 does not support. The included features are the database engine, database client connectivity components and programming APIs, Replication, and Data Transformation Services (DTS).</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H1><A NAME="_acquiring_desktop_engine_sp4"></A>2.0 Where to Find and Download SQL Server 2000 SP4</H1>
+
+<P>Before you prepare to download and extract SQL Server 2000 SP4, read "Downloading and Extraction Phase Guidelines," later in this section. SQL Server 2000 SP4 is distributed in the following ways:
+
+<UL type=disc>
+	<LI>On a SQL Server 2000 Service Pack 4 CD-ROM that contains service packs for the following components:
+<UL type=disc>
+	<LI>MSDE 2000 SP4<BR><BR></LI>
+
+	<LI>Database Components SP4<BR><BR></LI>
+
+	<LI>Analysis Services SP4<BR><BR></LI>
+
+	<LI>SQL Server 2000 SP4 (64-bit)</LI>
+</UL>
+
+<P class=tl>If you have a SQL Server 2000 SP4 CD, you can upgrade an instance of MSDE 2000 to MSDE 2000 SP4 by using the self-extracting file SQL2000.MSDE-KB884525-SP4-x86-<I>LLL</I>.exe from the CD.</P></LI>
+
+	<LI>In four self-extracting installation package files that can be downloaded from the Internet at this <A HREF="http://go.microsoft.com/fwlink/?LinkId=36830" target=_blank>Microsoft Web site</A>:
+<UL type=disc>
+	<LI>SQL2000.MSDE-KB884525-SP4-x86-<I>LLL</I>.exe (Desktop Engine (MSDE 2000) SP4)<BR><BR></LI>
+
+	<LI>SQL2000-KB884525-SP4-x86-<I>LLL</I>.exe (Database Components SP4)<BR><BR></LI>
+
+	<LI>SQL2000.AS-KB884525-SP4-x86-<I>LLL</I>.exe (Analysis Services SP4)<BR><BR></LI>
+
+	<LI>SQL2000-KB884525-SP4-ia64-<I>LLL</I>.exe (SQL Server 2000 SP4 (64-bit))</LI>
+</UL>
+
+<P class=atl><B>Note</B>&nbsp;&nbsp;&nbsp;<I>LLL</I> represents a designator that varies by language.</p></LI>
+</UL>
+
+<P>After you have acquired SQL2000.MSDE-KB884525-SP4-x86-<I>LLL</I>.exe from either the download site or SP4 CD, you can then run it to extract the MSDE 2000 SP4 files onto your computer. SQL2000.MSDE-KB884525-SP4-x86-<I>LLL</I>.exe creates a set of folders and files on your hard disk that you can use to install MSDE 2000 SP4.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_2461_choosing_the_correct_language_ar5q"></A>2.1 Choosing the Correct Language</H2>
+
+<P>SQL Server 2000 Desktop Engine service packs are language-specific. To upgrade an instance of MSDE 2000, you must obtain the service pack that has the same language as your instance. You get the service pack either on a SQL Server 2000 SP4 CD or by downloading the MSDE 2000 SP4 files. For example, if you upgrade an instance of MSDE 2000 that uses Japanese, you must get the Japanese version of MSDE 2000 SP4.</P>
+
+<P class=indent><B>Note</B>&nbsp;&nbsp;&nbsp;MSDE 2000 SP4 is the only part of the service pack that is available in Portuguese (Brazil), Swedish, and Dutch because SQL Server 2000 Desktop Engine is the only component of SQL Server 2000 that is produced for those languages. The SQL Server 2000 components that Database Components SP4 or Analysis Services SP4 upgrades are not available in those languages.</P>
+
+<P>If you are unsure of the language of an instance of MSDE 2000:
+
+<UL type=disc>
+	<LI>Click <B>Start</B>, then click <B>Run</B>.<BR><BR></LI>
+
+	<LI>In the <B>Open</B> box, type Regedit, and then click <B>OK</B>.<BR><BR></LI>
+
+	<LI>Locate and select one of the following keys:
+<UL type=disc>
+	<LI>For a default instance of MSDE 2000, locate and select this subkey:
+<P class=tl><B>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSSQLServer\MSSQLServer\CurrentVersion</B></P></LI>
+
+	<LI>For a named instance of MSDE 2000, locate and select this subkey:
+<P class=tl><B>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SQL Server\InstanceName\CurrentVersion</B></P>
+<P class=tl>where <I>InstanceName</I> is the name of the instance.</P></LI>
+</UL>
+</LI>
+
+	<LI>In the right list pane, read the value of the <B>Language</B> entry. Compare that value to those in the following table to determine the language for your instance of MSDE 2000:
+<TABLE border=1 cellpadding=2 cols=3 frame=box rules=rows width=542>
+
+<TR VALIGN="top">
+<TD width=34%><B><I>Language</I> Registry Value (in Hexadecimal)</B></TD>
+<TD width=30%><B><I>Language</I> Registry Value (in Decimal)</B></TD>
+<TD width=36%><B>Language of That Instance </B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%>0x00000404</TD>
+<TD width=30%>1028</TD>
+<TD width=36%>Traditional Chinese</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%>0x00000407</TD>
+<TD width=30%>1031</TD>
+<TD width=36%>German</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%>0x00000409</TD>
+<TD width=30%>1033</TD>
+<TD width=36%>English</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%>0x0000040a</TD>
+<TD width=30%>1034</TD>
+<TD width=36%>Spanish</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%>0x0000040c</TD>
+<TD width=30%>1036</TD>
+<TD width=36%>French</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%>0x00000410</TD>
+<TD width=30%>1040</TD>
+<TD width=36%>Italian</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%>0x00000411</TD>
+<TD width=30%>1041</TD>
+<TD width=36%>Japanese</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%>0x00000412</TD>
+<TD width=30%>1042</TD>
+<TD width=36%>Korean</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%>0x00000413</TD>
+<TD width=30%>1043</TD>
+<TD width=36%>Dutch</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%>0x00000416</TD>
+<TD width=30%>1046</TD>
+<TD width=36%>Portuguese (Brazil)</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%>0x0000041d</TD>
+<TD width=30%>1053</TD>
+<TD width=36%>Swedish</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%>0x00000804</TD>
+<TD width=30%>2052</TD>
+<TD width=36%>Simplified Chinese</TD>
+</TR>
+</TABLE><BR>
+</LI>
+</UL>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_2462_downloading_msde_2000_sp4_gq59"></A>2.2 Downloading MSDE 2000 SP4</H2>
+
+<P>If your instance of MSDE 2000 was installed by using the MSDE setup utility, you can upgrade your instance of MSDE 2000 by using a SQL Server 2000 SP4 download file. The original package name of the setup utility was SqlRun01.msi through SqlRun16.msi.</P>
+
+<P>To download MSDE 2000 SP4:
+
+<UL type=disc>
+	<LI>Go to this <A HREF="http://go.microsoft.com/fwlink/?LinkId=36830" target=_blank>Microsoft Web site</A>.<BR><BR></LI>
+
+	<LI>From the <B>Full Download</B> drop-down list in the upper-right portion of this page, select the language that matches the language for your instance of SQL Server 2000, and click <B>Go</B>. <BR><BR></LI>
+
+	<LI>On the Microsoft Download Center page that corresponds to the language chosen, select the file SQL2000.MSDE-KB884525-SP4-x86-<I>LLL</I>.exe, where <I>LLL</I> varies by language. </LI>
+</UL>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_2463_extracting_the_msde_2000_sp4_files_2y0t"></A>2.3 Extracting the MSDE 2000 SP4 Files</H2>
+
+<P>You must first extract the installation files from SQL2000.MSDE-KB884525-SP4-x86-<I>LLL</I>.exe before you can install MSDE 2000 SP4. You can execute SQL2000.MSDE-KB884525-SP4-x86-<I>LLL</I>.exe directly from the SP4 CD, or from the folder into which you either downloaded it or copied it from the CD.</P>
+
+<P>To extract the MSDE 2000 SP4 files:
+
+<UL type=disc>
+	<LI>Open Windows Explorer and navigate to the folder that contains SQL2000.MSDE-KB884525-SP4-x86-<I>LLL</I>.exe.<BR><BR></LI>
+
+	<LI>Double-click the downloaded file to extract the MSDE 2000 SP4 files. When asked, specify the folder into which you want the SP4 files to be extracted.</LI>
+</UL>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_2464_download_and_extraction_phase_guide_0a8g"></A>2.4 Download and Extraction Phase Guidelines</H2>
+
+<P>When you download and extract MSDE 2000 SP4 installation files from the Internet, use the following guidelines:&nbsp;&nbsp;&nbsp;&nbsp;
+
+<UL type=disc>
+	<LI>When running SQL2000.MSDE-KB884525-SP4-x86-<I>LLL</I>.exe to place the SP4 files into a folder, make sure you have free space that is approximately three times the size of the executable file in order to extract and store the service pack installation files. You must have space enough to store the self-extracting file and the extracted service pack files, and temporary working space for the self-extraction program.<BR><BR></LI>
+
+	<LI>When you run the self-extracting file SQL2000.MSDE-KB884525-SP4-x86-<I>LLL</I>.exe, the file prompts you for the name of the folder into which you want the service pack files placed.
+<P class=atl><B>Note</B>&nbsp;&nbsp;&nbsp;When you extract the service pack to a network shared directory, the path to the folder that you specify is relative to the folder from which you ran SQL2000.MSDE-KB884525-SP4-x86-<I>LLL</I>.exe.</p></LI>
+
+	<LI>You can rename or move the folder after you extract the components. However, make sure that the folder path name does not contain blank spaces.<BR><BR></LI>
+
+	<LI>You can download all four SP4 self-extracting files and extract them into the same target folder to create a location from which you can install each part of SQL Server 2000 SP4. The four self-extraction files will not overwrite each other or interfere with each other.</LI>
+</UL>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H1><A NAME="_service_pack_installation"></A>3.0 Service Pack Installation</H1>
+
+<P>To install MSDE 2000 SP4, use the installation instructions in the following sections. Review the material in Section 1.0 <A HREF="#_introduction">Introduction</A>, before you install MSDE 2000 SP4. The installation stages for MSDE 2000 SP4 are as follows:
+
+<OL>
+	<LI><A HREF="#_prepare_for_sp4_installation_wluf">Prepare for MSDE 2000 SP4 Installation</A><BR><BR></LI>
+
+	<LI><A HREF="#_install_desktop_engine_sp4">Install the service pack by running MSDE 2000 SP4</A><BR><BR></LI>
+
+	<LI><A HREF="#_restart_services">Restart Services and Applications</A></LI>
+</OL>
+
+<P>MSDE 2000 SP4 contains a complete set of the files required to install or upgrade instances of SQL Server 2000 Desktop Engine. You can perform all the MSDE 2000 setup actions by using the files from MSDE 2000 SP4, if you have a license to install or upgrade an instance of MSDE 2000. For more information about MSDE 2000 licensing, see this <A HREF="http://go.microsoft.com/fwlink/?LinkId=10253" target=_blank>Microsoft Web site</A>.</P>
+
+<P>If you need additional information about running Setup, the primary source of documentation is SQL Server 2000 Books Online. For more information about installing the latest version of SQL Server 2000 Books Online or accessing the copy that is online in the MSDN Library, see section 1.8 <A HREF="#_updated_books_online_documentation_is_av_wluf">Updates to SQL Server 2000 Books Online Are Available</A>. </P>
+
+<P>Here is a link to the reference topic for the Setup executable file in the copy of Books Online in the MSDN Library: <A HREF="http://go.microsoft.com/fwlink/?LinkId=20286" target=_blank>Customizing Desktop Engine Setup.exe</A>.</P>
+
+<P>In the latest version of SQL Server 2000 Books Online, "Customizing Desktop Engine Setup.exe" documents the functionality of the version of the Setup executable file that is included in Desktop Engine SP3a and MSDE 2000 Release A. The documentation is also current for the SP4 version of Desktop Engine Setup, except for the SAVESYSDB parameter, which was introduced in SP4. For more information, see Section 5.6.1<A HREF="#_new_desktop_engine_setup_savesysdb_param_fzpy"> New MSDE 2000 Setup SAVESYSDB Parameter</A>.</P>
+
+<P class=indent><B>Note</B>&nbsp;&nbsp;&nbsp;In versions of Setup for MSDE before SQL Server 2000 SP3, users were required to specify the .msi installation package file that they used to install or upgrade an instance of MSDE 2000. In SP3 and later versions of Setup, Setup manages the .msi files and you do not need to specify the .msi file for either an upgrade or a new installation.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_prepare_for_sp4_installation_wluf"></A>3.1 Prepare for MSDE 2000 SP4 Installation</H2>
+
+<P>You must do the following before you install MSDE 2000 SP4:
+
+<OL>
+	<LI><A HREF="#_back_up_your_sql_server_databases">Back Up Your SQL Server Databases</A><BR><BR></LI>
+
+	<LI><A HREF="#_make_sure_that_the_system_databases_have_enough_free_space">Verify That the System Databases Have Enough Free Space</A><BR><BR></LI>
+
+	<LI><A HREF="#_stop_services_and_applications_before_running_sp4_setup">Stop Services and Applications</A></LI>
+</OL>
+
+<H3><A NAME="_back_up_your_sql_server_databases"></A>3.1.1 Back Up Your SQL Server Databases</H3>
+
+<P>Before you install MSDE 2000 SP4, back up the <B>master</B>, <B>msdb</B>, and <B>model </B>databases. Installation of MSDE 2000 SP4 modifies the <B>master</B>, <B>msdb</B>, and <B>model </B>databases, making them incompatible with pre-SP4 versions of MSDE 2000. Backups of these databases are required if you decide to reinstall MSDE 2000 without SP4.</P>
+
+<P>It is also prudent to back up your user databases, although SP4 performs updates only on user databases that are members of replication topologies.</P>
+
+<P>An existing backup scheme accounts for replication and thus allows you to restore a database, after a failure, to a known point after the SP4 upgrade. After applying SP4, a log backup or full database backup is recommended for any user database that is included in a replication topology. If you perform these database backups, and a replication database later fails, you do not have to reapply SP4 after the database is restored.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_make_sure_that_the_system_databases_have_enough_free_space"></A>3.1.2 Verify That the System Databases Have Enough Free Space</H3>
+
+<P>If the <B>autogrow</B> option is not selected for the <B>master</B> and <B>msdb</B> databases, the databases must have at least 500 kilobytes (KB) of free space. To verify that they have this much space, run the <B>sp_spaceused</B> system stored procedure for the <B>master</B> database or <B>msdb</B> database. If the unallocated space in either database is less than 500 KB, increase the size of the database. For more information, see "Expanding a Database" in SQL Server 2000 Books Online.</P>
+
+<P>If the <B>autogrow</B> option is selected for the <B>master</B> and <B>msdb</B> databases, and there is sufficient room on the drives, you can skip the preceding space-verification step.</P>
+
+<P>To verify that the <B>autogrow</B> option is selected in MSDE 2000, use the <B>osql</B> command prompt utility to issue the following SQL statements:
+
+<UL type=disc>
+	<LI><CODE>sp_helpdb master</CODE><BR><BR></LI>
+
+	<LI><CODE>sp_helpdb msdb</CODE></LI>
+</UL>
+
+<P>In the output of these statements, verify that the value of the growth column is not 0.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_stop_services_and_applications_before_running_sp4_setup"></A>3.1.3 Stop Services and Applications Before You Run MSDE 2000 SP4 Setup</H3>
+
+<P>You should stop all applications and services, including Control Panel, Add and Remove Programs, SQL Server 2000 Reporting Services, SQL Server 2000 Notification Services, and all applications that make connections to the instance of MSDE being upgraded, before installing MSDE 2000 SP4.</P>
+
+<P>You can apply MSDE 2000 SP4 without first shutting down services, but then some services will not start again without a system reboot. If you do not shut down services, you are prompted to reboot the computer when Setup is complete. If you do not reboot the system, the following services may fail to start:
+
+<UL type=disc>
+	<LI>Microsoft Distributed Transaction Coordinator (DTC) and the Microsoft Search and MSSQLServerOLAPService services.<BR><BR></LI>
+
+	<LI>The MSSQLServer and SQLServerAgent services for the instance that is being upgraded (for example, MSSQL$NamedInstance).<BR><BR></LI>
+
+	<LI>Microsoft Component Services, Microsoft Message Queuing, and Microsoft COM Transaction Integrator.</LI>
+</UL>
+
+<P>You can reduce the likelihood that you will need to restart your computer after you install MSDE 2000 SP4. To reduce this likelihood, stop the services and applications in the preceding list before you run Setup.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_install_desktop_engine_sp4"></A>3.2 Run MSDE 2000 SP4 Setup</H2>
+
+<P>This section includes general guidelines for running the MSDE 2000 SP4 Setup utility. The section then gives examples of the most common MSDE 2000 SP4 scenarios:
+
+<UL type=disc>
+	<LI>3.2.2 <A HREF="#_3467464_upgrading_existing_instances_of__fzpy">Upgrading Existing Instances of MSDE 2000 To SP4</A><BR><BR></LI>
+
+	<LI>3.2.3 <A HREF="#_3467465_installing_a_new_instance_of_msd_cuy1">Installing a New Instance of MSDE 2000 SP4</A><BR><BR></LI>
+
+	<LI>3.2.4 <A HREF="#_3467466_upgrading_msde_1460_to_msde_2000_238p">Upgrading MSDE 1.0 to MSDE 2000 SP4</A></LI>
+</UL>
+
+<P>To install MSDE 2000 SP4, run Setup.exe from one of the following locations:
+
+<UL type=disc>
+	<LI>The folder on the local computer that contains the extracted service pack files from SQL2000.MSDE-KB884525-SP4-x86-<I>LLL</I>.exe, where <I>LLL</I> varies by language.<BR><BR></LI>
+
+	<LI>The folder, on the network share, that contains the extracted service pack files from SQL2000.MSDE-KB884525-SP4-x86-<I>LLL</I>.exe.</LI>
+</UL>
+
+<P>This starts the setup installation process.</P>
+
+<P>The Setup executable file that is included in MSDE 2000 SP4 is the SP4 version of the Desktop Engine Setup program for MSDE 2000. Except for the SAVESYSDB parameter, the operation of the MSDE 2000 SP4 Setup is documented in the latest version of SQL Server 2000 Books Online. For information about installation of the latest version of SQL Server 2000 Books Online, see section 1.8 <A HREF="#_updated_books_online_documentation_is_av_wluf">Updates to SQL Server 2000 Books Online Are Available</A>. This is an English-language copy of the reference topic that documents the behavior of Setup.exe: <A HREF="http://go.microsoft.com/fwlink/?LinkId=20286" target=_blank>Customizing Desktop Engine Setup.exe</A>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3>3.2.1 General Guidelines for Running Setup</H3>
+
+<P>MSDE 2000 SP4 is designed to be distributed with applications and installed by the setup program of an application. MSDE 2000 does not have an interactive setup program. The setup mechanisms for MSDE 2000 are designed to be called by an application setup utility. The application setup handles any required interaction with the end user. MSDE 2000 has two installation mechanisms:
+
+<UL type=disc>
+	<LI>A command prompt Setup utility (Setup.exe). The setup utility is usually called by an application setup utility, but can also be run from a command prompt window. The MSDE 2000 setup utility does not have a graphical user interface through which a user can control the behavior of the utility. Instead, this utility accepts a set of parameters that define the actions the utility takes.
+<P class=atl><B>Important</B>&nbsp;&nbsp;&nbsp;Always install or upgrade instances of MSDE by running Setup.exe. Do not try to start Setup indirectly through an .msi file; for example, do not double-click one of the MSDE 2000 .msi files. </p></LI>
+
+	<LI>You should always use the <B>/L*v</B> switch to generate a Setup log output file. <BR><BR></LI>
+
+	<LI>A set of Windows Installer merge modules. Developers who write setup utilities based on Windows Installer can program their application setup to install an instance of MSDE 2000 by consuming the MSDE 2000 merge modules. Developers can control the configuration of the installed instance by specifying installation package properties that correspond to the MSDE 2000 setup utility parameters.</LI>
+</UL>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H5>Setup Parameters</H5>
+
+<P>You must run Setup.exe from the command prompt to install or upgrade any instance of MSDE. Users control the behavior of the MSDE 2000 Setup program by specifying parameters. The setup parameters can be specified in one of two ways:
+
+<UL type=disc>
+	<LI>At the command prompt.<BR><BR></LI>
+
+	<LI>In an .ini file that is read by the Setup utility.</LI>
+</UL>
+
+<P>You must enclose the values for MSDE Setup parameters in quotation marks if the value specified has special characters, such as blanks. Otherwise, quotation marks are optional.</P>
+
+<P>Sections 3.2.2, 3.2.3, and 3.2.4 give examples of the parameters to use for the most common scenarios for installing MSDE 2000 SP4. The parameters that can be specified for Setup are documented in the latest version of SQL Server 2000 Books Online. For information about installing the latest version of SQL Server 2000 Books Online, see section 1.8 <A HREF="#_updated_books_online_documentation_is_av_wluf">Updates to SQL Server 2000 Books Online Are Available</A>. This is an English-language copy of the reference topic documenting the behavior of Setup.exe: <A HREF="http://go.microsoft.com/fwlink/?LinkId=20286" target=_blank>Customizing Desktop Engine Setup.exe</A>.</P>
+
+<P class=indent><B>Note</B>&nbsp;&nbsp;&nbsp;Problems can occur if you use a Terminal Services connection to attempt to upgrade an existing instance of MSDE to MSDE 2000 SP4, or to install a new instance of MSDE 2000 SP4. If you encounter problems, restart Setup from the local computer.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H5>Using an .ini File</H5>
+
+<P>You can specify MSDE 2000 Setup.exe parameters in an .ini file whose location is specified by a <B>/settings</B> switch. An .ini file is a text file; for example, a file you create by using Notepad and save with a file name that has an extension of .ini. In the .ini file, the first line is [Options]. Next, you specify the parameters, one parameter per line.</P>
+
+<P class=indent><!--IMPORTANT--><P ID="Alert_Important"><B CLASS="notes">Security Note</B>&nbsp;&nbsp;If you use an .ini file during setup, avoid storing security credentials in it.</P><!--/IMPORTANT--></P>
+
+<P>The following example specifies the parameters at the command prompt:</P>
+
+<PRE><CODE>setup SAPWD=<B>"</B><I>AStrongPassword</I><B>"</B> INSTANCENAME=<B>"</B><I>InstanceName</I><B>"
+</B>TARGETDIR=<B>"</B>C:\MyInstanceFolder<B>"</B></CODE></PRE>
+
+<P>To run Setup with the same parameters in an .ini file, use Notepad to create a file named <CODE>MyParameters.ini</CODE> with the following content:</P>
+
+<PRE><CODE>[Options]
+INSTANCENAME=<B>"</B><I>InstanceName</I><B>"</B>
+TARGETDIR=<B>"</B>C:\MyInstanceFolder<B>"</B></CODE></PRE>
+
+<P>Then run Setup, using the <B>/settings</B> switch to point to the .ini file:</P>
+
+<PRE><CODE>setup /settings <B>"</B>MyParameters.ini<B>"</B> SAPWD=<B>"</B><I>AStrongPassword</I><B>"</B></CODE></PRE>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H5>Requesting a Setup Log</H5>
+
+<P>Use a verbose log to verify that N installation succeeded or to help troubleshoot when problems.</P>
+
+<P>To generate a verbose log, specify <B>/L*v</B> &lt;<I>LogFileName&gt;</I>, where &lt;<I>LogFileName</I>&gt; is the name of a log file where Setup records all of its actions. If you do not specify a path as part of the name, the log file is created in the current folder. If you are executing Setup from a CD-ROM, you must specify the full path to a folder on your hard disk. </P>
+
+<P>The following example creates a log file, MSDELog.log, in the root folder of the C: drive:</P>
+
+<PRE><CODE>setup SAPWD=<B>"</B><I>AStrongSAPassword</I><B>"</B> /L*v C:\MSDELog.log</CODE></PRE>
+
+<P>If installation succeeds, an entry similar to the following appears at the end of the log:</P>
+
+<PRE><CODE>=== Logging stopped: 5/16/03&nbsp; 0:06:10 ===
+MSI (s) (BC:7C): Product: Microsoft SQL Server Desktop Engine
+ -- Installation operation completed successfully.</CODE></PRE>
+
+<P>If the installation fails, an entry similar to the following appears at the end of the log:</P>
+
+<PRE><CODE>=== Logging stopped: 5/15/03&nbsp; 23:50:34 ===
+MSI (c) (6A:CE): Product: Microsoft SQL Server Desktop Engine
+ -- Installation operation failed.</CODE></PRE>
+
+<P>If the installation failed, search for the string "<CODE>value 3"</CODE> in the error log. Within 10 lines of the string is a failure notice for a custom action. The notice contains additional information about the nature of the failure.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_3467464_upgrading_existing_instances_of__fzpy"></A>3.2.2 Upgrading Existing Instances of MSDE 2000 to MSDE 2000 SP4</H3>
+
+<P>The examples in this section show you how to upgrade an existing instance of MSDE 2000 to MSDE 2000 SP4, and to disable the network connectivity for that instance of MSDE 2000. If the instance must accept connections from applications that are running on other computers, do not specify the DISABLENETWORKPROTOCOLS parameter.</P>
+
+<P>The examples in this section incorporate the assumption that the <B>sa</B> login has a strong password. For more information about the <B>sa</B> login password, see section 1.3 <A HREF="#_3467462_security_considerations_for_msde_d3jb">Security Considerations for MSDE 2000 SP4</A>.</P>
+
+<P class=label><B>To upgrade an existing MSDE 2000 instance to MSDE 2000 SP4</B>
+
+<OL>
+	<LI>Open a command prompt window.<BR><BR></LI>
+
+	<LI>From the command prompt, use the <B>cd</B> command to navigate to the folder that contains the MSDE 2000 SP4 setup utility:
+<PRE><CODE>cd <I>c:\MSDESP4Folder</I>\MSDE</CODE></PRE>
+
+<P class=tl>where <I>c:\MSDESP4Folder</I> is either the path to the folder into which you extracted the MSDE 2000 SP4 files or the MSDE 2000 SP4 folder on the SQL Server 2000 SP4 CD.</P></LI>
+
+	<LI>Execute one of the following commands:
+<UL type=disc>
+	<LI>For a default instance that uses Windows Authentication and has its network protocols disabled, execute:
+<PRE><CODE>setup /upgradesp sqlrun /L*v C:\MSDELog.log</CODE></PRE>
+</LI>
+
+	<LI>For a default instance that uses Windows Authentication and has its network protocols enabled, execute:
+<PRE><CODE>setup /upgradesp sqlrun DISABLENETWORKPROTOCOLS=0 /L*v C:\MSDELog.log</CODE></PRE>
+</LI>
+
+	<LI>For a named instance that uses Windows Authentication and has its network protocols disabled, execute:
+<PRE><CODE>setup /upgradesp sqlrun INSTANCENAME=<I>InstanceName</I> /L*v C:\MSDELog.log</CODE></PRE>
+</LI>
+
+	<LI>For a default instance that uses Mixed Mode Authentication and has its network protocols disabled, where <I>AnAdminLogin</I> is a member of the <B>sysadmin</B> fixed server role, execute:
+<PRE><CODE>setup /upgradesp sqlrun SECURITYMODE=SQL UPGRADEUSER=<I>AnAdminLogin</I> 
+UPGRADEPWD=<I>AdminPassword</I> /L*v C:\MSDELog.log</CODE></PRE>
+</LI>
+
+	<LI>For a named instance that uses Mixed Mode Authentication and has its network protocols disabled, where <I>AnAdminLogin</I> is a member of the <B>sysadmin</B> fixed server role, execute:
+<PRE><CODE>setup /upgradesp sqlrun INSTANCENAME=<I> InstanceName </I>SECURITYMODE=SQL 
+UPGRADEUSER=<I>AnAdminLogin</I> UPGRADEPWD=<I>AdminPassword</I> /L*v C:\MSDELog.log</CODE></PRE>
+</LI>
+</UL>
+
+<P class=tl>Line breaks were included in these examples for readability. Commands must be executed without line breaks.</P>
+<P class=atl><B>Note</B>&nbsp;&nbsp;&nbsp;If the instance of MSDE 2000 being upgraded was previously upgraded from MSDE 1.0 using an earlier SQL Server 2000 service pack, you must also append <CODE>UPGRADE=1</CODE> to the setup command.</p>
+<P class=atl><!--IMPORTANT--><P ID="Alert_Important"><B CLASS="notes">Security Note</B>&nbsp;&nbsp;If you use an .ini file during setup, do not store credentials in the .ini file.</P><!--/IMPORTANT--></p></LI>
+</OL>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_3467465_installing_a_new_instance_of_msd_cuy1"></A>3.2.3 Installing a New Instance of MSDE 2000 SP4</H3>
+
+<P>The examples in this section show you how to install a new instance of MSDE 2000 SP4 that has been configured with its network connectivity disabled, which is the default behavior. If the instance must accept connections from applications that are running on other computers, you must also specify <CODE>DISABLENETWORKPROTOCOLS=0</CODE>.</P>
+
+<P>The following examples install instances by using the defaults for all configuration items, such as collation and file locations. The configurations can be controlled by setup parameters, such as COLLATION, DATADIR, and TARGETDIR. For more information about the configuration parameters that you can specify upon Setup, see <A HREF="http://go.microsoft.com/fwlink/?LinkId=20286" target=_blank>Customizing Desktop Engine Setup.exe</A>.</P>
+
+<P class=label><B>To install a new instance of Desktop Engine</B>
+
+<OL>
+	<LI>Open a command prompt window.<BR><BR></LI>
+
+	<LI>From the command prompt, use the <B>cd</B> command to navigate to the folder that contains the MSDE 2000 SP4 Setup utility:
+<PRE><CODE>cd <I>c:\MSDESP4Folder</I>\MSDE</CODE></PRE>
+
+<P class=tl>where <I>c:\MSDESP4Folder</I> is either the path to the folder into which you extracted the MSDE 2000 SP4 files or the MSDE 2000 SP4 folder on the SQL Server 2000 SP4 CD.</P></LI>
+
+	<LI>Execute one of the following commands:
+<UL type=disc>
+	<LI>To install a default instance that is configured to use Windows Authentication, execute:
+<PRE><CODE>setup SAPWD=<B>"</B><I>AStrongSAPwd</I><B>"</B> /L*v C:\MSDELog.log</CODE></PRE>
+
+<P class=tl>where <I>AStrongSAPwd</I> is a strong password to be assigned to the <B>sa</B> login.</P></LI>
+
+	<LI>To install a named instance that is configured to use Windows Authentication, execute:
+<PRE><CODE>setup INSTANCENAME=<B>"</B><I>InstanceName</I><B>"</B> SAPWD=<B>"</B><I>AStrongSAPwd</I><B>"</B>
+/L*v C:\MSDELog.log</CODE></PRE>
+
+<P class=tl>where <I>AStrongSAPwd</I> is a strong password to be assigned to the <B>sa</B> login and <I>InstanceName</I> is the name to be assigned to the instance.</P></LI>
+
+	<LI>To install a default instance that is configured to use Mixed Mode Authentication, execute:
+<PRE><CODE>setup SAPWD=<B>"</B><I>AStrongSAPwd</I><B>"</B> SECURITYMODE=SQL
+/L*v C:\MSDELog.log</CODE></PRE>
+
+<P class=tl>where <I>AStrongSAPwd</I> is a strong password to be assigned to the <B>sa</B> login.</P></LI>
+
+	<LI>To install a named instance that is configured to use Mixed Mode Authentication, execute:
+<PRE><CODE>setup INSTANCENAME=<B>"</B><I>InstanceName</I><B>"</B> SECURITYMODE=SQL
+SAPWD=<B>"</B><I>AStrongSAPwd</I><B>"</B> /L*v C:\MSDELog.log</CODE></PRE>
+
+<P class=tl>Where <I>AStrongSAPwd</I> is a strong password to be assigned to the <B>sa</B> login and <I>InstanceName</I> is the name to be assigned to the instance.</P></LI>
+</UL>
+</LI>
+</OL>
+
+<P class=indent><!--IMPORTANT--><P ID="Alert_Important"><B CLASS="notes">Important</B>&nbsp;&nbsp;If you use an .ini file during setup, do not store credentials in the .ini file.</P><!--/IMPORTANT--></P>
+
+<P class=indent><!--IMPORTANT--><P ID="Alert_Important"><B CLASS="notes">Important</B>&nbsp;&nbsp;Always specify a strong password for the <B>sa</B> login, even when the instance is configured to use Windows Authentication.</P><!--/IMPORTANT--></P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_3467466_upgrading_msde_1460_to_msde_2000_238p"></A>3.2.4 Upgrading MSDE 1.0 to MSDE 2000 SP4</H3>
+
+<P>The examples in this section show you how to upgrade an existing instance of MSDE 1.0 to MSDE 2000 SP4, and to disable the network connectivity for the instance. If the instance must accept connections from applications that are running on other computers, do not specify the <B>DISABLENETWORKPROTOCOLS</B> parameter.</P>
+
+<P>MSDE 1.0 operates in the same fashion as a default instance of MSDE 2000, and is always upgraded to a default instance of MSDE 2000.</P>
+
+<P class=indent><B>Note</B>&nbsp;&nbsp;&nbsp;Instances of MSDE 1.0 in a replication topology cannot be upgraded to MSDE 2000 SP4. </P>
+
+<P class=label><B>To upgrade MSDE 1.0 instance to MSDE 2000 SP4</B>
+
+<OL>
+	<LI>Open a command prompt window.<BR><BR></LI>
+
+	<LI>From the command prompt, use the <B>cd</B> command to navigate to the folder that contains the MSDE 2000 SP4 Setup utility:
+<PRE><CODE>cd <I>c:\MSDESP4Folder</I>\MSDE</CODE></PRE>
+
+<P class=tl>where <I>c:\MSDESP4Folder</I> is either the path to the folder into which you extracted the MSDE 2000 SP4 files, or the MSDE 2000 SP4 folder on the SQL Server 2000 SP4 CD.</P></LI>
+
+	<LI>Execute one of the following commands:
+<UL type=disc>
+	<LI>When you upgrade from an instance of MSDE 1.0 that uses Windows Authentication, execute:
+<PRE><CODE>setup UPGRADE=1 DISABLENETWORKPROTOCOLS=1
+/L*v C:\MSDELog.log</CODE></PRE>
+</LI>
+
+	<LI>When you upgrade from an instance of MSDE 1.0 that uses Mixed Mode Authentication (where <I>AnAdminLogin</I> is a member of the <B>sysadmin</B> fixed server role), execute:
+<PRE><CODE>setup UPGRADE=1 SECURITYMODE=SQL UPGRADEUSER=<I>AnAdminLogin</I>
+UPGRADEPWD=<I>AdminPassword</I> DISABLENETWORKPROTOCOLS=1
+/L*v C:\MSDELog.log</CODE></PRE>
+</LI>
+</UL>
+</LI>
+</OL>
+
+<P class=indent><!--IMPORTANT--><P ID="Alert_Important"><B CLASS="notes">Important</B>&nbsp;&nbsp;If you use an .ini file during setup, do not store credentials in the .ini file.</P><!--/IMPORTANT--></P>
+
+<P class=indent><!--CAUTION--><P ID="Alert_Caution"><B CLASS="notes">Security Note</B>&nbsp;&nbsp;The use of blank passwords is strongly discouraged because blank passwords add a significant vulnerability to security breaches.</P><!--/CAUTION--></P>
+
+<P class=indent><B>Note</B>&nbsp;&nbsp;&nbsp;If you use <CODE>BLANKSAPWD=1</CODE>, you are not required to specify <CODE>SECURITYMODE=SQL</CODE> or <CODE>UPGRADEUSER</CODE> and <CODE>UPGRADEPWD</CODE>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_restart_services"></A>3.3 Restart Services and Applications</H2>
+
+<P>When Setup completes, it may prompt you to restart the system. Section 3.1.3 <A HREF="#_stop_services_and_applications_before_running_sp4_setup">Stop Services and Applications Before You Run MSDE 2000 SP4 Setup</A> provides guidelines on when a restart is required. After the system restarts (or after Setup completes without requesting a restart), use the Services application in Control Panel to make sure that any services you stopped before you applied the service pack are now running. Services you might have stopped before you applied the service pack include DTC and the MSSQLServer and SQLServerAgent services or their instance-specific equivalents.</P>
+
+<P>Restart the applications you closed before you ran the service pack Setup program.</P>
+
+<P>It is prudent also to back up the upgraded <B>master</B> and <B>msdb</B> databases at this time.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_installing_on_replicated_servers"></A>3.4 Install MSDE 2000 SP4 on Replicated Servers</H2>
+
+<P>The following information applies only to existing MSDE 2000 instances that are part of a merge replication topology. 
+
+<UL type=disc>
+	<LI>Before you upgrade to SP4, ensure that the Windows account on which the SQL Server service runs is a member of the <B>sysadmin</B> fixed server role. You must verify this because replication distribution databases are upgraded in the context of the SQL Server service account. After upgrading to SP4, remove the Windows account from the <B>sysadmin</B> role.<BR><BR></LI>
+
+	<LI>You must upgrade the Distributor before you upgrade the Publisher.<BR><BR></LI>
+
+	<LI>When you need to upgrade an instance of MSDE 2000 in a replication topology based on transactional replication with read-only Subscribers, you can upgrade the Subscriber before or after the Publisher and Distributor. <BR><BR></LI>
+
+	<LI>When you need to upgrade an instance of MSDE 2000 in a replication topology based on merge replication or transactional replication with updating Subscribers, you must upgrade the Subscriber after the Publisher and Distributor.
+<P class=atl><B>Note</B>&nbsp;&nbsp;&nbsp;In many cases, especially in merge replication, the Distributor and Publisher are on the same server and are upgraded at the same time.</p></LI>
+
+	<LI>If you use merge replication and the Distributor is located on another computer or database instance (a remote Distributor), your must generate a new snapshot after you apply SP4.<BR><BR></LI>
+
+	<LI>You cannot upgrade instances of MSDE 1.0 in a replication topology to MSDE 2000 SP4. </LI>
+</UL>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H5>Installing MSDE 2000 SP4 on a Server that Acts as a Publisher and a Subscriber</H5>
+
+<P>You need to quiesce the system (stop all updates) and upgrade all servers simultaneously in the following cases.
+
+<UL type=disc>
+	<LI>For replication topologies based on merge replication<BR><BR></LI>
+
+	<LI>For replication topologies based on transactional replication, which updates Subscribers, among which are one or more servers that act as both a Subscriber and a Publisher (or Distributor). </LI>
+</UL>
+
+<H6>Example 1: Topology That Requires Simultaneous Upgrades</H6>
+
+<P>The following table includes servers that both publish and subscribe to publications that allow updates at the Subscriber. As noted in the preceding section, you must follow the upgrade order Distributor, Publisher, Subscriber for topologies that allow updates at the Subscriber. This order requires that you upgrade Server A first for the merge publication and Server B first for the transactional publication with updating Subscribers. In this case, you must quiesce the system and upgrade the servers simultaneously.</P>
+
+<TABLE border=1 cellpadding=2 cols=2 frame=box rules=rows width=614>
+
+<TR VALIGN="top">
+<TH class=label width=49%>Server A</TH>
+<TH class=label width=51%>Server B</TH>
+</TR>
+
+<TR VALIGN="top">
+<TD width=49%>Publisher/Distributor for merge replication</TD>
+<TD width=51%>Subscriber for merge replication</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=49%>Subscriber for transactional replication with updating</TD>
+<TD width=51%>Publisher/Distributor for transactional replication with updating</TD>
+</TR>
+</TABLE><BR>
+
+<H6>Example 2: Topology That Allows Sequential Upgrades</H6>
+
+<P>In this example, you can upgrade Server A first because the read-only transactional publication allows a Subscriber to be upgraded before the Publisher/Distributor is upgraded.</P>
+
+<TABLE border=1 cellpadding=2 cols=2 frame=box rules=rows width=614>
+
+<TR VALIGN="top">
+<TH class=label width=49%>Server A</TH>
+<TH class=label width=51%>Server B</TH>
+</TR>
+
+<TR VALIGN="top">
+<TD width=49%>Publisher/Distributor for merge replication</TD>
+<TD width=51%>Subscriber for merge replication</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=49%>Subscriber for read-only transactional replication</TD>
+<TD width=51%>Publisher/Distributor for read-only transactional replication</TD>
+</TR>
+</TABLE><BR>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_applying_sp4_to_read-only_databases_or_filegroups"></A>3.5 Apply MSDE 2000 SP4 to Read-Only Databases or Filegroups in a Replication Topology</H2>
+
+<P>The following information applies only to instances of MSDE 2000 that are part of a merge replication topology.</P>
+
+<P>When non-writable databases or filegroups exist, Setup displays the following message:</P>
+
+<PRE><CODE>Setup has detected one or more databases and filegroups which are not writable.</CODE></PRE>
+
+<P>In general, you can ignore this warning and setup continues. However, if any of the non-writable databases listed in the Setup log are members of a replication topology, you must make those databases writable and reapply SP4 Setup to that instance of SQL Server 2000.</P>
+
+<P>During installation, Setup makes no distinction between non-writable databases and databases that are offline or in a suspect state. If a database or filegroup in a replication topology is non-writable during setup, you must reapply the service pack to upgrade this database. For more information about how to bring a database online, see the topic "Attaching and Detaching a Database" in SQL Server 2000 Books Online. For more information about diagnosing suspect databases, see the topic "Server and Database Troubleshooting" in SQL Server 2000 Books Online.</P>
+
+<P><B>To apply MSDE 2000 SP4 to a read-only database</B>
+
+<OL>
+	<LI>Make the read-only database writable by using the <CODE>ALTER DATABASE</CODE> statement, as follows:
+<PRE><CODE>ALTER DATABASE <I>database</I> SET READ_WRITE</CODE></PRE>
+</LI>
+
+	<LI>Repeat Step 1 for all read-only databases.<BR><BR></LI>
+
+	<LI>Apply (or reapply) SP4.<BR><BR></LI>
+
+	<LI>If required, make the database read-only again using <CODE>ALTER DATABASE</CODE>, as follows:
+<PRE><CODE>ALTER DATABASE <I>database</I> SET READ_ONLY</CODE></PRE>
+</LI>
+</OL>
+
+<P><B>To apply SP4 to a read-only filegroup</B>
+
+<OL>
+	<LI>Make the read-only filegroup writable by using <CODE>ALTER DATABASE</CODE>, as follows:
+<PRE><CODE>ALTER DATABASE <I>Database</I> 
+MODIFY FILEGROUP <I>filegroup_name</I> READWRITE </CODE></PRE>
+</LI>
+
+	<LI>Repeat Step 1 for all read-only filegroups.<BR><BR></LI>
+
+	<LI>Apply (or reapply) the service pack.<BR><BR></LI>
+
+	<LI>Make the filegroup read-only again by using <CODE>ALTER DATABASE</CODE>, as follows:
+<PRE><CODE>ALTER DATABASE <I>Database</I> 
+MODIFY FILEGROUP <I>filegroup_name</I> READONLY</CODE></PRE>
+</LI>
+</OL>
+
+<P>For more information about ALTER DATABASE, see the "ALTER DATABASE" reference topic in SQL Server Books Online. For more information about reapplying SP4, see Section 3.8 <A HREF="#_reapplying_sp4">Reapply MSDE 2000 SP4</A>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_34613_upgrading_the_catalog_of_linked_se_d3jb"></A>3.6 Upgrade the Catalog of Linked Servers</H2>
+
+<P>When you upgrade an instance of MSDE 2000 to MSDE 2000 SP4, you might need to verify that some of the system stored procedures are updated in other instances of SQL Server or MSDE.</P>
+
+<P>MSDE 2000 SP4 includes an upgrade of the Microsoft Data Access Components (MDAC) to MDAC 2.8 SP1. MDAC 2.8 SP1 includes updates to the SQLOLEDB provider and the SQL Server ODBC driver. For more information, see Section 1.5 <A HREF="#_verify_the_version_of_microsoft_data_acc_d3jb">Verify the Version of Microsoft Data Access Components</A>. When either the provider or driver connects to an instance of SQL Server or MSDE, the provider or driver uses a set of system stored procedures known as the catalog stored procedures. The versions of the catalog stored procedures on the instance must be the same version or later than the provider and driver uses. If you attempt to connect to an instance of SQL Server or MSDE that has earlier versions of the catalog stored procedures, you receive the following error:</P>
+
+<P><CODE>The ODBC catalog stored procedures installed on server &lt;<I>ServerName</I>&gt; <BR>
+are version &lt;<I>OldVersionNumber</I>&gt;; version &lt;<I>NewVersionNumber</I>&gt; or later <BR>
+is required to ensure proper operation. Please contact your system <BR>
+administrator.</CODE></P>
+
+<H5>Run the Instcat.sql Script</H5>
+
+<P>Each version of the provider and driver is shipped with a script named Instcat.sql. Instcat.sql upgrades the catalog stored procedures in any instance of SQL Server or MSDE that has an earlier version of the catalog.</P>
+
+<P>After installing MSDE 2000 SP4, you must run the Instcat.sql script from MSDE 2000 SP4 against any instance of SQL Server or MSDE that is an earlier version than SQL Server 2000 SP4 and has the following characteristics:
+
+<UL type=disc>
+	<LI>Is accessed by applications that use the <B>SQLClient</B> managed namespace, ADO, OLE DB, or ODBC and run on the computer on which MSDE 2000 SP4 is installed.<BR><BR></LI>
+
+	<LI>Is referenced by distributed queries that run on an instance of MSDE 2000 SP4. Distributed queries include references to linked server entries that you define by using <B>sp_addlinkedserver</B> and the OPENROWSET and OPENQUERY functions.</LI>
+</UL>
+
+<P><B>To upgrade the catalog stored procedures on an instance of MSDE 2000 that has the Windows Authentication option selected</B>
+
+<OL>
+	<LI>Log on to Windows using a login that is a member of the SQL Server <B>sysadmin</B> fixed server role.<BR><BR></LI>
+
+	<LI>Open a command prompt window.<BR><BR></LI>
+
+	<LI>Run the <B>osql</B> utility:
+<UL type=disc>
+	<LI>For a default instance, execute:
+<PRE><CODE>osql -E -SComputerName -ilocation\instcat.sql</CODE></PRE>
+</LI>
+
+	<LI>For a named instance, execute:
+<PRE><CODE>osql -E -SComputerName\InstanceName -ilocation\instcat.sql</CODE></PRE>
+</LI>
+</UL>
+</LI>
+</OL>
+
+<P><B>To upgrade the catalog stored procedures on MSDE 2000 instance that has the Mixed Mode Authentication option selected:</B>
+
+<OL>
+	<LI>Log on to Windows using any login.<BR><BR></LI>
+
+	<LI>Open a command prompt window.<BR><BR></LI>
+
+	<LI>Run the <B>osql</B> utility:
+<UL type=disc>
+	<LI>For a default instance, execute:
+<PRE><CODE><B>osql -U</B><I>AnAdminLogin</I><B> -P</B><I>AdminPassword</I><B> 
+-S</B><I>ComputerName</I> <B>-i</B><I>location</I><B>\instcat.sql</B></CODE></PRE>
+</LI>
+
+	<LI>For a named instance, execute:
+<PRE><CODE><B>osql -U</B><I>AnAdminLogin</I><B> -P</B><I>AdminPassword</I><B> 
+-S</B><I>ComputerName</I>\<I>InstanceName</I> <B>-i</B><I>location</I><B>\instcat.sql</B></CODE></PRE>
+</LI>
+</UL>
+</LI>
+</OL>
+
+<P>where:
+
+<UL type=disc>
+	<LI><I>AnAdminLogin</I> is a SQL Server login that is a member of the <B>sysadmin</B> fixed server role.<BR><BR></LI>
+
+	<LI><I>AdminPassword</I> is the password for <I>AnAdminLogin</I>.<BR><BR></LI>
+
+	<LI><I>ComputerName</I> is the name of the computer on which the instance of SQL Server or MSDE is running.<BR><BR></LI>
+
+	<LI><CODE>InstanceName</CODE> is the name of a named instance of SQL Server 2000 or MSDE 2000.<BR><BR></LI>
+
+	<LI><I>location</I> is the full path to the folder containing <CODE>instcat.sql</CODE>. The default location for an installed instance of SQL Server 2000 is c:\program files\Microsoft SQL Server\MSSQL\Install.</LI>
+</UL>
+
+<P>The Instcat.sql script generates many messages. Typically, the messages do not indicate any errors. They only inform you how many rows were affected by each Transact-SQL statement in the script. The final message should indicate whether the script ran successfully.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_uninstalling_sp4"></A>3.7 Uninstall MSDE 2000 SP4</H2>
+
+<P>To be able return to pre-SP4 versions of MSDE 2000, you must back up the <B>master</B>,<B> msdb</B>,<B> </B>and <B>model </B>databases before you install SP4. For more information, see Section 3.1.1 <A HREF="#_back_up_your_sql_server_databases">Back Up Your SQL Server Databases</A>.</P>
+
+<P><B>To return to a pre-SP4 version of MSDE 2000</B>
+
+<OL>
+	<LI>Detach all user databases. For more information, see "How to attach and detach a database (Enterprise Manager)" in SQL Server 2000 Books Online.<BR><BR></LI>
+
+	<LI>Uninstall MSDE 2000: In <B>Control Panel</B>, double-click <B>Add/Remove Programs</B>, select the instance of MSDE 2000 that you want to uninstall, and click <B>Remove</B>.<BR><BR></LI>
+
+	<LI>Reinstall MSDE 2000 from the CD-ROM or from the location where you originally installed MSDE 2000.<BR><BR></LI>
+
+	<LI>Apply any service packs and hotfixes that were installed before MSDE 2000 SP4.<BR><BR></LI>
+
+	<LI>Restore the databases <B>master</B>, <B>msdb</B>, and <B>model</B> from the last backup that was created before you installed SP4. If the location of the data files has not changed, this restoration automatically attaches any user databases that were attached at the time the backup was created.<BR><BR></LI>
+
+	<LI>Attach any user databases that were created after the last backup of the <B>master</B> database.<BR><BR></LI>
+
+	<LI>Configure replication if necessary.
+<P class=atl><!--WARNING--><P ID="Alert_Warning"><B CLASS="notes">Warning</B>&nbsp;&nbsp;When you revert to the pre-SP4 version of SQL Server, all changes made to the databases <B>master</B>, <B>msdb</B>, and <B>model</B> after you installed SP4 are lost.</P><!--/WARNING--></p>
+<P class=atl><B>Note</B>&nbsp;&nbsp;&nbsp;MDAC updates are not uninstalled when you revert to a pre-SP4 version of MSDE 2000. For more information, see Section 1.5 <A HREF="#_verify_the_version_of_microsoft_data_acc_d3jb">Verify the Version of Microsoft Data Access Components</A>.</p></LI>
+</OL>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_reapplying_sp4"></A>3.8 Reapply MSDE 2000 SP4</H2>
+
+<P>You must reapply MSDE 2000 SP4 if databases or filegroups are made writable that are part of a replication topology and were read-only during the initial application of SP4.</P>
+
+<P>To reapply MSDE 2000 SP4, follow the steps in Section 3.0 <A HREF="#_service_pack_installation">Service Pack Installation</A>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H1><A NAME="_additional_installation_considerations"></A>4.0 Additional Installation Information</H1>
+
+<P>This section documents additional service pack installation considerations.</P>
+
+<H2><A NAME="_3467467_redistributing_msde_2000_sp4_ar5q"></A>4.1 Redistributing MSDE 2000 SP4</H2>
+
+<P>MSDE 2000 SP4 contains all the files necessary to redistribute MSDE 2000 with applications, if the application vendor has a license to distribute MSDE 2000. You can distribute the MSDE 2000 SP4 files as documented in the latest version of SQL Server 2000 Books Online. You can also register for MSDE 2000 redistribution rights at this <A HREF="http://go.microsoft.com/fwlink/?LinkId=44239" target=_blank>Microsoft Web site</A>.</P>
+
+<P>For more information about installing the latest version of SQL Server 2000 Books Online, see Section 1.8 <A HREF="#_updated_books_online_documentation_is_av_wluf">Updates to SQL Server 2000 Books Online Are Available</A>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H5>Distributing MSDE 2000 SP4 Patches</H5>
+
+<P>If an application has a Windows Installer-based setup utility, the application can install an instance of MSDE 2000 by consuming the MSDE 2000 merge modules. MSDE 2000 SP4 provides merge modules to support existing applications that use merge modules. The Setup utilities for new applications must be written to call the MSDE 2000 Setup utility rather than directly consuming the MSDE 2000 merge modules.</P>
+
+<P>Vendors who choose to install instances of MSDE 2000 by using the MSDE 2000 merge modules must supply all subsequent MSDE 2000 patches to their customers. Instances of MSDE 2000 that are installed by direct consumption of merge modules by the application are marked with a product code GUID that Windows Installer associates with the application. Only patch files that also contain the application product code GUID can patch those instances of MSDE 2000. Only patch files produced by the application vendor will contain the proper product codes. The MSDE 2000 service packs supplied by Microsoft cannot be applied to those instances. The application vendor must build patch files from the MSDE 2000 SP4 files and distribute those patch files to any of the vendor’s MSDE customers who need the fixes in SP4.</P>
+
+<P>For more information about how to create patch file packages, see the Windows Installer Software Development Kit (SDK), which can be downloaded from the <A HREF="http://go.microsoft.com/fwlink/?LinkId=4435" target=_blank>Microsoft Platform SDK Web site</A>.</P>
+
+<P>If an application setup utility installs an instance of MSDE 2000 by calling MSDE 2000 Setup, that instance of MSDE 2000 is marked with the MSDE 2000 product code GUID. Customers can patch these instances by using the standard MSDE 2000 service pack files. The application vendor can choose one of the following ways to distribute MSDE 2000 SP4:
+
+<UL type=disc>
+	<LI>Instruct customers to install MSDE 2000 SP4 from either the SQL Server 2000 SP4 download page or a SQL Server 2000 SP4 CD. Application vendors who instruct their customers to apply SP4 directly must provide instructions that are specific to their customers. <BR><BR></LI>
+
+	<LI>For examples of the types of MSDE 2000 service pack instructions that Microsoft application teams prepared for their customers, see this <A HREF="http://go.microsoft.com/fwlink/?LinkId=14961" target=_blank>Microsoft MSDE Applications Web page</A><BR><BR></LI>
+
+	<LI>Download the SQL2000.MSDE-KB884525-SP4-x86-<I>LLL</I>.exe download file and distribute it to customers with instructions about how to apply the service pack.<BR><BR></LI>
+
+	<LI>Using the MSDE 2000 SP4 files, build a service pack application utility that installs SP4 on the instances of MSDE 2000 that were installed by the application.</LI>
+</UL>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_3467468_msde_2000_sp4_file_locations_gq59"></A>4.2 MSDE 2000 SP4 File Locations</H2>
+
+<P>All MSDE SP4 installation files and folders are in the \MSDE folder, which is in one or more of the following locations:
+
+<UL type=disc>
+	<LI>On the SQL Server 2000 SP4 CD-ROM.<BR><BR></LI>
+
+	<LI>In the folder that contains the extracted service pack files from SQL2000.MSDE-KB884525-SP4-x86-<I>LLL</I>.exe, where <I>LLL</I> varies by language.</LI>
+</UL>
+
+<P>The \MSDE folder holds the Readmesql2k32desksp4.htm file, the readme.txt file, the license.txt file, and the executable files for the Setup utility. It also has the following subfolders:
+
+<UL type=disc>
+	<LI><B>\Msi:</B> contains the executable files that are required to install Windows Installer, or to upgrade a version of Windows Installer earlier than 2.0.2600.0.<BR><BR></LI>
+
+	<LI><B>\MSM:</B> Contains the merge modules needed for a merge module setup.<BR><BR></LI>
+
+	<LI><B>\Setup</B>: Contains the .msi installation package files that are required by MSDE 2000 Setup to install a new instance of MSDE 2000 SP4, or the .msp patch package files that are required to upgrade existing instances of MSDE 2000 to SP4. \Setup also contains the sqlrun.cab cabinet file containing the files installed by Setup.</LI>
+</UL>
+
+<P>For further instructions about how to use the MSDE merge modules, see the topic "Using SQL Server Desktop Engine Merge Modules" in SQL Server 2000 Books Online.</P>
+
+<P class=indent><B>Note</B>&nbsp;&nbsp;&nbsp;Merge modules are not supported for new installations. They are provided in SP4 for servicing instances of MSDE 2000 that were previously installed using merge modules.</P>
+
+<P>If your application setup calls MSDE 2000 Setup, build a folder that has the following structure and sets of files. The folder <I>MSDEInstallFolder</I> represents an example folder name:</P>
+
+<P class=dt><I>MSDEInstallFolder</I></P>
+
+<P class=indent>Copy to this location the following files from the MSDE 2000 SP4 \MSDE folder: Setup.exe, Setup.ini, Setup.rll, and sqlresld.dll.</P>
+
+<P class=dt><I>MSDEInstallFolder</I>\Msi</P>
+
+<P class=indent>Copy to this location the following all the files from the MSDE 2000 SP4 \MSDE\Msi folder.</P>
+
+<P class=dt><I>MSDEInstallFolder</I>\Setup</P>
+
+<P class=indent>Copy to this location the following all the files from the MSDE 2000 SP4 \MSDE\Setup folder.</P>
+
+<P>You can then execute Setup.exe to install or upgrade instances of MSDE 2000 SP4.</P>
+
+<P class=indent><B>Note</B>&nbsp;&nbsp;&nbsp;If Windows Installer has not been installed on the computer, or is a version earlier than the supported version for MSDE 2000 SP4 Setup, Setup will use the files in the MSDEInstallFolder\Msi folder to upgrade Windows Installer.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H1><A NAME="_documentation_notes"></A>5.0 Documentation Notes</H1>
+
+<P>This section covers issues that can occur after you apply MSDE 2000 SP4 and new features that are available when you run SP4. These issues apply when you run the service pack to upgrade from any earlier version of MSDE 2000, including MSDE 2000 Release A. This section does not describe of all of the fixes provided in SP4. For a complete list of these fixes, see Knowledge Base article <A HREF="http://support.microsoft.com?kbid=888799" target=_blank>888799</A>.</P>
+
+<P>Any information relevant to SQL Server 2000 Service Pack 4 that was not available in time to be included in this Readme file will be published in Microsoft Knowledge Base article <A HREF="http://support.microsoft.com?kbid=884525" target=_blank>884525</A>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_database_and_desktop_engine_enhancements"></A>5.1 MSDE 2000 Enhancements</H2>
+
+<P>The following enhancements apply to instances of MSDE 2000 on which Database Components SP4 is installed. They also apply to MSDE 2000 Release A instances on which MSDE 2000 SP4 is installed.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_hash_teams_removed"></A>5.1.1 Hash Teams Removed</H3>
+
+<P><I>Introduced in SP1</I></P>
+
+<P>Hash teams have been removed. Because of certain enhancements to MSDE 2000, hash teams no longer produce the performance benefits they offered in MSDE 1.0. In addition, removing hash teams makes MSDE 2000 more stable. </P>
+
+<P>Therefore, the query optimizer no longer generates query plans using hash teams.</P>
+
+<P>In rare cases, the removal of hash teams can cause a query to be processed more slowly. Analyze such queries to see whether creating more suitable indexes will return query performance to its previous level.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_affinity_mask_switches_added"></A>5.1.2 Affinity Mask Switches Added</H3>
+
+<P><I>Introduced in SP1</I></P>
+
+<P>Two affinity mask switches have been added to this service pack.</P>
+
+<H5>Affinity Mask I/O Switch</H5>
+
+<P>With this service pack, you can specify which CPUs are used to run threads for disk I/O operations. This switch must be used in conjunction with the <B>affinity mask</B> option. For more information, see Knowledge Base Article <A HREF="http://support.microsoft.com?kbid=298402" target=_blank>298402</A>.</P>
+
+<H5>Affinity Mask Connection Switch</H5>
+
+<P>With this service pack, you can configure systems that are enabled for Virtual Interface Architecture (VIA) to bind the MSDE 2000 connections from certain network cards to a processor or a set of processors. This switch must be used in conjunction with the <B>affinity mask</B> option. For more information, see Knowledge Base Article <A HREF="http://support.microsoft.com?kbid=299641" target=_blank>299641</A>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_syntax_changes_for_sp_change_users_login_wluf"></A>5.1.3 Syntax Changes for sp_change_users_login</H3>
+
+<P><I>Introduced in SP3</I></P>
+
+<P>When you run <B>sp_change_users_login</B> with the <B>@Action=Auto_Fix</B> argument, you must now specify a password. <B>sp_change_users_login</B> assigns the password to any new login it creates for the user. The following example shows the new <B>@Password</B> argument:</P>
+
+<PRE><CODE>sp_change_users_login [ @Action = ] 'action' 
+    [ , [ @UserNamePattern = ] 'user' ] 
+    [ , [ @LoginName = ] 'login' ]
+    [ , [ @Password = ] 'password' ]</CODE></PRE>
+
+<P>Use the <B>@Password</B> argument only with <B>@Action=Auto_Fix</B>. The following example shows the new syntax for the <B>sp_change_users_login</B> command when using <B>Auto_Fix</B>. Other examples in SQL Server Books Online remain unchanged.</P>
+
+<PRE><CODE>USE pubs
+go
+EXEC sp_change_users_login 'Auto_Fix', 'Mary', NULL, 'B3r12-36'
+go</CODE></PRE>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_ad_hoc_access_to_ole_db_providers_disabl_fzpy"></A>5.1.4 Ad Hoc Access to OLE DB Providers Disabled by Default</H3>
+
+<P><I>Introduced in SP3</I></P>
+
+<P>If the <B>DisallowAdhocAccess</B> registry option is not explicitly set, by default, ad hoc access to OLE DB providers is not allowed. This means ad hoc query syntax, such as OPENDATASOURCE and OPENROWSET, will not work against remote servers. To allow ad hoc access, you must explicitly set the <B>DisallowAdhocAccess</B> option to <B>0</B>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_new_sqlserverlike_provider_option_cuy1"></A>5.1.5 New SqlServerLike Provider Option</H3>
+
+<P><I>Introduced in SP3</I></P>
+
+<P>To enable more efficient processing of remote queries that include LIKE predicates, the <B>SqlServerLike</B> option was added in SP3. MSDE 2000 SP3 or later now has two options for sending LIKE operations to linked servers. If the OLE DB provider for a linked server supports the SQL Server syntax for the LIKE operator and wildcards, you can specify the <B>SqlServerLike</B> option to have MSDE 2000 send LIKE operations using SQL Server syntax. If the OLE DB provider for a linked server reports that it supports the Entry Level ANSI/ISO SQL-92 syntax or returns the <B>SQLPROP_ANSILIKE </B>property, SQL Server will send LIKE operations to the linked server using SQL-92 syntax. For more information on <B>SQLPROP_ANSILIKE</B>, see the topic "Programming the SQLPROPSET_OPTHINTS Property Set" in SQL Server 2000 Books Online.</P>
+
+<P>You must add a registry key value to enable the <B>SqlServerLike</B> option for an OLE DB provider.</P>
+
+<P class=indent><!--CAUTION--><P ID="Alert_Caution"><B CLASS="notes">Security Note</B>&nbsp;&nbsp;Incorrectly editing the registry can cause serious problems that may require you to reinstall your operating system. Microsoft cannot guarantee that problems resulting from editing the registry incorrectly can be resolved. Before editing the registry, back up any valuable data..</P><!--/CAUTION-->
+
+<OL>
+	<LI>Open Regedit32.<BR><BR></LI>
+
+	<LI>Locate the proper registry key:
+<UL type=disc>
+	<LI>For named instances, locate this subkey:
+<P class=tl><B>HKEY_LOCAL_MACHINE\Software\Microsoft\Microsoft SQL Server\&lt;Instance Name&gt;\Providers\&lt;Provider Name&gt;</B></P></LI>
+
+	<LI>For default instances, locate this subkey:
+<P class=tl><B>HKEY_LOCAL_MACHINE\Software\Microsoft\MSSQLServer\Providers\&lt;Provider Name&gt;</B></P></LI>
+</UL>
+</LI>
+
+	<LI>In the &lt;Provider Name&gt; key, add a DWORD value named SqlServerLIKE and set its value to 1.</LI>
+</OL>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_expanded_error_messages_for_distributed__d3jb"></A>5.1.6 Expanded Error Messages for Distributed Queries</H3>
+
+<P><I>Introduced in SP3</I></P>
+
+<P>For distributed queries, MSDE 2000 returns provider error information in addition to server error information. When a query between linked servers results in an error, MSDE 2000 checks whether the provider supports the <B>IErrorRecords</B> OLE DB interface. If this interface is supported, MSDE 2000 calls the <B>GetErrorInfo</B> function to get additional error information from the provider and returns this information to the user as part of the error message. If the <B>IErrorRecords</B> interface is not supported, there is no change in MSDE 2000 behavior: MSDE 2000 returns a generic error.</P>
+
+<P>For example, run the following query against a server that uses MSDASQL, which does not support <B>sql_variant</B>:</P>
+
+<PRE><CODE>SELECT * FROM remote2k.dqtable.dbo.sqlvariantnotnull 
+--Remote2k is a loopback server.</CODE></PRE>
+
+<P>Prior to SP3, MSDE 2000 returned the following error message:</P>
+
+<P><CODE>Server: Msg 7356, Level 16, State 1, Line 1</CODE></P>
+
+<P><CODE>OLE DB provider 'msdasql' supplied inconsistent metadata for a column. <BR>
+Metadata information was changed at execution time.</CODE></P>
+
+<P>After you apply SP3 or later, MSDE 2000 returns the following error message:</P>
+
+<P><CODE>Server: Msg 7356, Level 16, State 1, Line 1</CODE></P>
+
+<P><CODE>OLE DB provider 'msdasql' supplied inconsistent metadata for a column. <BR>
+Metadata information was changed at execution time.</CODE></P>
+
+<P><CODE>OLE DB error trace [Non-interface error:&nbsp; Column 'sql_variant' (compile-time<BR>
+ordinal 3) of object '"dqtable"."dbo"."sqlvariantnotnull"' was reported <BR>
+to have a DBCOLUMNFLAGS_ISFIXEDLENGTH of 16 at compile time and 0 at run time].</CODE></P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_new_function_fn_get_sql_returns_sql_stat_wluf"></A>5.1.7 New Function fn_get_sql Returns SQL Statement</H3>
+
+<P><I>Introduced in SP3</I></P>
+
+<P>SP3 and later includes the new function <B>fn_get_sql</B> that returns the text of the SQL statement for the specified SQL handle. In addition, to support this function, three new columns have been added to the <B>sysprocesses</B> system table: <B>sql_handle</B>, <B>stmt_start</B>, and <B>stmt_end</B>.</P>
+
+<P><B>fn_get_sql</B> is documented in the latest copy of the SQL Server 2000 Books Online. For information about installing the latest version of the SQL Server 2000 Books Online, see section 1.8 <A HREF="#_updated_books_online_documentation_is_av_wluf">Updates to SQL Server 2000 Books Online Are Available</A>. This is an English-language copy of the reference topic for <A HREF="http://go.microsoft.com/fwlink/?LinkId=33351" target=_blank><B>fn_get_sql</B></A>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_enabling_cross45database_ownership_chain_ar5q"></A>5.1.8 Cross-Database Ownership Chaining</H3>
+
+<P><I>Introduced in SP3</I></P>
+
+<P>This service pack provides new options for turning cross-database ownership chaining on and off.</P>
+
+<P>When installing MSDE 2000 SP4, you can use the ALLOWXDBCHAINING setup parameter to enable cross-database ownership chaining for all databases. ALLOWXDBCHAINING is documented in this topic in the latest copy of the SQL Server 2000 Books Online: <A HREF="http://go.microsoft.com/fwlink/?LinkId=20286" target=_blank>Customizing Desktop Engine Setup.exe</A>. For information about installing the latest version of the SQL Server 2000 Books Online, see section 1.8 <A HREF="#_updated_books_online_documentation_is_av_wluf">Updates to SQL Server 2000 Books Online Are Available</A>.</P>
+
+<P class=indent><B>Note</B>&nbsp;&nbsp;&nbsp;Enabling cross-database ownership chaining for all databases is not recommended.</P>
+
+<P>After installation, you can use the following methods to turn cross-database ownership chaining on and off for all databases in the instance:
+
+<UL type=disc>
+	<LI>Use the new <B>Cross DB Ownership Chaining</B> argument of the <B>sp_configure</B> system stored procedure.<BR><BR></LI>
+
+	<LI>Use the <B>Allow Cross-Database Ownership Chaining</B> option on the <B>Security</B> tab of the <B>SQL Server Properties</B> dialog box in Enterprise Manager.<BR><BR></LI>
+
+	<LI>Use the <B>SQLServer.Configuration.ConfigValues</B> Database Management Objects (DMO) collection. When the <B>SQLServer </B>object references an instance of MSDE 2000 2000 SP3 or later, this collection contains a <B>ConfigValue</B> object named <B>Cross DB Ownership Chaining</B>.</LI>
+</UL>
+
+<P>If cross-database ownership chaining is turned off for the instance, you can configure it for individual databases. Use the following methods to turn cross-database ownership chaining on and off for a database:
+
+<UL type=disc>
+	<LI>Use the new <B>db chaining </B>option of the <B>sp_dboption</B> system stored procedure.<BR><BR></LI>
+
+	<LI>Use the <B>Allow Cross-Database Ownership Chaining</B> option on the <B>Options</B> tab of the <B>Database Properties</B> dialog box in Enterprise Manager.<BR><BR></LI>
+
+	<LI>Use the <B>DBChaining</B> property of the <B>DBOption2</B> DMO object.</LI>
+</UL>
+
+<P>For more information, click the Help button on the <B>Backwards Compatibility</B> <B>Checklist</B> page when you run Setup, download the updated edition of <A HREF="#_updated_books_online_documentation_is_av_wluf">SQL Server 2000 Books Online</A>, or see Knowledge Base article <A HREF="http://support.microsoft.com?kbid=810474" target=_blank>810474</A>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_enhancements_for_trace_flag_1204_gq59"></A>5.1.9 Enhancement for Trace Flag 1204</H3>
+
+<P><I>Introduced in SP3</I></P>
+
+<P>Trace flag 1204 returns the type of locks participating in the deadlock and the current command affected. In SP3 and later, when this trace flag is on, the deadlock information is automatically written to the error log.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_permissions_change_for_sp_changedbowner_2y0t"></A>5.1.10 Permissions Change for sp_changedbowner</H3>
+
+<P><I>Introduced in SP3</I></P>
+
+<P>Only members of the <B>sysadmin</B> fixed server role can run the <B>sp_changedbowner</B> system stored procedure.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_debugging_functionality_changes_f8s1"></A>5.1.11 Debugging Functionality Changes</H3>
+
+<P><I>Introduced in SP3</I></P>
+
+<P>The functionality for debugging stored procedures with Microsoft Visual Studio&reg; 6.0 and older or with SQL Server Query Analyzer prior to SP3 is turned off by default. Application debugging (stopping at a SQL Server Transact-SQL breakpoint while debugging a client application) is also turned off by default. To enable debugging functionality, run <B>sp_sdidebug</B>, passing the parameter <B>legacy_on</B>. To disable debugging, pass <B>legacy_off </B>to this procedure. </P>
+
+<P class=indent><B>Note</B>&nbsp;&nbsp;&nbsp;Running the <B>sp_sdidebug</B> stored procedure on production servers is not recommended.</P>
+
+<P>For more information, see Knowledge Base article <A HREF="http://support.microsoft.com?kbid=328151" target=_blank>328151</A>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3>5.1.12 Named Pipes Cannot Be Disabled on Clustered Servers</H3>
+
+<P><I>Introduced in SP3</I></P>
+
+<P>After applying the service pack, you are no longer able to disable the Named Pipes protocol on instances of the database engine participating in a failover cluster.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_54614615_turning_off_udp_port_1434_d3jb"></A>5.1.13 Operations On UDP Port 1434</H3>
+
+<P><I>Introduced in SP3a</I></P>
+
+<P>Starting with MSDE 2000 SP3a, instances of MSDE 2000 that are not configured to support network communications will stop using User Datagram Protocol (UDP) port 1434. Instances that are configured to support network communications will use UDP 1434.</P>
+
+<P>An instance upgraded to SP3a or later will stop using UDP 1434 whenever all of the server Net-Libraries for the instance, except the shared memory Net-Library, are disabled. The instance will start using port 1434 whenever you enable any of the server Net-Libraries. For information on disabling or enabling server Net-Libraries, see the topic "SQL Server Network Utility" in SQL Server 2000 Books Online.</P>
+
+<P>The use of UDP port 1434 by a computer will not stop until all instances of SQL Server 2000 and MSDE 2000 on the computer have been upgraded to SP3a or later and configured to not support network communications.</P>
+
+<P>Whether UDP port 1434 is open or closed does not depend on the state of the shared memory Net-Library. The shared memory Net-Library is used only for local connections, and does not use a network. The shared memory Net-Library is always active; it cannot be enabled or disabled.</P>
+
+<P>You can also specify whether the server Net-Libraries are disabled when installing or upgrading an instance of MSDE 2000. Use either the MSDE 2000 Setup utility <B>DISABLENETWORKPROTOCOLS</B> parameter, or the MSDE 2000 merge module <B>SqlDisableNetworkProtocols</B> property. For more information on these options, see this topic in the latest copy of the SQL Server 2000 Books Online: <A HREF="http://go.microsoft.com/fwlink/?LinkId=20286" target=_blank>Customizing Desktop Engine Setup.exe</A>. For information about installing the latest version of the SQL Server 2000 Books Online, see section 1.8 <A HREF="#_updated_books_online_documentation_is_av_wluf">Updates to SQL Server 2000 Books Online Are Available</A>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3>5.1.14 Change to Maximum Network Packet Size</H3>
+
+<P><I>Introduced in SP4</I></P>
+
+<P>In SP4, the maximum value for the network packet size option (set using <B>sp_configure</B>) is 32767. This is slightly less than half the previous maximum of 65536. During upgrade, existing values larger than 32767 will automatically be adjusted to 32767. If a script attempts to use <B>sp_configure</B> to set a value larger than 32767 but less than or equal to 65536, the value will also be set to 32767. Setting the network packet size to a value larger than 65536 results in an error.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3>5.1.15 Optimization of Queries with Large IN Lists or Many OR Clauses</H3>
+
+<P><I>Introduced in SP4</I></P>
+
+<P>SP4 includes a change in the behavior of the SQL Server optimizer that affects queries containing predicates with large IN lists or many OR clauses. More specifically, this change (introduced in SQL Server 2000 hotfix 789) affects queries that contain (or that can be rewritten using an equivalent expression that contains) the following: 
+
+<UL type=disc>
+	<LI>More than 10,000 elements in the IN list<BR><BR></LI>
+
+	<LI>Two IN lists, each containing over 100 elements<BR><BR></LI>
+
+	<LI>Over 10,000 disjuncts in the OR clause<BR><BR></LI>
+
+	<LI>A combination of OR clauses and IN lists such that their equivalent expression will contain more than 10,000 disjuncts</LI>
+</UL>
+
+<P>When such queries are run on systems that have very large memory and a low degree of parallelism, a query plan with inferior performance may be chosen by the optimizer. To override the change in optimizer behavior, trace flag 9060 is provided in this service pack. By default, trace flag 9060 is OFF. When the trace flag is ON, SP3 behavior prior to hotfix 789 is enabled. If error 701 (insufficient system memory) is encountered when the trace flag is ON, consider rewriting the queries using temporary tables or table variables for the values in the IN lists. For numerical ranges, use BETWEEN clauses or greater than (&gt;) or less than (&lt;) operators. For information on using trace flags, see "Trace Flags" in SQL Server Books Online. </P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3>5.1.16 Future Network Protocol Support</H3>
+
+<P><I>Introduced in SP4</I></P>
+
+<P>Banyan VINES, Multiprotocol, AppleTalk, and NWLink IPX/SPX network protocols are supported in SP4. However, these protocols will not be supported in SQL Server 2005 and later releases. Please plan accordingly.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_replication_enhancements"></A>5.2 Replication Enhancements</H2>
+
+<P>This section discusses enhancements to MSDE 2000 replication that are included with MSDE 2000 SP4.</P>
+
+<H3><A NAME="_transactional_replication_update_custom_stored_procedure"></A>5.2.1 Transactional Replication UPDATE Custom Stored Procedure</H3>
+
+<P><I>Introduced in SP1</I></P>
+
+<P>During transactional replication setup, custom stored procedures for insert, delete, and update actions are created in the subscription database. Regardless of how many columns are affected by an UPDATE statement, the update custom stored procedure updates all of the columns in the subscription table. Any column that has not changed is reset to the same values that existed before the update. Typically, this action causes no problems. However, if any of these columns are indexed, this resetting can become expensive.</P>
+
+<P>If you use transactional replication and have several indexes on the subscription table, and only a few column values change because of updates, the overhead of maintaining the index can limit performance when changes are applied at the Subscriber. For example, a subscription database that is used for reporting purposes may have many more indexes than the publication database. Dynamically building the UPDATE statement at run time can improve performance. The update includes only the columns that have changed, creating an optimal UPDATE string.</P>
+
+<P>This service pack includes a new stored procedure, <B>sp_scriptdynamicupdproc</B>, which generates a custom stored procedure that you can use at the Subscriber to dynamically build the UPDATE statement at run time. However, building the dynamic UPDATE statement at run time requires extra processing.</P>
+
+<P><B>sp_scriptdynamicupdproc</B> is documented in the latest copy of the SQL Server 2000 Books Online. For information about installing the latest version of the SQL Server 2000 Books Online, see section 1.8 <A HREF="#_updated_books_online_documentation_is_av_wluf">Updates to SQL Server 2000 Books Online Are Available</A>. This is an English-language copy of the reference topic for <A HREF="http://go.microsoft.com/fwlink/?LinkId=33474" target=_blank><B>sp_scriptdynamicupdproc</B></A>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_transactional_replication_scripting_custom_stored_procedures"></A>5.2.2 Transactional Replication Scripting Custom Stored Procedures</H3>
+
+<P><I>Introduced in SP1</I></P>
+
+<P>When setting up nosync subscriptions (that is, subscriptions that do not receive the initial snapshot), the custom stored procedures for INSERT, UPDATE, and DELETE statements must be created manually. Typically, these statements are created at the Subscriber when the initial snapshot is delivered. A new stored procedure, <B>sp_scriptpublicationcustomprocs</B>, has been added to generate scripts for the custom stored procedures at the publication level. This new functionality may make it easier to set up nosync subscriptions.</P>
+
+<P><B>sp_scriptpublicationcustomprocs</B> is documented in the latest copy of the SQL Server 2000 Books Online. For information about installing the latest version of the SQL Server 2000 Books Online, see section 1.8 <A HREF="#_updated_books_online_documentation_is_av_wluf">Updates to SQL Server 2000 Books Online Are Available</A>. This is an English-language copy of the reference topic for <A HREF="http://go.microsoft.com/fwlink/?LinkId=33475" target=_blank><B>sp_scriptpublicationcustomprocs</B></A>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_merge_replication_retention-based_meta_data_clean_up"></A>5.2.3 Merge Replication Retention-Based Meta Data Clean Up</H3>
+
+<P><I>Introduced in SP1</I></P>
+
+<P>When merge replication system tables contain large amounts of meta data, cleaning up the meta data improves performance. Prior to SQL Server 2000 SP1, meta data could be cleaned up only by running <B>sp_mergecleanupmetadata</B>. However, SQL Server 2000 SP1 and later versions include retention-based meta data clean up, which means that meta data can be automatically deleted from the following system tables:
+
+<UL type=disc>
+	<LI><B>MSmerge_contents</B><BR><BR></LI>
+
+	<LI><B>MSmerge_tombstone</B><BR><BR></LI>
+
+	<LI><B>MSmerge_genhistory</B><BR><BR></LI>
+
+	<LI>Any before image tables, if present</LI>
+</UL>
+
+<P class=indent><B>Note</B>&nbsp;&nbsp;&nbsp;Before image<I> </I>tables are present if the <B>@keep_partition_changes</B> synchronization optimization option is enabled on the publication.</P>
+
+<P>Retention-based meta data clean up occurs as follows:
+
+<UL type=disc>
+	<LI>If the <B>&#0150;MetadataRetentionCleanup</B> Merge Agent parameter is set to 1, as it is by default, the Merge Agent cleans up the Subscriber and the Publisher that are involved in the merge. <BR><BR></LI>
+
+	<LI>If the <B>-MetadataRetentionCleanup</B> parameter is set to 0, automatic clean up does not occur. In this case, manually initiate retention-based meta data clean up by executing <B>sp_mergemetadataretentioncleanup</B>. This stored procedure must be executed at every Publisher and Subscriber that should be cleaned up. It is recommended, but not required, that the Publisher and Subscribers be cleaned up at similar points in time (see <A HREF="#_preventing_false_conflicts">Preventing False Conflicts</A> later in this section).
+<P class=atl><B>Note</B>&nbsp;&nbsp;&nbsp; <B>-MetadataRetentionCleanup</B> parameter is set to <B>1</B> for all Merge Agent profiles that are included with SQL Server 2000 SP1 and later versions. If you upgrade a server to SP1 or later and then add merge replication, the Merge Agent profile is automatically updated to include this parameter. If you upgrade a server that already has merge replication enabled to SP1 or later, the Merge Agent profile is not automatically updated; update the profile by running <B>sp_add_agent_parameter</B> (see <A HREF="#_additional_parameter_for_sp_add_agent_parameter">Additional Parameter for sp_add_agent_parameter</A> later in this section).</p>
+<P class=atl><!--IMPORTANT--><P ID="Alert_Important"><B CLASS="notes">Important</B>&nbsp;&nbsp;The default retention period for publications is 14 days. If an article belongs to several publications, there might be different retention periods. In that situation, the longest retention period is used to determine the earliest possible time that clean up can occur. If there are multiple publications on a database, and if any one of those publications uses an infinite publication retention period (<B>@retention=0</B>), merge meta data for the database is not automatically cleaned up. For this reason, use infinite publication retention with caution.</P><!--/IMPORTANT--></p></LI>
+</UL>
+
+<H5><A NAME="_additional_parameter_for_sp_add_agent_parameter"></A>Additional Parameter for sp_add_agent_parameter</H5>
+
+<P>The system stored procedure <B>sp_add_agent_parameter</B> now has a <B>MetadataRetentionCleanup</B> parameter, which allows you to add or remove meta data retention clean up from Merge Agent profiles. A value of 1 indicates that the profile should include clean up; a value of 0 indicates that it should not include clean up. For example, to add meta data retention clean up to a profile, execute the following code:</P>
+
+<PRE><CODE>EXEC sp_add_agent_parameter @profile_id=&lt;my_profile_id&gt;,
+  @parameter_name='MetadataRetentionCleanup', @parameter_value=1</CODE></PRE>
+
+<H5>Meta Data Cleanup in Topologies with Different Versions of SQL Server</H5>
+
+<P>For automatic retention-based clean up to occur in a database involved in merge replication, the database and the Merge Agent must both be on servers running SQL Server 2000 SP1 or later. For example:
+
+<UL type=disc>
+	<LI>A SQL Server 7.0 pull Subscriber does not run clean up at a SQL Server 2000 SP1 Publisher.<BR><BR></LI>
+
+	<LI>A SQL Server 2000 SP1 push Merge Agent does not run clean up in a pre-SP1 SQL Server 2000 Subscriber database. <BR><BR></LI>
+
+	<LI>A SQL Server 2000 SP1 push Merge Agent runs clean up in a SQL Server 2000 SP1 Publisher database, even if it has subscribers that are running SQL Server 2000 or earlier.</LI>
+</UL>
+
+<P>Automatic clean up on some servers and not on others will at most cause false conflicts, and those should be rare. For topologies that include versions of SQL Server prior to SQL Server 2000 SP1, you may see performance benefits by running <B>sp_mergemetadatacleanup</B> on all servers that are not cleaned up automatically.</P>
+
+<H5><A NAME="_preventing_false_conflicts"></A>Preventing False Conflicts</H5>
+
+<P>Retention-based meta data clean up prevents non-convergence and silent overwrites of changes at other nodes. However, false conflicts can occur if the following conditions are met:
+
+<UL type=disc>
+	<LI>The meta data is cleaned up at one node and not another.<BR><BR></LI>
+
+	<LI>A subsequent update at the cleaned-up node occurs on a row whose meta data was deleted.</LI>
+</UL>
+
+<P>For example, if meta data is cleaned up at the Publisher but not at the Subscriber, and an update is made at the Publisher, a conflict occurs even though the data appears to be synchronized. </P>
+
+<P>To prevent this conflict, make sure that meta data is cleaned up at related nodes at about the same time. If <B>-MetadataRetentionCleanup</B> is set to 1, both the Publisher and Subscriber are cleaned up automatically before the merge starts, thereby ensuring that the nodes are cleaned up at the same time. If a conflict occurs, use the merge replication conflict viewer to review the conflict and change the outcome if necessary.</P>
+
+<P>If an article belongs to several publications or is in a republishing scenario, it is possible that the retention periods for a given row at the Publisher and Subscriber are different. To reduce the chance of cleaning up meta data on one side but not the other, it is recommended that those different publications have similar retention periods.</P>
+
+<P class=indent><B>Note</B>&nbsp;&nbsp;&nbsp;If the system tables contain large amounts of meta data that must be cleaned up, the merge process may take longer to run. Clean up the meta data on a regular basis to prevent this issue.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_backup_and_restore_issues_for_merge_replication"></A>5.2.4 Backup and Restore Issues for Merge Replication</H3>
+
+<P><I>Introduced in SP1</I></P>
+
+<P>A publication database that is restored from a backup should first synchronize with a subscription database that has a global subscription (that is, a subscription having an assigned priority value) to guarantee correct convergence behavior. Synchronization ensures that the changes that were lost at the publication database because of the restore operation are reapplied accurately.</P>
+
+<P>Do not synchronize the publication database with a subscription database that has an anonymous subscription. Because anonymous subscriptions do not have enough meta data to apply changes to the publication database, such synchronization can lead to the non-convergence of data. </P>
+
+<P>When you are planning back up and restore operations for merge replication, consider the following additional issues: 
+
+<UL type=disc>
+	<LI>Restore the subscription databases from backups that are not beyond the retention period.</LI>
+</UL>
+
+<P class=indent>Restore a subscription database from a backup only if the backup is no older than the shortest retention period of all publications to which the Subscriber subscribes. For example, if a Subscriber subscribes to three publications with retention periods of 10, 20, and 30 days, respectively, the backup used to restore the database should not be more than 10 days old. 
+
+<UL type=disc>
+	<LI>Synchronize before generating a backup.</LI>
+</UL>
+
+<P class=indent>It is strongly recommended that a Subscriber synchronize with the Publisher before you perform a backup. Otherwise, the system might not converge correctly if the Subscriber is restored from this backup. Although the backup file itself might be new, the last synchronization with a Publisher could be almost as old as the retention period. For example, consider a publication with a retention period of 10 days. The last synchronization was 8 days ago, and now the backup is performed. If the backup is applied 4 days later, the last synchronization will have occurred 12 days ago, which is past the retention period. If the Subscriber had synchronized right before the backup, the subscription database would be within the retention period.
+
+<UL type=disc>
+	<LI>Reinitialize the Subscriber if you change the publication retention value.</LI>
+</UL>
+
+<P class=indent>If you need to change the publication retention value, manually reinitialize the Subscriber to avoid the non-convergence of data. The retention-based meta data clean up feature deletes outdated meta data from merge system tables when the publication retention period is reached. </P>
+
+<P class=indent>The publication retention value is used to determine when subscriptions that have not synchronized within the retention period should expire. If, after a clean up, the publication retention period is increased and a subscription attempts to merge with the Publisher (which has already deleted the meta data), the subscription will not expire because of the increased retention value. Furthermore, the Publisher does not have enough meta data to download changes to the Subscriber, which leads to non-convergence.
+
+<UL type=disc>
+	<LI>Use the same publication retention values for all Publishers and their alternate synchronization partners. Using different values can lead to non-convergence.</LI>
+</UL>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_restoring_replicated_databases_from_different_versions_of_sql_server"></A>5.2.5 Restoring Replicated Databases from Different Versions of SQL Server</H3>
+
+<P><I>Introduced in SP1</I></P>
+
+<P>Restoring a backup to the same server and database&#0151;running the same version as the server from which the backup was created&#0151;preserves your replication settings. If you are restoring a replicated database to a version of SQL Server that is different from the version used to back up the database, consider the following issues:
+
+<UL type=disc>
+	<LI>If you are restoring the database to SQL Server 2000 SP3a from a backup created with SQL Server 2000 and you want to preserve replication settings, you must run <B>sp_vupgrade_replication</B>. Running <B>sp_vupgrade_replication</B> ensures that the replication meta data is upgraded. If you do not run <B>sp_vupgrade_replication</B>, the replication meta data can be left in an unpredictable state.<BR><BR></LI>
+
+	<LI>If you are restoring the database to SQL Server 2000 from a backup created with SQL Server 7.0 (the release version, SP1, SP2, SP3, and SP4) and you want to preserve replication settings, you must re-create the backup before installing service packs. It is possible to restore the database to SQL Server 2000 SP3a directly from a backup of a replicated database created in SQL Server 7.0, but replication settings are not maintained.</LI>
+</UL>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_a_new_-maxnetworkoptimization_command_line_argument_for_snapshot_agent"></A>5.2.6 New -MaxNetworkOptimization Command Line Argument for Snapshot Agent</H3>
+
+<P><I>Introduced in SP2.</I></P>
+
+<P>During normal processing, merge replication can send DELETE commands to Subscribers for rows that do not belong to the Subscriber's partition. DELETE commands of this type are referred to as irrelevant deletes. Irrelevant deletes do not affect data integrity or convergence, but they can result in unnecessary network traffic. </P>
+
+<P>To reduce network traffic caused by irrelevant deletes, you can use the new Snapshot Agent parameter <BR>
+<B>-MaxNetworkOptimization</B> with merge replication publications. Setting the parameter to 1 minimizes the chances of irrelevant deletes, which maximizes network optimization. </P>
+
+<P class=indent><B>Note</B>&nbsp;&nbsp;&nbsp;Setting this parameter to 1 is useful only when the synchronization optimization option of the merge publication is set to true (the <B>@keep_partition_changes</B> parameter of <B>sp_addmergepublication</B>).</P>
+
+<P>The default is 0 because setting the parameter to 1 can increase the storage of meta data and cause performance to degrade at the Publisher if multiple levels of join filters and complex subset filters are present. You should carefully assess your replication topology and set <B>-MaxNetworkOptimization</B> to 1 only if network traffic from irrelevant deletes is unacceptably high.</P>
+
+<P>You can add this parameter to the Snapshot Agent profile by executing the system procedure <B>sp_add_agent_parameter</B> as follows:</P>
+
+<PRE><CODE>EXEC sp_add_agent_parameter 1, 'MaxNetworkOptimization', 1</CODE></PRE>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_merge_replication_uses_new_role_d3jb"></A>5.2.7 Merge Replication Uses New Role</H3>
+
+<P><I>Introduced in SP3</I></P>
+
+<P>SP3 and later automatically creates a new role for use by merge replication. The name of the new role is in the form <B>MSmerge-&lt;publication ID&gt;</B>. The role is created on the Publisher for each merge replication publication and acts as the publication access list (PAL) to control access to merge publications on the Publisher. If this role is dropped, you can run a new stored procedure included with SP3 or later, <B>sp_createmergepalrole</B>, to re-create the role. This stored procedure is executed at the Publisher on the publication database to re-create the role.</P>
+
+<P><B>sp_createmergepalrole </B>is documented in the latest copy of the SQL Server 2000 Books Online. For information about installing the latest version of the SQL Server 2000 Books Online, see section 1.8 <A HREF="#_updated_books_online_documentation_is_av_wluf">Updates to SQL Server 2000 Books Online Are Available</A>. This is an English-language copy of the reference topic for <A HREF="http://go.microsoft.com/fwlink/?LinkId=33476" target=_blank><B>sp_createmergepalrole</B></A>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_sql_agent_proxy_account_required_for_non_wluf"></A>5.2.8 New Requirements for Subscriptions Created by Non-sysadmin Users</H3>
+
+<P><I>Introduced in SP3</I></P>
+
+<P>If a subscription is created by a user who is not a member of the <B>sysadmin</B> fixed server role, you must do one of the following:
+
+<UL type=disc>
+	<LI>Configure the SQL Server Agent proxy account with a login and password so that the SQL Server Agent job step associated with the replication agent runs with sufficient privileges. For more information, see the topic "xp_sqlagent_proxy_account" in SQL Server Books Online.<BR><BR></LI>
+
+	<LI>Change the owner of the job step to a user that is a member of the <B>sysadmin</B> fixed server role before running the agent.</LI>
+</UL>
+
+<P class=indent><B>Note</B>&nbsp;&nbsp;&nbsp;The remote agent activation feature always requires the job step to run in the context of a user account in the <B>sysadmin</B> fixed server role.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_changes_to_permissions_on_stored_procedu_d3jb"></A>5.2.9 Changes to Permissions for Stored Procedures</H3>
+
+<P><I>Introduced in SP3</I></P>
+
+<P>Permissions have been changed on a number of the stored procedures used to implement, administer, and monitor a replication topology. Most of these changes involve a tightening of the permissions that are required to run the stored procedures. For more information about the new permissions, review the Transact-SQL reference documentation for the replication stored procedures in the updated version of SQL Server Books Online. For more information about the updated SQL Server Books Online, see Section 1.8 <A HREF="#_updated_books_online_documentation_is_av_wluf">Updates to SQL Server 2000 Books Online Are Available</A>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_new_parameter_for_sp_addmergearticle_and_fzpy"></A>5.2.10 New Parameter for sp_addmergearticle and sp_changemergearticle</H3>
+
+<P><I>Introduced in SP3</I></P>
+
+<P>A new parameter, <B>@published_in_tran_pub</B>, has been added to both <B>sp_addmergearticle</B> and <B>sp_changemergearticle</B>. This parameter is used to indicate that an article in a merge publication is also published in a transactional publication. <B>@published_in_tran_pub </B>is <B>nvarchar(5)</B>, with a default of <B>FALSE</B>. <B>TRUE</B> specifies that the article is also published in a transactional publication. </P>
+
+<P class=indent><B>Note</B>&nbsp;&nbsp;&nbsp;When you change this parameter in <B>sp_changemergearticle</B>, the snapshot must be invalidated and subscribers must be reinitialized.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_changes_to_windows_synchronization_manag_d3jb"></A>5.2.11 Changes to Windows Synchronization Manager Support</H3>
+
+<P><I>Introduced in SP3</I></P>
+
+<P>SQL Server allows you to enable existing subscriptions (created using SQL Server Enterprise Manager, SQL-DMO, and replication stored procedures) for use with Windows Synchronization Manager. You can also create new subscriptions using Windows Synchronization Manager. After you apply the service pack, when synchronizing a subscription, Windows Synchronization Manager will prompt you to enter the password or passwords required to connect to the servers involved in the synchronization.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_change_to_requirements_for_attaching_40o_wluf"></A>5.2.12 Change to Requirements for Attaching or Restoring a Replication Database</H3>
+
+<P><I>Introduced in SP3</I></P>
+
+<P>Under a certain set of conditions, replication could malfunction in the process of attaching or restoring a published database. These conditions are:
+
+<UL type=disc>
+	<LI>SP3 or later has been applied.<BR><BR></LI>
+
+	<LI>The user attaching the database is not a member of the <B>sysadmin</B> fixed server role.<BR><BR></LI>
+
+	<LI>Cross-database chaining has not been allowed.</LI>
+</UL>
+
+<P>If all of these conditions are true, you should execute the <B>sp_changedbowner</B> stored procedure on the attached or restored database. Assign ownership to the <B>sa</B> built-in administrator login. This will ensure that replication functions correctly.</P>
+
+<P class=indent><B>Note</B>&nbsp;&nbsp;&nbsp;You must be a member of the <B>sysadmin</B> fixed server role to execute<B> sp_changedbowner </B>. </P>
+
+<P>For more information about cross-database ownership chaining, see Section 5.1.8 <A HREF="#_enabling_cross45database_ownership_chain_ar5q">Cross-Database Ownership Chaining</A>.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3>5.2.13 Change to Security Designations of Replication ActiveX Controls</H3>
+
+<P><I>Introduced in SP4</I></P>
+
+<P>Replication ActiveX® controls (sqlinitx.dll, sqldistx.dll, sqlmergx.dll, and replerrx.dll) are no longer designated as "safe for scripting" and "safe for initialization." The security and functional behaviors of the controls have not changed since SP3; however, the security designations have been changed to meet security standards. These changes may affect applications that invoke embedded replication ActiveX controls in a Web page.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3>5.2.14 New Parameter for Articles in Merge Publications</H3>
+
+<P><I>Introduced in SP4</I></P>
+
+<P>A new parameter, <B>@compensate_for_errors</B>, can be specified when calling <B>sp_addmergearticle</B>. The parameter specifies whether compensating actions are taken if errors (such as a constraint violation) are encountered during synchronization. When set to TRUE (the default), a change that cannot be applied at a node during synchronization leads to compensating actions that undo the change at all other nodes. In some cases this behavior is desirable, but in some cases it can be problematic; for example, one incorrectly configured Subscriber that generates an error can cause changes to be undone at the Publisher and all other Subscribers. </P>
+
+<P>Specifying a value of FALSE disables these compensating actions; however, the errors are still logged and subsequent merges will continue to attempt to apply the changes. Although data in the affected rows might appear to be out of convergence, as soon as you address the error the change can be applied, and data will converge.</P>
+
+<P class=indent><B>Note</B>&nbsp;&nbsp;&nbsp;If the source table for an article is already published in another publication, then the value of <B>@compensate_for_errors</B> must be the same for both articles. </P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3>5.2.15 New Schema Option for Replicating Identity Columns in Transactional Publications</H3>
+
+<P><I>Introduced in SP4</I></P>
+
+<P>In previous releases, identity columns in transactional publications were replicated as the base data type, such as <B>int</B>, without the identity property set. This approach is appropriate for applications that do not allow inserts at the Subscriber. SQL Server 2000 SP4 introduces a new schema option (<B>0x4</B>) for transactional publications, which is used to replicate the identity column as an identity column. This is useful in a number of cases, including bidirectional replication and using the Subscriber as a warm standby server. In these cases, inserts can occur at the Subscriber, and the inserts result in the identity column being incremented.</P>
+
+<P><B>To specify that an identity column should be replicated as an identity column:</B>
+
+<OL>
+	<LI>When creating the table at the Publisher, specify the NOT FOR REPLICATION option for the identity column. This ensures that only user inserts, not replication agent inserts, increment the identity column. For more information, see "CREATE TABLE" in SQL Server Books Online.<BR><BR></LI>
+
+	<LI>When adding an article with an identity column, set the option <B>0x4</B> for the <B>@schema_option</B> parameter of <B>sp_addarticle</B>. For more information about this parameter, see "sp_addarticle" in SQL Server Books Online.<BR><BR></LI>
+
+	<LI>After initializing the Subscriber, execute DBCC CHECKIDENT for each table with an identity column. This allows you to specify a starting value for inserts into the identity column at the Subscriber, so that the values inserted will not be the same as those inserted at the Publisher. For example, you could specify that inserts at the Subscriber should start at 1,000,000:
+<PRE><CODE>USE Northwind
+GO
+DBCC CHECKIDENT ('Employees', RESEED, 1000000)
+GO</CODE></PRE>
+</LI>
+</OL>
+
+<P>For more information, see DBCC CHECKIDENT in SQL Server Books Online.</P>
+
+<H3>5.2.16 Non-SQL Server Subscribers Not Supported for Distributors Running in Windows-on-Windows 64 Mode</H3>
+
+<P><I>Introduced in SP4</I></P>
+
+<P>Distributor instances of SQL Server 2000 (32-bit) running in Windows-on-Windows 64 mode on Windows 2003 SP1 systems running on X64 or compatible processors cannot have non-SQL Server Subscribers. Although running Windows-on-Windows 64 mode is now supported for SQL Server 2000 SP4, this mode is not supported by drivers or providers used to connect from the Distributor to the non-SQL Server Subscriber.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_5464_sql_server_agent_enhancements_705"></A>5.3 SQL Server Agent and Shared Tools Enhancements</H2>
+
+<P>This section discusses enhancements to SQL Server Agent that are included in SP4. </P>
+
+<H3><A NAME="_sql_server_agent_logs_account_information"></A>5.3.1 SQL Server Agent Logs Account Information</H3>
+
+<P><I>Introduced in SP2</I></P>
+
+<P>The SQL Server Agent Job History now records the Windows account under which each job step runs. This information helps administrators diagnose security issues with scheduled jobs, including scheduled jobs that are defined for replication and Data Transformation Services (DTS) tasks.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_sql_server_agent_permission_checks_d3jb"></A>5.3.2 SQL Server Agent Permission Checks</H3>
+
+<P><I>Introduced in SP3</I></P>
+
+<P>MSDE 2000 now checks to ensure that the Agent job owner has permission to append or overwrite the output log file from each job. This happens in three ways:
+
+<UL type=disc>
+	<LI>If the job owner is a member of the <B>sysadmin</B> fixed server role, the job output log file can be written to the server. <BR><BR></LI>
+
+	<LI>If the job owner is a Windows user, MSDE 2000 tests to see if the user has permission to write to the selected job output log file location on the server.<BR><BR></LI>
+
+	<LI>If the job owner is a MSDE 2000 user, MSDE 2000 tests the SQL Server Agent proxy account for permission to write to the selected job output log file location on the server. If the proxy account has not been set, no log is written. </LI>
+</UL>
+
+<P>In all cases, jobs are written with SQL Server Agent credentials, but MSDE 2000 now tests to ensure the user has permission to write to the selected job output log file location on the server. Errors appear in the job history, but the job steps do not fail if the log file cannot be written.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H3><A NAME="_5464465_sql_server_agent_mail_mapi_profi_d3jb"></A>5.3.3 SQL Agent Mail MAPI Profiles</H3>
+
+<P><I>Introduced in SP3</I></P>
+
+<P>In MSDE 2000 and the 32-bit version of SQL Server 2000, SQL Agent Mail can be configured to use an Extended MAPI e-mail profile for sending e-mail alerts. You can use an Extended MAPI e-mail application, such as Microsoft Outlook, to create an Extended MAPI profile. In the 64-bit version of SQL Server 2000, SQL Agent Mail can only use a Simple MAPI profile for sending e-mail alerts. Do not use Simple MAPI profiles in MSDE 2000 or the 32-bit version of SQL Server 2000.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_sqlxml_enhancement_d3jb"></A>5.4 XML Enhancements</H2>
+
+<P>The following topic discusses an enhancement for XML and SQLXML in SP4.</P>
+
+<H3><A NAME="_improved_validation_of_xpath_expressions_wluf"></A>5.4.1 Improved Validation of XPath Expressions</H3>
+
+<P><I>Introduced in SP3</I></P>
+
+<P>When you apply SP4, OPENXML is updated to use a custom-built XML parsing technology designed to be backward compatible with MSXML 2.6. </P>
+
+<P>Prior to SP3, the version of the XML parser used by OPENXML permitted a predicate in an XPath expression to follow the special character abbreviation that identifies the current context node, which is denoted by a period (<CODE>.</CODE>) in XPath syntax. This violates the XPath syntax specification, which requires that this character be followed by a location path expression. </P>
+
+<P>With the new OPENXML behavior, a predicate cannot immediately follow the current context node abbreviation special character. XPath expressions in SQLXML queries (XPath queries against annotated mapping schemas and in XSLT style sheets written to transform the results of SQLXML queries) that use the faulty syntax will fail after you upgrade to SP3 or later.</P>
+
+<P>To prevent these failures, identify and fix any expressions that use the incorrect syntax. For example, the syntax of the XPath expression that is specified as the value of the test attribute in the following <CODE>xsl:if</CODE> element is not valid because the predicate, <CODE>[@ResourceTypeID='2']</CODE>, immediately follows the special character abbreviation that identifies the current context node. </P>
+
+<P>The following statement, which previously did not generate an error, will fail after SP3 or later is installed. </P>
+
+<PRE><CODE>&lt;xsl:if test=".[@ResourceTypeID='2']"&gt;</CODE></PRE>
+
+<P>To prevent a failure, the XPath expression must be amended as follows:</P>
+
+<PRE><CODE>&lt;xsl:if test="@ResourceTypeID='2'"&gt;</CODE></PRE>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_db-library_and_embedded_sql_for_c"></A>5.5 DB-Library and Embedded SQL for C</H2>
+
+<P><I>Introduced in SP1, updated for SP4</I></P>
+
+<P>While the DB-Library and Embedded SQL for C APIs are still supported in SQL Server 2000 and MSDE 2000, no future versions of SQL Server will include the files or documentation that are necessary to program applications that use these APIs. Connections from existing applications written using DB-Library and Embedded SQL for C will still be supported in the next version of SQL Server, but this support will be dropped in a future release. Do not use DB-Library or Embedded SQL when writing new applications. Remove dependencies on these technologies when modifying existing applications. Instead of DB-Library or Embedded SQL for C, use the system.data.SQLClient namespace from the .NET Framework or an API such as ADO, OLE DB, or ODBC to access data in SQL Server. For more information about these technologies, see SQL Server Books Online or the .NET Framework SDK.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_desktop_engine_setup_enhancements_wluf"></A>5.6 MSDE 2000 Setup Enhancements</H2>
+
+<P>The following topic describes an enhancement to MSDE 2000 Setup.</P>
+
+<H3><A NAME="_new_desktop_engine_setup_savesysdb_param_fzpy"></A>5.6.1 New MSDE 2000 Setup SAVESYSDB Parameter</H3>
+
+<P><I>Introduced in SP4</I></P>
+
+<P>MSDE 2000 SP4 introduces a new SAVESYSDB parameter for MSDE 2000 Setup. The SAVESYSDB parameter is intended to be used when upgrading instances of MSDE 2000 that were installed using merge modules or MSI files to future versions of SQL Server 2005 Express Edition. SAVESYSDB will be used in conjunction with a new feature planned for future versions of SQL Server Express. SAVESYSDB is only valid when uninstalling an instance by running MSDE 2000 Setup at the command prompt.</P>
+
+<P>By default, MSDE 2000 Setup deletes the files of the <B>master</B>, <B>model</B>, and <B>msdb</B> system databases when you uninstall an instance of MSDE 2000. When you specify SAVESYSDB=1, MSDE 2000 Setup leaves the files for these system databases in place.</P>
+
+<P>While SAVESYSDB can be specified at any time, it is only processed when used with the /x uninstall switch:</P>
+
+<PRE><CODE>Setup /x sqlrun01.msi SAVESYSDB=1 INSTANCENAME="MyInstance"</CODE></PRE>
+
+<P>SAVESYSDB is ignored if /x is not specified. If both SAVESYSDB and /x are specified, SAVESYSDB must be set to 1, setting it to any other value generates an error.</P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+<H2><A NAME="_54610_supportability_enhancements_d3jb"></A>5.7 Serviceability Enhancements</H2>
+
+<P><I>Introduced in SP4</I></P>
+
+<P>SQL Server 2000 SP4 introduces new serviceability functionality that enables you to uninstall hotfixes applied to SP4 and later versions of SQL Server 2000 running on Windows XP and Windows Server 2003. (This same functionality was available with SQL Server 2000 SP3, but only after the application of an additional hotfix). </P>
+
+<P><A HREF="#_contents_ar5q">[Top]</A></P>
+
+</BODY>
+</HTML>

@@ -1,0 +1,494 @@
+<html xmlns:controls>
+<head>
+    <title>Dashboard Table Test</title>
+    <LINK href="dashstyle.css" type="text/css" rel="stylesheet">
+    <?import namespace="controls" implementation="BasicPane/BasicPane.htc" ?>
+</head>
+<script id="PaneObjects" src="Pane.js"></script>
+<script id="jsCommon" src="common.js"></script>
+<script id="jsCommands" src="commands.js"></script>
+
+
+<script>
+    var g_CellSize = 7;
+    var g_SurplusSize = 50;
+    var g_ColumnNum = 3;
+    var g_sPageContext = location.hash.slice(1);
+    var g_NumOfReadyListviews = 0;
+    var g_AllowResize = false;
+    var g_TabToMoveTo = "";
+
+    var g_Panes = new Array();
+    var g_nLastHeight = new Array();
+
+    function body_onload()
+    {
+        // Initialize the "LastHeight" Array
+        for (var i = 0; i <= g_ColumnNum; i++)
+        {
+            g_nLastHeight[i] = -100;
+        }
+
+        // Page is now loaded, notify the MMC Console about it
+        NotifySnapin("IDR_PAGE_LOADED", g_sPageContext);
+    }
+
+    //  Updates the UI according to specified ISA edition type
+    function UpdateViewForEditionType(EditionType)
+    {
+        //  Nothing to do
+    }
+    
+    function AddPane(sTitle, nColumn, nPosition, bOpened, sTabGUID, nHeightMust, nHeightNicetohave, iStatus)
+    {
+        var tmpPane = new Pane(sTitle, nColumn, nPosition, bOpened, sTabGUID, nHeightMust, nHeightNicetohave, iStatus);
+        g_Panes.push(tmpPane);
+    }
+
+    function AddPaneObject(nColumn, nPosition, sGUID, sActiveX, sParams, nCol, nRow)
+    {
+        var i = GetIndexByColAndRow(g_Panes, nColumn, nPosition);
+        if (i == -1)
+        {
+            debugger;
+            return;
+        }
+        g_Panes[i].AddObject(new PaneObject(sGUID, sActiveX, sParams, nCol, nRow));
+    }
+
+    function ApplyPanes()
+    {
+        g_Panes.sort(PaneSortByPositionDesc);
+
+        //
+        // For each pane - insert into HTML
+        //
+        var tbl;
+        for (var i = 0; i < g_Panes.length; i++)
+        {
+            tbl = TranslateColNumToTable(g_Panes[i].nColumn);
+            if (tbl != null && tbl != undefined)
+                AddRowToTable(tbl, g_Panes[i]);
+            else
+            {
+                debugger;
+            }
+        }
+
+        //
+        // Reverse Panes array to ascending order for correct resizing
+        //
+        g_Panes.reverse();
+
+        TableDashboardMain.focus();
+    }
+
+    function DeleteAllPanes()
+    {
+        g_AllowResize = false;
+        while (g_Panes.length > 0)
+        {
+            g_Panes.pop();
+        }
+
+        for (var i = 0; i < g_ColumnNum; ++i)
+        {
+            var tbl = TranslateColNumToTable(i);
+            while (tbl.rows.length > 0)
+            {
+                tbl.deleteRow(0);
+            }
+        }
+    }
+
+    function TranslateColNumToTable(nCol)
+    {
+        if (nCol == null)
+        {
+            alert("TranslateColNumToTable(null)");
+            debugger;
+            return;
+        }
+        if (nCol == undefined)
+        {
+            alert("TranslateColNumToTable(undefined)");
+            debugger;
+            return;
+        }
+        switch (parseInt(nCol))
+        {
+            case 0:
+                return TableDashboardLeftCol;
+            case 1:
+                return TableDashboardRightCol;
+            case 2:
+                return TableDashboardDownCol;
+        }
+        alert("TranslateColNumToTable("+nCol+") : unknown");
+        debugger;
+        return null;
+    }
+
+    function AddRowToTable(tbl, Pane)
+    {
+        if (Pane == null || Pane == undefined)
+        {
+            debugger;
+            return;
+        }
+
+        tbl.insertRow(0);
+        tbl.rows(0).className = "trDashboard";
+        tbl.rows(0).insertCell(0);
+        tbl.rows(0).cells(0).className = "tdDashboard";
+        tbl.rows(0).cells(0).height = 1;
+
+        tbl.rows(0).cells(0).innerHTML =
+            "<controls:BasicPane id='"+Pane.GetControlName()+"' Heading='"+Pane.sTitle+"'"+
+            " ImgPrefix='BasicPane/' ColContext='"+Pane.nColumn+"' RowContext='"+Pane.nPosition+"'"+
+            " onPreMaximize='OpeningPane()' onPostMinimize='ClosingPane()' onTitleClicked='TitleClicked()'"+
+            " StatusIcon="+ GetStatusIconText(Pane.iStatus)+" State=" + (Pane.bOpened ? "'Maximized'" : "'Minimized'") +
+            " TestKey='BasicPane_"+Pane.sTabGUID+"'"+
+            " HasTitleLink=" + (Pane.sTabGUID != "" ? "'true'" : "'false'") +
+            " ContainedHtml=\""+Pane.GetObjectsString()+"\">" +
+            "</controls:BasicPane>";
+
+        Pane.UpdateObjectsString();
+    }
+
+    function SetPaneOpenState(nCol, nRow, isOpened)
+    {
+        var i = GetIndexByColAndRow(g_Panes, nCol, nRow);
+        if (i == -1)
+        {
+            debugger;
+            return;
+        }
+        g_Panes[i].bOpened = isOpened;
+        ResizeAllColumns(false);
+    }
+
+    function ClosingPane()
+    {
+        SetPaneOpenState(window.event.iTaskID, window.event.sTaskContext, 0 /* false */);
+        NotifySnapin("IDR_DASHBOARD_PANE_MINIMIZED", g_sPageContext);
+    }
+
+    function OpeningPane()
+    {
+        SetPaneOpenState(window.event.iTaskID, window.event.sTaskContext, -1 /* true */);
+        NotifySnapin("IDR_DASHBOARD_PANE_MAXIMIZED", g_sPageContext);
+    }
+
+    function TitleClicked()
+    {
+        var i = GetIndexByColAndRow(g_Panes, window.event.iTaskID, window.event.sTaskContext);
+        if (i == -1)
+        {
+            debugger;
+            return;
+        }
+        if (g_Panes[i].sTabGUID != "")
+        {
+            g_TabToMoveTo = g_Panes[i].sTabGUID;
+            NotifySnapin("IDR_DASHBOARD_TITLE_CLICKED", g_sPageContext);
+        }
+        else
+        {
+            g_TabToMoveTo = "";
+        }
+    }
+
+    function GetTabGUIDToMoveTo()
+    {
+        return g_TabToMoveTo;
+    }
+
+    function GetStatusIconText(iStatus)
+    {
+        switch (parseInt(iStatus))
+        {
+            // case 1: return "Running";    // Never a status
+            case 2: return "Ok";
+            case 3: return "Info";
+            case 4: return "Graph";
+            case 5: return "Warning";
+            case 6: return "Error";
+            default: return "None";
+        }
+    }
+
+    function AdjustColumn(nCol, nRemainder)
+    {
+        if (nRemainder < 1)
+            return;
+
+        for (var i = g_Panes.length - 1; i >= 0; i--)
+        {
+            if (g_Panes[i].nColumn == nCol && g_Panes[i].bOpened && g_Panes[i].nHeightNicetohave)
+            {
+                var BasicPane = document.getElementById(g_Panes[i].GetControlName());
+                for (var j = 0; j < g_Panes[i].ObjectsArr.length; ++j)
+                {
+                    var PaneObj = BasicPane.getContainedObjectById(g_Panes[i].ObjectsArr[j].sGUID);
+                    if (PaneObj == null)
+                    {
+                        alert("AdjustColumn: Missing obj in Col: "+g_Panes[i].nColumn+" Row: "+g_Panes[i].nPosition);
+                        debugger;
+                        continue;
+                    }
+                    PaneObj.height = (parseInt(PaneObj.height) + nRemainder / g_Panes[i].nInnerRows);
+                }
+                BasicPane.refresh();
+                return;
+            }
+        }
+    }
+
+    function ResizeColumn(nCol, bBecauseResize, nBodyHeight)
+    {
+        if (!g_AllowResize || nCol == (g_ColumnNum - 1))
+            return;
+
+        if (bBecauseResize && nBodyHeight == g_nLastHeight[nCol+1])
+            return;
+        g_nLastHeight[nCol+1] = nBodyHeight;
+
+        // Accumulate required heights of each row
+        var nAccumHeightMust = GetAccumColumnHeight(nCol)
+
+        // We will use a higher body than available if needed (use scrollbars)
+        if (nBodyHeight < nAccumHeightMust)
+        {
+            nBodyHeight = nAccumHeightMust;
+        }
+
+        var nAccumHeightNice = GetAccumColumnHeightNice(nCol)
+        var nOpenedPanes = GetOpenedPanes(nCol);
+        var nOverNice = (nOpenedPanes ? (nBodyHeight - nAccumHeightMust - nAccumHeightNice) / nOpenedPanes : 0);
+        if (nOverNice < 0)
+            nOverNice = 0;
+
+        // Assign each row the height that it deserves
+        var nGaveNice = 0;
+        var nTmpNice;
+        var tbl = TranslateColNumToTable(nCol);
+        for (var i = 0; i < g_Panes.length; i++)
+        {
+            if (g_Panes[i].nColumn == nCol)
+            {
+                if (g_Panes[i].bOpened && (g_Panes[i].nHeightNicetohave != 0))
+                {
+                    nTmpNice = Math.min(g_Panes[i].nHeightNicetohave, nBodyHeight - nAccumHeightMust - nGaveNice) + nOverNice;
+                }
+                else
+                {
+                    nTmpNice = 0;
+                }
+                nGaveNice += nTmpNice;
+                var BasicPane = document.getElementById(g_Panes[i].GetControlName());
+                for (var j = 0; j < g_Panes[i].ObjectsArr.length; ++j)
+                {
+                    var PaneObj = BasicPane.getContainedObjectById(g_Panes[i].ObjectsArr[j].sGUID);
+                    if (PaneObj == null)
+                    {
+                        alert("ResizeColumn: Missing obj in Col: "+g_Panes[i].nColumn+" Row: "+g_Panes[i].nPosition);
+                        debugger;
+                        continue;
+                    }
+                    PaneObj.height = ((nTmpNice + g_Panes[i].nHeightMust) / g_Panes[i].nInnerRows);
+                }
+                BasicPane.refresh();
+            }
+        }
+        AdjustColumn(nCol, nBodyHeight - nAccumHeightMust - nGaveNice);
+    }
+
+    function GetOpenedPanes(nCol)
+    {
+        var nCnt = 0;
+        for (var i = 0; i < g_Panes.length; i++)
+        {
+            if ((g_Panes[i].nColumn == nCol) && g_Panes[i].bOpened && g_Panes[i].nHeightNicetohave)
+            {
+                nCnt++;
+            }
+        }
+        return nCnt;
+    }
+
+    function GetAccumColumnHeightNice(nCol)
+    {
+        var nAccumHeightNice = 0;
+        for (var i = 0; i < g_Panes.length; i++)
+        {
+            if (g_Panes[i].nColumn == nCol && g_Panes[i].bOpened)
+            {
+                nAccumHeightNice += g_Panes[i].nHeightNicetohave;
+            }
+        }
+        return nAccumHeightNice;
+    }
+
+    function GetAccumColumnHeight(nCol)
+    {
+        var nAccumHeightMust = 0;
+        var nCntOpened = 0, nCntClosed = 0;
+        for (var i = 0; i < g_Panes.length; i++)
+        {
+            if (g_Panes[i].nColumn == nCol)
+            {
+                nAccumHeightMust += g_Panes[i].GetMustHeight();
+                if (g_Panes[i].bOpened)
+                    nCntOpened++;
+                else
+                    nCntClosed++;
+            }
+        }
+        // TODO : Calculate cellpadding, cellspacing, etc. instead of fixed size.
+        nAccumHeightMust += nCntOpened * g_CellSize + nCntClosed * g_CellSize;
+        return nAccumHeightMust;
+    }
+
+    function ResizeAllColumns(bBecauseResize)
+    {
+        if (!g_AllowResize)
+            return;
+
+        var nBodyHeight = bodyMain.clientHeight - g_SurplusSize;
+
+        if (bBecauseResize && nBodyHeight == g_nLastHeight[0])
+            return;
+        g_nLastHeight[0] = nBodyHeight;
+
+        //
+        // No scrolling, unless we have to
+        //
+        if (bodyMain.clientWidth < 400)
+            TableWrapper.width = "400";
+        else
+            TableWrapper.width = "100%";
+
+        //
+        // First - resize the bottom table.
+        // Next - resize the rest, but omit the bottom table's height.
+        //
+        ResizeColumn(g_ColumnNum - 1, bBecauseResize, nBodyHeight);
+
+        var nUseHeight = nBodyHeight - GetAccumColumnHeight(g_ColumnNum - 1);
+
+        for (var i = 0; i < g_ColumnNum - 1; i++)
+        {
+            if (GetAccumColumnHeight(i) > nUseHeight)
+                nUseHeight = GetAccumColumnHeight(i);
+        }
+
+        for (var i = 0; i < g_ColumnNum - 1; i++)
+        {
+            ResizeColumn(i, bBecauseResize, nUseHeight);
+        }
+    }
+    function ResizeAllColumnsTrue()
+    {
+        ResizeAllColumns(true);
+    }
+
+    window.onresize = ResizeAllColumnsTrue;
+
+</script>
+
+<script>
+    function AllowResize()
+    {
+        g_AllowResize = true;
+        ResizeAllColumns(false);
+    }
+
+    function GetObjectByGUID(sGUID)
+    {
+        var i = GetIndexByGUID(g_Panes, sGUID);
+        if (i == -1)
+        {
+            debugger;
+            return null;
+        }
+
+        return document.getElementById(g_Panes[i].GetControlName()).getContainedObjectById(sGUID).object;
+    }
+
+    function GetPaneOpenedStatus(nCol, nRow)
+    {
+        var i = GetIndexByColAndRow(g_Panes, nCol, nRow);
+        if (i == -1)
+            return -1;
+
+        return g_Panes[i].bOpened ? 1 : 0;
+    }
+
+    function GetPaneOpenedStatusByGUID(sGUID)
+    {
+        var i = GetIndexByGUID(g_Panes, sGUID);
+        if (i == -1)
+        {
+            debugger;
+            return "error";      //  Return non-integer type to indicate error
+        }
+
+        return g_Panes[i].bOpened ? 1 : 0;
+    }
+
+    function SetObjectStatusAndHeightByGUID(sGUID, iStatus, nHeightMust, nHeightNicetohave)
+    {
+        var i = GetIndexByGUID(g_Panes, sGUID);
+        if (i == -1)
+        {
+            debugger;
+            return false;
+        }
+
+        if (g_Panes[i].iStatus != iStatus)
+        {
+            g_Panes[i].iStatus = iStatus;
+            var StatusName = GetStatusIconText(iStatus);
+            document.getElementById(g_Panes[i].GetControlName()).StatusIcon = StatusName;
+        }
+
+        // special case for the graphs pane
+        if (iStatus == 4 /* graphs*/ )
+        {
+            document.getElementById(g_Panes[i].GetControlName()).getContainedObjectById(sGUID).height = parseInt(nHeightMust) + parseInt(nHeightNicetohave);
+            document.getElementById(g_Panes[i].GetControlName()).refresh();
+        }
+        else
+        {
+            g_Panes[i].nHeightMust = nHeightMust;
+            g_Panes[i].nHeightNicetohave = nHeightNicetohave;
+        }
+        return true;
+    }
+
+</script>
+
+<body id=bodyMain class=MarginlessBody style="overflow:auto;" onload="body_onload()" >
+    <table id="TableWrapper" border="0" width="100%"><tr><td>
+    <table class="TableDashboard" id="TableDashboardMain">
+        <tr class="trDashboard">
+            <td class="tdDashboard" width="40%">
+                <table class="TableDashboard" id="TableDashboardLeftCol" cellspacing="6px">
+                </table>
+            </td>
+            <td class="tdDashboard" width="60%">
+                <table class="TableDashboard" id="TableDashboardRightCol" cellspacing="6px">
+                </table>
+            </td>
+        </tr>
+        <tr class="trDashboard">
+            <td class="tdDashboard" width="100%" colspan="2">
+                <table class="TableDashboard" id="TableDashboardDownCol" cellspacing="6px">
+                </table>
+            </td>
+        </tr>
+    </table>
+    </td></tr></table>
+</body>
+</html>

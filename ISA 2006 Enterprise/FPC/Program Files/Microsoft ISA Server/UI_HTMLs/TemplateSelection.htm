@@ -1,0 +1,146 @@
+<html xmlns:controls>
+	<head>
+		<script id="jsCommon" src="common.js"></script>
+        <script id="jsCommands" src="commands.js"></script>
+        <link REL="stylesheet" type="text/css" href="_common/isa.css">
+		<script>
+            var g_sPageContext = location.hash.slice(1);
+            var g_sNetworkTemplatePath = "..\\NetworkTemplates\\";
+            
+            var g_MainTable;
+            var g_trSelected = null;
+            var g_trWithFocus = null;
+            
+   			function getRowOf(e){
+				if (e == null){
+					return null;
+				}
+
+				for (var eNext = e ; (eNext != document.body); eNext = eNext.parentElement){
+					if(eNext.id == "idRow"){
+						return eNext;
+					}
+				}
+
+				return null;
+			}
+			
+			function setStyle(element, style){
+				element.className = style;
+				for(var i = 0; i < element.children.length; i++)
+				{
+					setStyle(element.children[i], style);
+				}
+			}
+            
+            function onSetFocus(){
+                onLoseFocus();
+				g_trWithFocus = getRowOf(event.srcElement);
+				setStyle(g_trWithFocus, "TemplateMouseOver");
+			}
+            
+            function onLoseFocus(){
+                if(g_trWithFocus){
+				    setStyle(g_trWithFocus, "TemplatesNormal");
+				    g_trWithFocus = null;
+				}
+			}
+            
+            function MarkSelectedRow(tr){
+				if(g_trSelected){
+					g_trSelected.cells(0).id = "TemplateUnSelected";
+				}
+				g_trSelected = tr;
+				g_trSelected.cells(0).id = "TemplateSelected";
+            }
+            
+            function onMoseDown(){
+				var tr = getRowOf(event.srcElement);
+				MarkSelectedRow(tr);
+				NotifySnapin("IDR_NETWORK_TEMPLATE_SELECT", g_sPageContext);
+            }
+
+            function onKeyPress(){
+                if(window.event.keyCode == 13)
+                    onMoseDown();
+            }
+
+            // public
+            function GetSelectedTemplate(){
+				return g_trSelected.getAttribute("strName");
+			}
+            
+            // public
+            function SelectTemplate(strName){
+				for(var i = 0; i < g_MainTable.rows.length; ++i){
+					var tr = g_MainTable.rows[i];
+					if(tr.getAttribute("strName") == strName){
+						MarkSelectedRow(tr);
+					}
+				}
+            }
+            
+            // public
+            function AddTemplate(file, title, description){
+				g_MainTable = document.getElementById("idMainTable");
+	
+				// add the new row
+				var tr = g_MainTable.insertRow();
+
+				//store title
+				tr.setAttribute("strName", title);
+				
+				//tr.style.cursor	= "hand" ;
+				tr.onmouseover = onSetFocus;
+				tr.onfocus = onSetFocus; 
+				tr.onmouseout = onLoseFocus;
+				tr.onblur = onLoseFocus;
+				tr.onmousedown = onMoseDown;
+				tr.onkeypress = onKeyPress;
+				tr.id = "idRow";
+				tr.className = "TemplateNormal";
+				tr.tabIndex = 1;
+
+				var td = tr.insertCell();
+				td.id = "TemplateUnSelected";
+				var InnerTable = document.createElement("table");
+				td.appendChild(InnerTable);
+				
+				// add top row (for image and title)
+				var trImgTitle = InnerTable.insertRow();
+				
+				// add image
+				var tdImg = trImgTitle.insertCell();
+				var Img = document.createElement("img");
+				Img.src = g_sNetworkTemplatePath + file;
+				tdImg.appendChild(Img);
+			
+				// add title
+				var tdTitle = trImgTitle.insertCell();
+				tdTitle.innerHTML	= "<b>" + title + "</b>"				
+					
+				// add description
+				var trDesc = InnerTable.insertRow();
+				var tdDesc = trDesc.insertCell();
+				tdDesc.colSpan = "2";
+				tdDesc.innerHTML = "<p>" + description + "</p>";
+			}
+			
+			
+			
+            function body_onload() {
+				NotifySnapin("IDR_PAGE_LOADED", g_sPageContext);
+            }
+           
+            //  Updates the UI according to specified ISA edition type
+            function UpdateViewForEditionType(EditionType)
+            {
+                //  Nothing to do
+            }
+		</script>
+	</head>
+	<body topmargin="0" leftmargin="0" rightmargin="0" onload="body_onload()" class = "TemplateNormal">
+		<table width="100%" id="idMainTable" border="0" cellspacing="3">
+		</table>
+	</body>
+</html>

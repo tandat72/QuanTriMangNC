@@ -1,0 +1,29 @@
+<html xmlns:controls>
+    <head>
+		<LINK REL="stylesheet" type="text/css" href="_common/isa.css">
+        <script id="jsCommon" src="common.js"></script>
+        <script id="jsCommands" src="commands.js"></script>
+        <script>
+            var g_sPageContext = location.hash.slice(1);
+
+            function body_onload() {
+                var ListviewsCollection = document.getElementsByName("IsaToolBox");
+                ListviewsCollection[0].id = g_sPageContext;
+                ListviewsCollection[0].TestKey = "ISA_TOOLBOX_CONTROL" + g_sPageContext;
+                NotifySnapin("IDR_PAGE_LOADED", g_sPageContext);
+            }
+            
+            //  Updates the UI according to specified ISA edition type
+            function UpdateViewForEditionType(EditionType)
+            {
+                //  Nothing to do
+            }
+        </script>
+    </head>
+    <body topmargin="0" leftmargin="0" rightmargin="0" SCROLL=no height="100%" width="100%" onload="body_onload()" bgColor="activeborder">
+        <object id="IsaToolBox" NAME="IsaToolBox" height="100%" style="width=196px" classid="CLSID:18E6F7AC-1EE1-44E1-A13A-5298FB52EFB0" VIEWASTEXT>
+        </object>
+        <script LANGUAGE="javascript" FOR="objIsaToolBox" EVENT="ControlCreated">
+        </script>
+    </body>
+</html>

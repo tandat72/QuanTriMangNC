@@ -1,0 +1,579 @@
+<meta name=vs_targetSchema content="http://schemas.microsoft.com/intellisense/ie5">
+
+<public:component tagName="TabsHandler" literalcontent="false">
+        <public:property name="Select" get="getSelect" put="putSelect" value="0" />
+        <public:property name="content" get="getContent" />
+        <public:property name="tabWidth" internalname="m_nTabWidth" value="0" />
+        <public:property name="AlwaysShowTab" internalname="m_bAlwaysShowTab" value="true" />
+        <public:property name="imgPrefix" internalname="m_sImgPrefix" put="putImgPrefix" value="" />
+        <public:property name="boldWhenSelected" internalname="m_sBoldWhenSelected" value="true" />
+        <public:property name="padding" internalname="m_nPadding" value="0" />
+        <public:property name="boostUp" internalname="m_nBoostUp" value="0" />
+        <public:property name="contentHeight" internalname="m_nContentHeight" value="30" />
+        <public:property name="boostDown" internalname="m_nBoostDown" value="0" />
+        <public:property name="NumberOfPages" get="getNumberOfPages" />
+        <public:property name="InnerDocument" get="getInnerDocument" />
+        <public:method name="AddPage" />
+        <public:method name="PageDocument" />
+        <public:method name="PageID" />
+        <public:method name="PageLoaded" />
+        <public:method name="PageTitle" />
+        <public:method name="renderTabs" />
+        
+        <public:event name="onTabChanged" id="m_eventTabChanged" />
+        <public:event name="onTabLoaded" id="m_eventTabLoaded" />
+
+        <public:defaults id=DefaultTaskFontID viewLinkContent style="font-family: tahoma; font-size: 8pt" />
+        <public:defaults tabStop="true"/>
+        <public:attach event="oncontentready" onevent="init()" />
+        
+        <html xmlns:controls>
+                <style id=ControlsStyleID>
+                        td {
+                                font-family: tahoma;
+                                font-size: 8pt;
+                        }
+
+                        .tab {
+                                cursor: hand;
+                        }
+                        
+                </style>
+                
+                <head>
+            <link rel="stylesheet" type="text/css" href="../_common/isa.css">
+                </head>
+                <body id="bodyTabsHandler" width="100%" height="100%" scroll="no"
+                      onresize="javascript:UpdatePageAreaHeight()"
+                      onload="javascript:UpdatePageAreaHeight()">
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                                <tr width="100%">
+                                    <td width="100%">
+                                        <table cellpadding="0" cellspacing="0" width="100%" >
+                                                <tr width="100%" id=trTabs />
+                                        </table>
+                                    </td>
+                                </tr>
+                        </table>                        
+                        <table id="tblPageArea" cellpadding="0" cellspacing="0" width="100%" height="0">
+                                <tr width="100%" height="100%">
+                                    <td id="tdPageArea" width="100%" height="100%" />
+                                </tr>
+                        </table>                        
+                        
+                        <script language="jscript">
+
+                                //////////////////////////////////////////////////////////////////////
+
+                                //      Member data.
+                                //
+                                var     m_bInitialized          = false ;
+                                var     m_niSelectedPage        = -1 ;
+                                var m_aPages                    = new Array () ;
+                                var     m_elementSelected       = null ;
+                                var     m_nTabWidth                     = 0 ;
+                                var     m_sImgPrefix            = "" ;
+                                var m_sBoldWhenSelected = "true" ;
+                                var m_bAlwaysShowTab    = true ;
+                                var m_nPadding                  = 0 ;
+                                var m_nBoostUp                  = 0 ;
+                                var m_nBoostDown                = 0 ;
+                                var     m_nContentHeight        = 30 ;
+                                var m_niHiliteTab               = -1 ;
+
+                                //////////////////////////////////////////////////////////////////////
+                                //      Methods for: initialization
+                                //
+
+                                var m_aImages;
+                                var m_aImagesTab,m_aImagesTab2,m_aImagesTab3;
+
+                                function ClearStatus()
+                                {
+                                    if (window.status.search("#none")) 
+                                    {
+                                        window.status = "";
+                                    }
+                                }
+
+                                
+                                function UpdatePageAreaHeight()
+                                {
+                                    tblPageArea.style.pixelHeight = bodyTabsHandler.offsetHeight - tblPageArea.offsetTop;
+                                }
+
+                                function preloadImage (sImage)
+                                {
+                                    var img = document.createElement ("img") ;
+                                    img.src = m_sImgPrefix + sImage ;
+                                    img.name = sImage;
+                                    
+                                    m_aImages.push (img) ;
+                                        
+                                }
+
+                                function preloadImages ()
+                                {
+                                    m_aImages = new Array () ;
+                                    
+                                    preloadImage ("a.png") ;
+                                    preloadImage ("aabb.png") ;
+                                    preloadImage ("aabx.png") ;
+                                    preloadImage ("aann.png") ;
+                                    preloadImage ("abbb.png") ;
+                                    preloadImage ("abnn.png") ;
+                                    preloadImage ("axbb.png") ;
+                                    preloadImage ("axnn.png") ;
+                                    preloadImage ("b.png") ;
+                                    preloadImage ("bbaa.png") ;
+                                    preloadImage ("bbab.png") ;
+                                    preloadImage ("bbax.png") ;
+                                    preloadImage ("bxaa.png") ;
+                                    preloadImage ("n.png") ;
+                                    preloadImage ("nnaa.png") ;
+                                    preloadImage ("nnab.png") ;
+                                    preloadImage ("nnax.png") ;
+                                    preloadImage ("x.png") ;
+                                }
+
+                                function GetPage(iPageLocation) {
+                                
+                                        for (i=0;i<m_aPages.length;i++) {
+                                                if (m_aPages[i].m_niPage == iPageLocation) {
+                                                        return m_aPages[i];
+                                                }
+                                        }
+                                }
+                                
+                                function AddPage(Title,href,ID,iPageLocation,bRender) {
+                                
+                                        var page = new Object ();
+                                        
+                                        if ((iPageLocation ==-1) || (iPageLocation >  m_aPages.length)) {
+                                                iPageLocation = m_aPages.length;
+                                        }
+                                        page.m_niPage = iPageLocation
+                                        page.m_sRef     = href;
+                                        page.m_sText = Title;
+                                        page.m_id = ID;
+                                                
+
+                                        if (0 == iPageLocation) {
+                                                if (trTabs.cells.length == 0) {
+                                                        page.m_tdSep1 = trTabs.insertCell();
+                                                        page.m_tdSep1.paddingLeft=0;
+                                                        page.m_tdSep1.paddingRight=0;
+                                                        page.m_tdSep1.noWrap = true;
+                                                        var tdLast = trTabs.insertCell () ;
+                                                        tdLast.background       = m_sImgPrefix + "n.png" ;
+                                                        tdLast.width            = "100%" ;
+                                                } else {
+                                                        page.m_tdSep1 = trTabs.cells[0];
+                                                }                                               
+                                        } else {
+                                                var prevPage = GetPage(iPageLocation-1);                                        
+                                                page.m_tdSep1 = prevPage.m_tdSep2 ;
+                                        }
+                        
+                                        page.m_tdMain = trTabs.insertCell (page.m_tdSep1.cellIndex+1) ;
+                                        page.m_tdSep2 = trTabs.insertCell (page.m_tdMain.cellIndex+1) ;
+                                        page.m_tdSep2.paddingLeft=0;
+                                        page.m_tdSep2.paddingRight=0;
+                                        page.m_tdSep2.noWrap = true;
+                                        page.m_hrefTab = document.createElement("a");
+                                        page.m_hrefTab.href = "#none";
+                                        page.m_hrefTab.onmousemove = ClearStatus;
+                                        page.m_hrefTab.id = "hrefTab";
+                                        page.m_hrefTab.tabIndex = -1;
+                                        page.m_tdMain.appendChild(page.m_hrefTab);
+                                        page.m_element = null;
+                                        
+                                        var     nextPage = GetPage(iPageLocation);
+                                        if (nextPage != null) {
+                                                nextPage.m_tdSep1 =     page.m_tdSep2;  
+                                        }
+                                        
+                                        for (i=0 ; i<m_aPages.length    ; i++) {
+                                                if (m_aPages[i].m_niPage >= iPageLocation) {
+                                                        m_aPages[i].m_niPage++;
+                                                }
+                                        }
+                                        
+                                                                                
+                                        m_aPages.push(page); 
+                                        
+                                        if (bRender) {
+                                                render () ;
+                                        }
+                                }
+                                
+
+                                function init ()
+                                {
+                                        element.style.display   = "block";
+                                        element.style.width             = "100%";
+                                        element.style.height    = "100%";
+
+					var TabCollection = element.children.tags("A");
+                                        var nNumPages = TabCollection.length;
+
+                                        var sImgPrefix = m_sImgPrefix;
+                                        m_sImgPrefix = "TabsHandler/tab-";
+                                        preloadImages () ;
+                                        m_aImagesTab = m_sImgPrefix;
+                                        
+                                        m_sImgPrefix = "TabsHandler/tab2-";
+                                        preloadImages () ;
+                                        m_aImagesTab2 = m_sImgPrefix;
+                                        
+                                        m_sImgPrefix = "TabsHandler/tab3-";
+                                        preloadImages () ;
+                                        m_aImagesTab3 = m_sImgPrefix;
+
+                                        m_sImgPrefix = sImgPrefix;
+                                        preloadImages () ;
+                                        
+                                        for (var niPage = 0 ; niPage < nNumPages ; ++niPage) 
+                                        {
+                                                AddPage(TabCollection[niPage].innerText,TabCollection[niPage].href,"",-1,false);
+                                        }
+
+                                        m_bInitialized = true;
+                                        render () ;
+                                }
+
+                                //////////////////////////////////////////////////////////////////////
+                                //      Methods for: rendering
+                                //
+                                
+                                
+                                function replaceImageIn (td, sImage)
+                                {
+                                    var sFullImagePath = m_sImgPrefix + sImage ;
+                                    
+                                    if ((td.img == undefined) || (td.img.src !=sFullImagePath)) 
+                                    {
+                                        for (i=0; i< m_aImages.length; i++)
+                                        {
+                                        
+                                            if (sImage == m_aImages[i].name)
+                                            {
+                                                td.img = m_aImages[i] ;
+                                                td.style.width = td.img.width;
+                                            }
+                                        }
+                                        td.style.height = m_nContentHeight;
+                                        td.background = sFullImagePath;
+                                     }
+                                 }
+
+                                function replaceBackgroundImageOf (td, sImage)
+                                {
+                                        var sFullImagePath = m_sImgPrefix + sImage ;
+
+                                        if (td.background != sFullImagePath) {
+                                                td.background = sFullImagePath ;
+                                        }
+                                }
+
+                                function replaceInnerHtmlOf (td, sHtml)
+                                {
+                                        if (td.innerHTML != sHtml) {
+											td.innerHTML = sHtml;
+                                        }
+                                }
+
+                                function renderTab (niPage)
+                                {
+                                        
+                                        var niTab = m_aPages[niPage].m_niPage;
+                                        var niTabSelected = 0;
+                                        if (m_niSelectedPage >= 0) {
+                                            niTabSelected = m_aPages[m_niSelectedPage].m_niPage;
+                                        } 
+                                        var niHiliteTab = -1;
+                                        if (m_niHiliteTab != -1) {
+                                                niHiliteTab = m_aPages[m_niHiliteTab].m_niPage;
+                                        }
+                                        
+                                        // render first separator
+                                        if (niTab == 0) {
+                                                if (niTab == niTabSelected) {
+                                                        replaceImageIn (m_aPages[niPage].m_tdSep1, "nnaa.png") ;
+                                                } else if (niTab == niHiliteTab) {
+                                                        replaceImageIn (m_aPages[niPage].m_tdSep1, "nnax.png") ;
+                                                } else {
+                                                        replaceImageIn (m_aPages[niPage].m_tdSep1, "nnab.png") ;
+                                                }
+                                        } else {
+                                                if (niTab == niTabSelected) {
+                                                        if (niTab - 1 == niHiliteTab) {
+                                                                replaceImageIn (m_aPages[niPage].m_tdSep1, "bxaa.png") ;
+                                                        } else {
+                                                                replaceImageIn (m_aPages [niPage].m_tdSep1, "bbaa.png") ;
+                                                        }
+                                                } else if (niTab - 1 == niTabSelected) {
+                                                        if (niTab == niHiliteTab) {
+                                                                replaceImageIn (m_aPages [niPage].m_tdSep1, "aabx.png") ;
+                                                        } else {
+                                                                replaceImageIn (m_aPages [niPage].m_tdSep1, "aabb.png") ;
+                                                        }
+                                                } else {
+                                                        if (niTab < niTabSelected) {
+                                                                if (niTab == niHiliteTab) {
+                                                                        replaceImageIn (m_aPages [niPage].m_tdSep1, "bbax.png") ;
+                                                                }
+                                                                else if (niTab - 1 == niHiliteTab) {
+                                                                        replaceImageIn (m_aPages [niPage].m_tdSep1, "axbb.png") ;
+                                                                } else {
+                                                                        replaceImageIn (m_aPages [niPage].m_tdSep1, "bbab.png") ;
+                                                                }
+                                                        }
+                                                        else {
+                                                                if (niTab == niHiliteTab) {
+                                                                        replaceImageIn (m_aPages [niPage].m_tdSep1, "bbax.png") ;
+                                                                } else if (niTab - 1 == niHiliteTab) {
+                                                                        replaceImageIn (m_aPages [niPage].m_tdSep1, "axbb.png") ;
+                                                                } else {
+                                                                        replaceImageIn (m_aPages [niPage].m_tdSep1, "abbb.png") ;
+                                                                }
+                                                        }
+                                                }
+                                        }
+                                
+                                        // render tab center
+                                        if (niTab == niTabSelected) {
+												        replaceInnerHtmlOf (
+                                                        m_aPages [niPage].m_hrefTab,
+                                                        ((m_sBoldWhenSelected == "true") ? "<U><B>" : "") + m_aPages [niPage].m_sText + ((m_sBoldWhenSelected == "true") ? "</B></U>" : "")) ;
+
+                                                replaceBackgroundImageOf (m_aPages [niPage].m_tdMain, "a.png") ;
+
+                                                m_aPages [niPage].m_tdMain.style.paddingTop             = ((m_nBoostUp < 0) ? -m_nBoostUp : 0) ;
+                                                m_aPages [niPage].m_tdMain.style.paddingBottom  = ((m_nBoostUp > 0) ? m_nBoostUp : 0) ;
+                                        } else if (niTab == niHiliteTab) {
+                                                replaceInnerHtmlOf (m_aPages [niPage].m_hrefTab, m_aPages [niPage].m_sText) ;
+
+                                                replaceBackgroundImageOf (m_aPages [niPage].m_tdMain, "x.png") ;
+
+                                                m_aPages [niPage].m_tdMain.style.paddingTop             = ((m_nBoostDown < 0) ? -m_nBoostDown : 0) ;
+                                                m_aPages [niPage].m_tdMain.style.paddingBottom  = ((m_nBoostDown > 0) ? m_nBoostDown : 0) ;
+                                        } else {
+                                                replaceInnerHtmlOf (m_aPages [niPage].m_hrefTab, m_aPages [niPage].m_sText) ;
+
+                                                replaceBackgroundImageOf (m_aPages [niPage].m_tdMain, "b.png") ;
+
+                                                m_aPages [niPage].m_tdMain.style.paddingTop             = ((m_nBoostDown < 0) ? -m_nBoostDown : 0) ;
+                                                m_aPages [niPage].m_tdMain.style.paddingBottom  = ((m_nBoostDown > 0) ? m_nBoostDown : 0) ;
+                                        }
+
+                                        if (m_nTabWidth > 0) {
+                                                m_aPages [niPage].m_tdMain.width                        = m_nTabWidth ;
+                                        }
+
+                                        m_aPages [niPage].m_tdMain.align                = "center" ;
+                                        m_aPages [niPage].m_tdMain.noWrap                       = true ;
+                                        m_aPages [niPage].m_hrefTab.className           = "tabHREF" ;
+                                        m_aPages [niPage].m_hrefTab.onclick                     = onClickTab;
+                                        m_aPages [niPage].m_tdMain.TestKey                      =  "TAB_HANDLE_"+m_aPages[niPage].m_id;
+                                        m_aPages [niPage].m_tdMain.m_niTab                      = niPage;
+                                        m_aPages [niPage].m_hrefTab.m_niTab                         = niPage;
+                                        m_aPages [niPage].m_tdMain.style.paddingLeft    = m_nPadding ;
+                                        m_aPages [niPage].m_tdMain.style.paddingRight   = m_nPadding ;
+
+                                        // render second separator
+                                        if (niTab == m_aPages.length - 1) {
+                                                if (niTab == niTabSelected) {
+                                                        replaceImageIn (m_aPages [niPage].m_tdSep2, "aann.png") ;
+                                                }
+                                                else if (niTab == niHiliteTab) {
+                                                        replaceImageIn (m_aPages [niPage].m_tdSep2, "axnn.png") ;
+                                                }
+                                                else {
+                                                        replaceImageIn (m_aPages [niPage].m_tdSep2, "abnn.png") ;
+                                                }
+                                        }
+                                        /*
+                                        else {
+                                                if (niTab == niTabSelected) {
+                                                        replaceImageIn (m_aPages [niPage].m_tdSep2, "aabb.png") ;
+                                                }
+                                                else {
+                                                        replaceImageIn (m_aPages [niPage].m_tdSep2, "abbb.png") ;
+                                                }
+                                        }
+                                        */
+                                }
+
+                                function renderPage (niPage)
+                                {
+                                        var oPage = m_aPages [niPage] ;
+                                        
+                                        if (oPage.m_element == null) 
+                                        {
+                                                var div = document.createElement ("div") ;
+                                                var iframe = document.createElement ("iframe") ;
+
+                                                iframe.frameBorder      = 0 ;
+                                                iframe.style.width      = "100%" ;
+                                                iframe.style.height     = "100%" ;
+                                                iframe.name                     = oPage.m_id ;
+                                                div.appendChild (iframe) ;
+                                                oPage.m_iframe          = iframe ;
+                                                div.runtimeStyle.display = "none" ;
+                                                oPage.m_element = div ;
+
+                                                tdPageArea.appendChild (div) ;
+                                                iframe.src                      = oPage.m_sRef+"#"+oPage.m_id ;
+                                        }
+                                }
+
+                                function renderTabs () {
+                                        if ((m_aPages.length > 1) || (m_bAlwaysShowTab == true)) {
+                                                trTabs.runtimeStyle.display = "block";
+                                                                                                
+                                                for (niTab = 0 ; niTab < m_aPages.length ; ++niTab) {
+                                                        renderTab (niTab) ;
+                                                }
+                                        } else {
+                                                trTabs.runtimeStyle.display = "none";
+                                        }
+                                }
+
+                                function render ()
+                                {
+                                        if (!m_bInitialized) 
+                                        {
+                                                return ;
+                                        }
+                                        if (m_aPages.length == 0) {
+                                                return
+                                        }
+                                        
+                                        renderTabs();
+                                        if (m_niSelectedPage >= 0) {
+                                            renderPage (m_niSelectedPage) ;
+                                            var oPage = m_aPages [m_niSelectedPage] ;
+
+                                            if ((m_elementSelected != null) && (m_elementSelected != oPage.m_element)) {
+                                                    m_elementSelected.runtimeStyle.display = "none" ;
+                                            }
+                                            oPage.m_element.runtimeStyle.display = "block" ;
+                                            m_elementSelected = oPage.m_element ;
+                                        }
+                                }
+
+
+
+                                //////////////////////////////////////////////////////////////////////
+
+                                //      Methods for: public interface
+
+                                //
+                                function getInnerDocument ()
+                                {
+                                        return document ;
+                                }
+
+                                function putImgPrefix(sImagePrefix)
+                                {
+                                    m_sImgPrefix = sImagePrefix;
+                                    preloadImages () ;
+                                }
+
+                                function getSelect ()
+                                {
+                                        if (m_niSelectedPage >= 0) {
+                                            return m_aPages[m_niSelectedPage].m_id ;
+                                        } else {
+                                            return null;
+                                        }
+                                }
+
+                                function putSelect (SelectedID)
+                                {
+                                        if (!m_bInitialized) 
+                                        {
+                                                return ;
+                                        }
+                                        
+                                        for (i = 0 ; i < m_aPages.length ; i++) {
+                                                if (m_aPages[i].m_id == SelectedID) {
+                            if (m_niSelectedPage != i)
+                            { 
+                                                            var bfirstTime = (m_aPages[i].m_iframe == undefined);
+                                                            m_niSelectedPage = i ;
+                                                                render () ;
+                                                        var oEvent = createEventObject () ;
+                                                        oEvent.tab = SelectedID ;
+                                                        if (bfirstTime) {
+                                                            m_eventTabLoaded.fire (oEvent) ;
+                                                        } else {    
+                                                            m_eventTabChanged.fire (oEvent) ;
+                                                        }
+                                                    }
+                                                        return;
+                                                }
+                                        }
+                                }
+
+                                function getContent ()
+                                {
+                                        return m_elementSelected ;
+                                }
+                                
+                                function PageDocument(PageID) {
+                                        for (i = 0 ; i < m_aPages.length ; i++) {
+                                                if (m_aPages[i].m_id == PageID) {
+                                                        if (m_aPages[i].m_iframe == undefined) return null;
+                                                        
+                                                        return m_aPages[i].m_iframe.contentWindow.document;
+                                                }
+                                        }
+                                }
+
+                                function PageID( PageNumber) {
+                                    return m_aPages[PageNumber].m_id;
+                                }
+                                
+                                function PageTitle( PageID) {
+                                    for (i = 0 ; i < m_aPages.length ; i++) {
+                                            if (m_aPages[i].m_id == PageID) {
+                                        return m_aPages[i].m_sText;
+                                            }
+                                    }
+                                }
+
+                                function PageLoaded( PageID) {
+                                    for (i = 0 ; i < m_aPages.length ; i++) {
+                                        if (m_aPages[i].m_id == PageID) {
+                                            if (m_aPages[i].m_iframe == undefined){
+                                                return false;
+                                            } else {
+                                                return true;
+                                            }
+                                        } 
+                                    }
+                                }
+
+
+                                function getNumberOfPages() {
+                                    return m_aPages.length;
+                                }
+
+                                function onClickTab ()
+                                {
+                                    if (event.srcElement.m_niTab == null) {
+                                            return ;
+                                    }
+
+                                    if (m_niSelectedPage != event.srcElement.m_niTab) {
+                                            var SelectedID = m_aPages[event.srcElement.m_niTab].m_id;
+                                            putSelect(SelectedID);
+                                    }
+                                }
+                        </script>
+                </body>
+        </html>
+
+</public:component>

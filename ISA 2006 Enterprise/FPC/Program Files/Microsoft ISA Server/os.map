@@ -1,0 +1,30 @@
+# map_os
+# Os;map  -1 if no mapping included
+win95;Windows 95
+win98;Windows 98
+winnt;Windows NT
+win2000;Windows 2000
+windows 95;Windows 95
+windows 98;Windows 98
+Windows NT 6.0;Windows Vista
+Windows NT 5.2;Windows Server 2003
+Windows NT 5.1;Windows XP
+windows nt 5;Windows 2000
+windows nt;Windows NT
+windows 2000;Windows 2000
+win16;Windows 16bit
+win32;Windows 32bit
+windows ce;Windows CE
+windows;Windows
+mac;-1
+linux;-1
+unix;-1
+solaris;-1
+amiga;-1
+sun;-1
+hp;-1
+irix;-1
+vax;-1
+aix;-1
+#  '$' end of file
+$

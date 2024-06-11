@@ -1,0 +1,51 @@
+<html xmlns:controls>
+	<head>
+		<LINK REL="stylesheet" type="text/css" href="_common/isa.css">
+			<script id="jsCommon" src="common.js"></script>
+			<script id="jsCommands" src="commands.js"></script>
+			<script>
+            var g_sPageContext = location.hash.slice(1);
+
+            function body_onload() {
+                NotifySnapin("IDR_PAGE_LOADED", g_sPageContext);
+            }
+            
+            function CmdActivate(Code)
+            {
+                NotifySnapin(Code, g_sPageContext);
+            }
+                        
+            //  Updates the UI according to specified ISA edition type
+            function UpdateViewForEditionType(EditionType)
+            {
+                //  Nothing to do
+            }
+			
+			</script>
+	</head>
+	<body class="TabPageBody" id="idBody" height="100%" width="100%" onload="body_onload();">
+		<table height="100%" width="100%" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td height="20%" width="100%" class="dFilter">
+					<OBJECT id="{AA54A692-5AC6-4FCA-8DA1-18F1C67B75AC}" height="100%" width="100%" classid="CLSID:7B800019-6212-41DC-B208-520B501FBFB2" name="IsaListView" VIEWASTEXT TestKey="ISA_LIST_CONTROL_{41601c15-d9f2-4e54-9156-1f595d751fca}">
+					</OBJECT>
+				</td>
+			</tr>
+			<tr>
+				<td height="7" nowrap></td>
+			</tr>
+			<tr>
+				<td class="contSep" nowrap></td>
+			</tr>
+			<tr>
+				<td height="3" nowrap></td>
+			</tr>
+			<tr>
+				<td height="100%" width="100%">
+					<OBJECT id="{8427D867-2452-4B04-AFA2-B92508448553}" height="100%" width="100%" classid="CLSID:7B800019-6212-41DC-B208-520B501FBFB2" name="IsaListView" VIEWASTEXT TestKey="ISA_LIST_CONTROL_{50ea82d9-32d5-42ef-bac8-fdab743f0754}">
+					</OBJECT>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

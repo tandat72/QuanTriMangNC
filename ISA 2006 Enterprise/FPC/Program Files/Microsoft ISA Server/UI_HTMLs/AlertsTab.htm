@@ -1,0 +1,76 @@
+<html xmlns:controls>
+    <head>
+        <LINK REL="stylesheet" type="text/css" href="_common/isa.css">
+            <script id="jsCommon" src="common.js"></script>
+            <script id="jsCommands" src="commands.js"></script>
+
+            <script>
+            var g_sPageContext = location.hash.slice(1);
+
+            function body_onload()
+            {
+                var ListviewsCollection = document.getElementsByName("IsaListView");
+                ListviewsCollection[0].id = g_sPageContext;
+                ListviewsCollection[0].TestKey = "ISA_LIST_CONTROL" + g_sPageContext;
+                NotifySnapin("IDR_PAGE_LOADED", g_sPageContext);
+            }
+
+            //  Updates the UI according to specified ISA edition type
+            function UpdateViewForEditionType(EditionType)
+            {
+                //  Nothing to do
+            }
+            
+			function GetObjectByGUID(sGUID)
+            {
+                if (sGUID == "{B918D0BC-FD24-4456-824F-2F373DFBD919}")
+                    return IsaListView.object;
+                return null;
+            }
+
+            function EmptyDescription()
+            {
+                DescriptionTableID.innerHTML = "";
+            }
+
+            function SetDescription2(sDesc, sTxt)
+            {
+                EmptyDescription();
+                var oSpan1 = document.createElement("SPAN");
+                oSpan1.innerHTML = sDesc;
+                var oSpan2 = document.createElement("SPAN");
+                oSpan2.innerText = sTxt;
+                DescriptionTableID.appendChild(oSpan1);
+                DescriptionTableID.appendChild(oSpan2);
+
+                return true;
+            }
+
+            function SetDescription4(sDesc1, sTxt1, sDesc2, sTxt2)
+            {
+                DescriptionTableID.innerHTML = "<b>" + sDesc1 + "</b>: " + sTxt1 + "<br><b>" + sDesc2 + "</b>: " + sTxt2;
+            }
+            </script>
+    </head>
+    <body id="idBody" class="TabPageBody" height="100%" width="100%" onload="body_onload();">
+        <table height="100%" width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+                <td><object NAME="IsaListView" height="100%" width="100%" classid="CLSID:7B800019-6212-41DC-B208-520B501FBFB2" VIEWASTEXT>
+                    </object>
+                </td>
+            </tr>
+            <tr>
+                <td class="contSep" nowrap></td>
+            </tr>
+            <tr>
+                <td class="alertsBoxHeader" height="20" align="left" valign="middle"><ID id="L_AlertsTab_AlertInformation">Alert Information</ID></td>
+            </tr>
+            <tr>
+                <td class="alertsBox" height="100">
+                    <div id="DescriptionTableID" style="height: 100%; width: 100%; overflow: auto;" tabIndex="1">
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

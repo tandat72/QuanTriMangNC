@@ -1,0 +1,619 @@
+ProxyServer-MIB DEFINITIONS ::= BEGIN
+
+        IMPORTS
+                enterprises,
+                OBJECT-TYPE,
+                Counter
+                        FROM RFC1155-SMI
+                internetServer
+                        FROM InternetServer-MIB;
+
+--      microsoft       OBJECT IDENTIFIER ::= { enterprises 311 }
+--      software        OBJECT IDENTIFIER ::= { microsoft 1 }
+--      internetServer  OBJECT IDENTIFIER ::= { software 7 }
+        proxyServer     OBJECT IDENTIFIER ::= { internetServer 11 }
+        proxyStatistics OBJECT IDENTIFIER ::= { proxyServer 1 }
+
+-- Proxy Server Statistics
+	TotalInetBytesSent OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The rate at which data bytes are sent by the Web Proxy filter to remote servers or to a chained upstream proxy."
+		::= { proxyStatistics 1 }
+
+	TotalInetBytesRecvd OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The rate at which data bytes are received by the Web Proxy filter from remote servers or from a chained upstream proxy."
+		::= { proxyStatistics 2 }
+
+	TotalInetBytes OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total rate for all bytes transferred between ISA Server and remote servers or a chained upstream proxy."
+		::= { proxyStatistics 3 }
+
+	TotalClntBytesSent OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The rate at which data bytes are sent by the Web Proxy filter to Web Proxy clients."
+		::= { proxyStatistics 4 }
+
+	TotalClntBytesRecvd OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The rate at which data bytes are received by the Web Proxy filter from Web Proxy clients."
+		::= { proxyStatistics 5 }
+
+	TotalClntBytes OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The sum of Client Bytes Sent/sec and Client Bytes Received/sec. This is the total rate for all bytes transferred between the Web Proxy filter and Web Proxy clients."
+		::= { proxyStatistics 6 }
+
+	TotalSSLClntBytesSent OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The rate at which Secure Sockets Layer (SSL) data bytes are sent by the Web Proxy filter to Web Proxy clients over a secure connection."
+		::= { proxyStatistics 7 }
+
+	TotalSSLClntBytesRecvd OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The rate at which Secure Sockets Layer (SSL) data bytes are received by the Web Proxy filter from Web Proxy clients over a secure connection."
+		::= { proxyStatistics 8 }
+
+	TotalSSLClntBytes OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The sum of SSL Client Bytes Sent/sec and Bytes Received/sec. This is the total rate for all bytes transferred between the Web Proxy filter and Web Proxy clients over a secure connection."
+		::= { proxyStatistics 9 }
+
+	CurrentUsers OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of active Web sessions currently connected to ISA Server."
+		::= { proxyStatistics 10 }
+
+	TotalUsers OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of users that have ever connected to the ISA Server computer, since the Firewall service was started."
+		::= { proxyStatistics 11 }
+
+	MaxUsers OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The maximum number of users that have connected to the ISA Server computer simultaneously, since the Firewall service was started."
+		::= { proxyStatistics 12 }
+
+	FtpRequests OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of FTP requests made to ISA Server, since the Firewall service was started."
+		::= { proxyStatistics 13 }
+
+	HttpRequests OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of HTTP requests made to ISA Server, since the Firewall service was started."
+		::= { proxyStatistics 14 }
+
+	TotalRequests OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of requests made to ISA Server, since the Firewall service was started."
+		::= { proxyStatistics 15 }
+
+	TotalSuccRequests OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of requests that were successfully processed by the Web Proxy filter."
+		::= { proxyStatistics 16 }
+
+	TotalFailRequests OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of requests that failed to be processed due to errors. Errors can be the result of the Web Proxy filter failing to locate a requested server URL on the Internet or because the Web Proxy client was denied access to the requested URL."
+		::= { proxyStatistics 17 }
+
+	TotalCacheFetches OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of Web Proxy client requests served from the ISA Server cache."
+		::= { proxyStatistics 18 }
+
+	TotalInetFetches OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of requests served by retrieving content from remote servers or from a chained upstream ISA Server computer."
+		::= { proxyStatistics 19 }
+
+	CacheHitRatio OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The percentage of Web Proxy client requests served using cached data, out of the total number of Web Proxy client requests to the ISA Server."
+		::= { proxyStatistics 20 }
+
+	CacheRunningHitRatio OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The percentage of Web Proxy client requests served using cached data out of the total number of Web Proxy client requests to the ISA Server, for the last 10,000 requests serviced."
+		::= { proxyStatistics 21 }
+
+	TotalSitesDenied OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of websites to which the Web Proxy filter denied access."
+		::= { proxyStatistics 22 }
+
+	TotalSitesGranted OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of websites to which the Web Proxy filter allowed access."
+		::= { proxyStatistics 23 }
+
+	HttpsSessions OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of HTTP-secured sessions serviced by the Secure Sockets Layer (SSL) tunnel. This includes only sessions allowed by rules configured to use SSL tunneling publishing mode."
+		::= { proxyStatistics 24 }
+
+	SnewsSessions OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of SNEWS sessions serviced by the Secure Sockets Layer (SSL) tunnel. This includes only sessions allowed by rules configured to use SSL tunneling publishing mode."
+		::= { proxyStatistics 25 }
+
+	SSLSessions OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of unknown Secure Sockets Layer (SSL) sessions serviced by the SSL tunnel. This includes only sessions allowed by rules configured to use SSL tunneling publishing mode."
+		::= { proxyStatistics 26 }
+
+	SSLTotalSessions OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of Secure Sockets Layer (SSL) sessions serviced by the SSL tunnel. This includes only sessions allowed by rules configured to use SSL tunneling publishing mode."
+		::= { proxyStatistics 27 }
+
+	ThreadPoolSize OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of threads in the thread pool."
+		::= { proxyStatistics 28 }
+
+	ThreadPoolFailures OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of requests rejected because the thread pool was overcommitted."
+		::= { proxyStatistics 29 }
+
+	PoolSessions OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of sessions actively serviced by thread pool threads."
+		::= { proxyStatistics 30 }
+
+	TotalArrayBytesSent OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The rate at which data bytes are sent by the ISA Server to other servers within the same array."
+		::= { proxyStatistics 31 }
+
+	TotalArrayBytesRecvd OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The rate at which data bytes are received by the ISA Server from other servers within the same array in response to requests from the Web Proxy filter."
+		::= { proxyStatistics 32 }
+
+	TotalArrayBytes OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The sum of Array Bytes Sent/sec and Bytes Received/sec. This is the total rate for all bytes transferred between the ISA Server and other members of the same array."
+		::= { proxyStatistics 33 }
+
+	TotalProcessingTime OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The mean number of milliseconds required to service a Web Proxy client request (not including tunneled requests for HTTPS or SNEWS)."
+		::= { proxyStatistics 34 }
+
+	TotalArrayFetches OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of Web Proxy client requests that have been serviced by requesting the data from another ISA Server within the array."
+		::= { proxyStatistics 35 }
+
+	TotalReverseBytesSent OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The rate at which data bytes are sent by the Web Proxy filter to published Web servers in response to incoming Web requests."
+		::= { proxyStatistics 36 }
+
+	TotalReverseBytesRecvd OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The rate at which data bytes are received by the Web Proxy filter from published Web servers in response to incoming Web requests."
+		::= { proxyStatistics 37 }
+
+	TotalReverseBytes OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The sum of Reverse Bytes Sent/sec and Reverse Bytes Received/sec. This is the total rate for all bytes transferred between the ISA Server and published Web servers in response to incoming Web requests."
+		::= { proxyStatistics 38 }
+
+	TotalReverseFetches OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of incoming Web requests serviced by retrieving data from published Web servers."
+		::= { proxyStatistics 39 }
+
+	TotalPendingConnects OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of connection requests made, but not yet established."
+		::= { proxyStatistics 40 }
+
+	TotalMemberProcessingTime OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The mean number of milliseconds required to service a Web Proxy client request that is fetched through another array member (not including requests serviced by the Secure Sockets Layer tunnel)."
+		::= { proxyStatistics 41 }
+
+	TotalDirectProcessingTime OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The mean number of milliseconds required to service a Web Proxy client request directly to the Web server or upstream proxy (not including tunneled requests for HTTPS or SNEWS)."
+		::= { proxyStatistics 42 }
+
+	TotalCacheProcessingTime OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The mean number of milliseconds required to service a Web Proxy client request from cache (not including tunneled requests for HTTPS or SNEWS)."
+		::= { proxyStatistics 43 }
+
+	TotalIoErrorsToClient OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of IO errors that occurred during communication with the client."
+		::= { proxyStatistics 44 }
+
+	TotalIoErrorsToServer OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of IO errors that occurred during communication with the server."
+		::= { proxyStatistics 45 }
+
+	TotalIoErrorsToMember OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of IO errors that occurred during communication with an array member."
+		::= { proxyStatistics 46 }
+
+	TotalConnectErrors OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of errors that occurred while connecting."
+		::= { proxyStatistics 47 }
+
+	TotalKAToClient OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of requests that use an existing keep alive connection between the client and ISA Server."
+		::= { proxyStatistics 48 }
+
+	TotalKAToServer OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of requests that use an existing keep alive connection between ISA Server and the Web server."
+		::= { proxyStatistics 49 }
+
+	TotalKAToMember OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of that use an existing keep alive connection between ISA Server and another array member."
+		::= { proxyStatistics 50 }
+
+	TotalRequestsToMember OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of requests going to another array member."
+		::= { proxyStatistics 51 }
+
+	TotalRequestsFromMember OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of requests coming from another array member."
+		::= { proxyStatistics 52 }
+
+	TotalBytesInRangeRequests OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of bytes returned in responses to HTTP requests containing range headers."
+		::= { proxyStatistics 53 }
+
+	TotalBytesInRangeRequestsServedFromCache OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of bytes returned in responses to HTTP requests containing range headers served from cache."
+		::= { proxyStatistics 54 }
+
+	NumberOfRequestsWithMultiRange OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The number of requests with more than one range in the HTTP Range header."
+		::= { proxyStatistics 55 }
+
+	TotalBytesRequestedFromServerForRangeRequests OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of bytes requested from server in HTTP requests containing range headers."
+		::= { proxyStatistics 56 }
+
+	TotalBytesInRangeRequestsInLastHour OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of bytes returned in responses to HTTP requests containing range headers in the last hour."
+		::= { proxyStatistics 57 }
+
+	TotalBytesInRangeRequestsServedFromCacheInLastHour OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of bytes returned in responses to HTTP requests containing range headers served from cache in the last hour."
+		::= { proxyStatistics 58 }
+
+	DiffServTotal1stHighestPriorityRequests OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"Total number of 1st priority requests since the last performance monitoring sample."
+		::= { proxyStatistics 59 }
+
+	CompressTotalFailures OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"The total number of failures to compress or decompress a response."
+		::= { proxyStatistics 60 }
+
+	DiffServTotal2ndHighestPriorityRequests OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"Total number of 2nd priority requests since the last performance monitoring sample."
+		::= { proxyStatistics 61 }
+
+	DiffServTotal3rdHighestPriorityRequests OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"Total number of 3rd priority requests since the last performance monitoring sample."
+		::= { proxyStatistics 62 }
+
+	DiffServTotal4thHighestPriorityRequests OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"Total number of 4th priority requests since the last performance monitoring sample."
+		::= { proxyStatistics 63 }
+
+	DiffServTotal5thHighestPriorityRequests OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"Total number of 5th priority requests since the last performance monitoring sample."
+		::= { proxyStatistics 64 }
+
+	DiffServTotalOtherPriorityRequests OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"Total number of low priority requests (6th priority and below) since the last performance monitoring sample."
+		::= { proxyStatistics 65 }
+
+	DiffServTotalPriorityRequests OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"Total number of requests with an assigned priority since the last performance monitoring sample."
+		::= { proxyStatistics 66 }
+
+	DiffServTotalNonPriorityRequests OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"Total number of requests without an assigned priority since the last performance monitoring sample."
+		::= { proxyStatistics 67 }
+
+	DiffServTotal1stHighestPriorityResponses OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"Total number of 1st priority responses since the last performance monitoring sample."
+		::= { proxyStatistics 68 }
+
+	DiffServTotal2ndHighestPriorityResponses OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"Total number of 2nd priority responses since the last performance monitoring sample."
+		::= { proxyStatistics 69 }
+
+	DiffServTotal3rdHighestPriorityResponses OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"Total number of 3rd priority responses since the last performance monitoring sample."
+		::= { proxyStatistics 70 }
+
+	DiffServTotal4thHighestPriorityResponses OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"Total number of 4th priority responses since the last performance monitoring sample."
+		::= { proxyStatistics 71 }
+
+	DiffServTotal5thHighestPriorityResponses OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"Total number of 5th priority responses since the last performance monitoring sample."
+		::= { proxyStatistics 72 }
+
+	DiffServTotalOtherPriorityResponses OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"Total number of low priority responses (6th priority and below) since the last performance monitoring sample."
+		::= { proxyStatistics 73 }
+
+	DiffServTotalPriorityResponses OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"Total number of responses with an assigned priority since the last performance monitoring sample."
+		::= { proxyStatistics 74 }
+
+	DiffServTotalNonPriorityResponses OBJECT-TYPE
+		SYNTAX	Counter
+		ACCESS	read-only
+		STATUS	mandatory
+		DESCRIPTION 
+			"Total number of responses without an assigned priority since the last performance monitoring sample."
+		::= { proxyStatistics 75 }
+
+
+END
